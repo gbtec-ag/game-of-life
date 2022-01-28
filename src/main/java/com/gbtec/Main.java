@@ -1,18 +1,18 @@
 package com.gbtec;
 
 import static com.gbtec.service.GenerationCalculator.calculateNextGeneration;
-import static com.gbtec.service.GenerationReader.createInitialGeneration;
 
 import com.gbtec.model.Generation;
 import com.gbtec.presentation.Printer;
+import com.gbtec.service.GenerationReader;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         Printer printer = new Printer();
-        Generation currentGeneration = createInitialGeneration();
+        Generation currentGeneration = GenerationReader.readFromJARFile();
 
         printer.printGeneration(currentGeneration);
         while (true) {
