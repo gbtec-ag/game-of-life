@@ -2,7 +2,7 @@ package com.gbtec.presentation;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.gbtec.model.Cell;
@@ -38,13 +38,13 @@ public class Printer {
         }
     }
 
-    private void printLine(ArrayList<Cell> line) {
+    private void printLine(List<Cell> line) {
         String renderedLine = line.stream().map(this::renderCell).collect(Collectors.joining(""));
         System.out.println(ansi().render(renderedLine));
     }
 
     private String renderCell(Cell cell) {
-        if (cell.getIsAlive()) {
+        if (cell.getAlive()) {
             return "@|yellow X|@";
         } else {
             return "@|white O|@";
