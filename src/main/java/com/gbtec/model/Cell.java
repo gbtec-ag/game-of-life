@@ -1,11 +1,11 @@
 package com.gbtec.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NonNull;
 
-@AllArgsConstructor
-@Getter
+@Data
 public class Cell {
 
-    Boolean isAlive;
+    @NonNull
+    private Boolean alive;
 }
