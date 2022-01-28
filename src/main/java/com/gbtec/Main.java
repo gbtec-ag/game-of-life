@@ -6,9 +6,11 @@ import static com.gbtec.service.GenerationReader.createInitialGeneration;
 import com.gbtec.model.Generation;
 import com.gbtec.presentation.Printer;
 
+import java.io.FileNotFoundException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Printer printer = new Printer();
         Generation currentGeneration = createInitialGeneration();
 
