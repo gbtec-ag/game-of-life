@@ -4,12 +4,16 @@ public class Cell {
     private boolean isAlive = false;
     int PositionX;
      int PositionY;
-    String Name = "";
 
-    public Cell(String bezeichnung, int posX, int posY) {
-        bezeichnung = Name;
+    public Cell(int posX, int posY) {
         posX = PositionX;
         posY = PositionY;
+        if(isAlive){
+            System.out.print("O");
+        }
+        else{
+            System.out.print("X");
+        }
     }
 
 
