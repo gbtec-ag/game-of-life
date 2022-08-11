@@ -7,9 +7,9 @@ public class Cell {
     int positionY;
 
     public Cell(int posX, int posY, boolean alive) {
-       positionX = posX;
-       positionY = posY;
-       isAlive = alive;
+        positionX = posX;
+        positionY = posY;
+        isAlive = alive;
     }
 
     public int getCoordinateY() {

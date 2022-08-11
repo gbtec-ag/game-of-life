@@ -67,7 +67,6 @@ public class Generation {
         row6.add(new Cell(5, 5, random.nextBoolean()));
 
 
-
         generation.add(row1);
         generation.add(row2);
         generation.add(row3);
@@ -78,22 +77,19 @@ public class Generation {
 
 
     public void printStatus() {
-        for(int x=0; x<6;x++)
-        {
+        for (int x = 0; x < 6; x++) {
             List<Cell> currentRow;
             currentRow = generation.get(x);
-            String rowOutput ="";
+            String rowOutput = "";
 
 
-            for(int y=0; y<6; y++)
-            {
+            for (int y = 0; y < 6; y++) {
                 Cell currentCell;
                 currentCell = currentRow.get(y);
-                if(!currentCell.getStatus())
-                {
-                    rowOutput= rowOutput + "X";
-                } else{
-                    rowOutput= rowOutput + "0";
+                if (!currentCell.getStatus()) {
+                    rowOutput = rowOutput + "X";
+                } else {
+                    rowOutput = rowOutput + "0";
                 }
 
             }
