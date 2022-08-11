@@ -7,83 +7,83 @@ import java.util.Random;
 public class Generation {
     public List<List<Cell>> generation = new ArrayList<>();
 
-    public Generation() {
+    public Generation() {}
 
-    }
-
-
+// List<List<>> gets filled with Cells
     public void initialize() {
 
         Random random = new Random();
 
         List<Cell> row1 = new ArrayList<>();
-        row1.add(new Cell(0, 0, random.nextBoolean()));
-        row1.add(new Cell(0, 1, random.nextBoolean()));
-        row1.add(new Cell(0, 2, random.nextBoolean()));
-        row1.add(new Cell(0, 3, random.nextBoolean()));
-        row1.add(new Cell(0, 4, random.nextBoolean()));
-        row1.add(new Cell(0, 5, random.nextBoolean()));
+        row1.add(new Cell(false));
+        row1.add(new Cell(true));
+        row1.add(new Cell(false));
+        /*row1.add(new Cell(false));
+        row1.add(new Cell(false));
+        row1.add(new Cell(false));*/
 
 
         List<Cell> row2 = new ArrayList<>();
-        row2.add(new Cell(1, 0, random.nextBoolean()));
-        row2.add(new Cell(1, 1, random.nextBoolean()));
-        row2.add(new Cell(1, 2, random.nextBoolean()));
-        row2.add(new Cell(1, 3, random.nextBoolean()));
-        row2.add(new Cell(1, 4, random.nextBoolean()));
-        row2.add(new Cell(1, 5, random.nextBoolean()));
+        row2.add(new Cell(false));
+        row2.add(new Cell(true));
+        row2.add(new Cell(false));
+        /*row2.add(new Cell(false));
+        row2.add(new Cell(false));
+        row2.add(new Cell(false));*/
 
 
         List<Cell> row3 = new ArrayList<>();
-        row3.add(new Cell(2, 0, random.nextBoolean()));
-        row3.add(new Cell(2, 1, random.nextBoolean()));
-        row3.add(new Cell(2, 2, random.nextBoolean()));
-        row3.add(new Cell(2, 3, random.nextBoolean()));
-        row3.add(new Cell(2, 4, random.nextBoolean()));
-        row3.add(new Cell(2, 5, random.nextBoolean()));
+        row3.add(new Cell(false));
+        row3.add(new Cell(true));
+        row3.add(new Cell(false));
+        /*row3.add(new Cell(false));
+        row3.add(new Cell(false));
+        row3.add(new Cell(false));*/
 
-        List<Cell> row4 = new ArrayList<>();
-        row4.add(new Cell(3, 0, random.nextBoolean()));
-        row4.add(new Cell(3, 1, random.nextBoolean()));
-        row4.add(new Cell(3, 2, random.nextBoolean()));
-        row4.add(new Cell(3, 3, random.nextBoolean()));
-        row4.add(new Cell(3, 4, random.nextBoolean()));
-        row4.add(new Cell(3, 5, random.nextBoolean()));
+        /*List<Cell> row4 = new ArrayList<>();
+        row4.add(new Cell(false));
+        row4.add(new Cell(true));
+        row4.add(new Cell(false));
+        row4.add(new Cell(false));
+        row4.add(new Cell(false));
+        row4.add(new Cell(false));
 
         List<Cell> row5 = new ArrayList<>();
-        row5.add(new Cell(4, 0, random.nextBoolean()));
-        row5.add(new Cell(4, 1, random.nextBoolean()));
-        row5.add(new Cell(4, 2, random.nextBoolean()));
-        row5.add(new Cell(4, 3, random.nextBoolean()));
-        row5.add(new Cell(4, 4, random.nextBoolean()));
-        row5.add(new Cell(4, 5, random.nextBoolean()));
+        row5.add(new Cell(false));
+        row5.add(new Cell(true));
+        row5.add(new Cell(false));
+        row5.add(new Cell(false));
+        row5.add(new Cell(false));
+        row5.add(new Cell(false));
 
         List<Cell> row6 = new ArrayList<>();
-        row6.add(new Cell(5, 0, random.nextBoolean()));
-        row6.add(new Cell(5, 1, random.nextBoolean()));
-        row6.add(new Cell(5, 2, random.nextBoolean()));
-        row6.add(new Cell(5, 3, random.nextBoolean()));
-        row6.add(new Cell(5, 4, random.nextBoolean()));
-        row6.add(new Cell(5, 5, random.nextBoolean()));
+        row6.add(new Cell(false));
+        row6.add(new Cell(true));
+        row6.add(new Cell(false));
+        row6.add(new Cell(false));
+        row6.add(new Cell(false));
+        row6.add(new Cell(false));
+
+         */
 
 
         generation.add(row1);
         generation.add(row2);
         generation.add(row3);
-        generation.add(row4);
+        /*generation.add(row4);
         generation.add(row5);
-        generation.add(row6);
+        generation.add(row6);*/
     }
 
 
     public void printStatus() {
-        for (int x = 0; x < 6; x++) {
+        for (int x = 0; x <= 2; x++) {
             List<Cell> currentRow;
             currentRow = generation.get(x);
             String rowOutput = "";
 
 
-            for (int y = 0; y < 6; y++) {
+            for (int y = 0; y <= 2; y++) {
                 Cell currentCell;
                 currentCell = currentRow.get(y);
                 if (!currentCell.getStatus()) {
@@ -91,11 +91,11 @@ public class Generation {
                 } else {
                     rowOutput = rowOutput + "0";
                 }
-
             }
             System.out.println(rowOutput);
-        }
 
+        }
+        System.out.println("      ");
     }
 }
 
