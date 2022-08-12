@@ -14,6 +14,5 @@ public class Main {
         NextGeneration nextGeneration = new NextGeneration();
         currentGeneration  = nextGeneration.calculateNextGeneration(currentGeneration);
         GenerationPrinter.printIntoConsole(currentGeneration);
-
     }
 }

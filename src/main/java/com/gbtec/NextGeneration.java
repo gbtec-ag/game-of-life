@@ -10,12 +10,11 @@ public class NextGeneration extends Generation {
     public List<List<Cell>> calculateNextGeneration(List<List<Cell>> generation) {
 
         Generation nextGeneration = new Generation();
-
         int generationLength = generation.size(); // number of rows in a generation, in this example 3
+
         for (int y = 0; y < generationLength - 1; y++) {
 
-            /* row of PreGeneration */
-            List<Cell> currentRow = generation.get(y); // for Checking which NeighborCells are neighbours
+            List<Cell> currentRow = generation.get(y);/* row of PreGeneration */
             int neighbours; // number of neighbour Cells
             int rowLength = currentRow.size(); // length of row
 
@@ -33,7 +32,6 @@ public class NextGeneration extends Generation {
                         neighbours++;
                     }
                 }
-
                 // Checking cell left
                 Cell neighbourCellLeft;
                 if (x >= 1) {
@@ -51,7 +49,6 @@ public class NextGeneration extends Generation {
                         neighbours++;
                     }
                 }
-
                 // Checking cell top right
                 if (y >= 1) {
                     if (x < rowLength - 1) {
@@ -61,9 +58,7 @@ public class NextGeneration extends Generation {
                             neighbours++;
                         }
                     }
-
                 }
-
                 // Checking cell top left
                 if (y >= 1) {
                     if (x >= 1) {
@@ -82,7 +77,6 @@ public class NextGeneration extends Generation {
                         neighbours++;
                     }
                 }
-
                 // Checking cell bottom left
                 if (y < generationLength - 1) {
                     if (x >= 1) {
@@ -103,22 +97,13 @@ public class NextGeneration extends Generation {
                         }
                     }
                 }
-
                 // Implementing the rules
-                if (currentCell.isAlive && neighbours < 2) {
-                    nextGeneration.generation.get(y).get(x).setStatus(false);
-
-                } else if (currentCell.isAlive && neighbours >= 4) {
-                    nextGeneration.generation.get(y).get(x).setStatus(false);
-
-                } else if (!currentCell.isAlive && neighbours == 3) {
+                if (!currentCell.isAlive && neighbours == 3)
                     nextGeneration.generation.get(y).get(x).setStatus(true);
-                } else if (currentCell.isAlive && neighbours==2 || neighbours==3) {
+                else if (currentCell.isAlive && neighbours == 2 || neighbours == 3)
                     nextGeneration.generation.get(y).get(x).setStatus(true);
-                } else {
+                else {
                     nextGeneration.generation.get(y).get(x).setStatus(false);
-
-
                 }
             }
         }
