@@ -11,7 +11,7 @@ public class NextGeneration extends Generation {
 
         Generation nextGeneration = new Generation();
 
-        int generationLength = generation.size(); // number of rows in a generation, in this example 6
+        int generationLength = generation.size(); // number of rows in a generation, in this example 3
         for (int y = 0; y < generationLength - 1; y++) {
 
             /* row of PreGeneration */
@@ -29,7 +29,7 @@ public class NextGeneration extends Generation {
                 int lastXIndex = rowLength - 1;
                 if (x < lastXIndex) {
                     Cell neighbourCellRight = currentRow.get(x + 1);
-                    if (neighbourCellRight.isAlive == true) {
+                    if (neighbourCellRight.isAlive) {
                         neighbours++;
                     }
                 }
@@ -66,7 +66,7 @@ public class NextGeneration extends Generation {
 
                 // Checking cell top left
                 if (y >= 1) {
-                    if (x > 0) {
+                    if (x >= 1) {
                         List<Cell> neighbourRowTop = generation.get(y - 1);
                         Cell neighbourCellTopLeft = neighbourRowTop.get(x - 1);
                         if (neighbourCellTopLeft.isAlive) {
@@ -84,8 +84,8 @@ public class NextGeneration extends Generation {
                 }
 
                 // Checking cell bottom left
-                if (y <= generationLength - 1) {
-                    if (x > 0) {
+                if (y < generationLength - 1) {
+                    if (x >= 1) {
                         List<Cell> neighbourRowBottom = generation.get(y + 1);
                         Cell neighbourCellBottomLeft = neighbourRowBottom.get(x - 1);
                         if (neighbourCellBottomLeft.isAlive) {
@@ -108,18 +108,18 @@ public class NextGeneration extends Generation {
                 if (currentCell.isAlive && neighbours < 2) {
                     nextGeneration.generation.get(y).get(x).setStatus(false);
 
-                } else if(currentCell.isAlive && neighbours==2){
-                    nextGeneration.generation.get(y).get(x).setStatus(true);
-
-                }else if (currentCell.isAlive && neighbours >= 4) {
+                } else if (currentCell.isAlive && neighbours >= 4) {
                     nextGeneration.generation.get(y).get(x).setStatus(false);
 
-                } else if (!currentCell.isAlive && neighbours >= 3) {
+                } else if (!currentCell.isAlive && neighbours == 3) {
                     nextGeneration.generation.get(y).get(x).setStatus(true);
-                } else{
+                } else if (currentCell.isAlive && neighbours==2 || neighbours==3) {
+                    nextGeneration.generation.get(y).get(x).setStatus(true);
+                } else {
                     nextGeneration.generation.get(y).get(x).setStatus(false);
+
+
                 }
-
             }
         }
         return nextGeneration.generation;
