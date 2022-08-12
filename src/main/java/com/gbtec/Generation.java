@@ -8,69 +8,23 @@ public class Generation {
     public List<List<Cell>> generation = new ArrayList<>();
 
     public Generation() {
+        for (int numberOfRows = 0; numberOfRows < 3; numberOfRows++) {
+            ArrayList<Cell> row = new ArrayList<>();
+            for (int numberOfColumns = 0; numberOfColumns < 3; numberOfColumns++) {
+                row.add(new Cell(false));
+            }
+            generation.add(row);
+        }
     }
 
     // List<List<>> gets filled with Cells
     public void initialize() {
 
-        Random random = new Random();
+        // create Blinker
+        List<Cell> row2 = generation.get(1);
+        row2.get(0).setStatus(true);
+        row2.get(1).setStatus(true);
+        row2.get(2).setStatus(true);
 
-        List<Cell> row1 = new ArrayList<>();
-        row1.add(new Cell(false));
-        row1.add(new Cell(true));
-        row1.add(new Cell(false));
-        /*row1.add(new Cell(false));
-        row1.add(new Cell(false));
-        row1.add(new Cell(false));*/
-
-
-        List<Cell> row2 = new ArrayList<>();
-        row2.add(new Cell(false));
-        row2.add(new Cell(true));
-        row2.add(new Cell(false));
-        /*row2.add(new Cell(false));
-        row2.add(new Cell(false));
-        row2.add(new Cell(false));*/
-
-
-        List<Cell> row3 = new ArrayList<>();
-        row3.add(new Cell(false));
-        row3.add(new Cell(true));
-        row3.add(new Cell(false));
-        /*row3.add(new Cell(true));
-        row3.add(new Cell(true));
-        row3.add(new Cell(true));*/
-
-        /*List<Cell> row4 = new ArrayList<>();
-        row4.add(new Cell(false));
-        row4.add(new Cell(false));
-        row4.add(new Cell(false));
-        row4.add(new Cell(false));
-        row4.add(new Cell(false));
-        row4.add(new Cell(false));
-
-        List<Cell> row5 = new ArrayList<>();
-        row5.add(new Cell(false));
-        row5.add(new Cell(false));
-        row5.add(new Cell(false));
-        row5.add(new Cell(false));
-        row5.add(new Cell(false));
-        row5.add(new Cell(false));
-
-        List<Cell> row6 = new ArrayList<>();
-        row6.add(new Cell(true));
-        row6.add(new Cell(true));
-        row6.add(new Cell(true));
-        row6.add(new Cell(true));
-        row6.add(new Cell(true));
-        row6.add(new Cell(true));*/
-
-
-        generation.add(row1);
-        generation.add(row2);
-        generation.add(row3);
-        /*generation.add(row4);
-        generation.add(row5);
-        generation.add(row6);*/
     }
 }
