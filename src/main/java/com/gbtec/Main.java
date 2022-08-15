@@ -4,28 +4,18 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        int x= 20;
-        int numberOfGenerations =3;
+        int sizeOfGeneration = 9;
+        int numberOfNextGenerations =3;
         List<List<Cell>> currentGeneration;
-        Generation2 generation = new Generation2(x-1);
-        currentGeneration = generation.generation2;
+        Generation generation = new Generation(sizeOfGeneration-1);
+        currentGeneration = generation.generation;
         GenerationPrinter.printIntoConsole(currentGeneration);
 
-        for(int i=0; i <=numberOfGenerations-2; i++) {
-            NextGeneration2 nextGeneration = new NextGeneration2();
+        for(int i=0; i <=numberOfNextGenerations-2; i++) {
+            NextGeneration nextGeneration = new NextGeneration();
             Thread.sleep(5000);
-            currentGeneration = nextGeneration.calculateNextGeneration(currentGeneration, x - 1);
+            currentGeneration = nextGeneration.calculateNextGeneration(currentGeneration, sizeOfGeneration - 1);
             GenerationPrinter.printIntoConsole(currentGeneration);
         }
-        /*Generation generation = new Generation();
-        generation.initialize();
-        currentGeneration = generation.generation;
-
-        GenerationPrinter.printIntoConsole(currentGeneration);
-
-        NextGeneration2 nextGeneration = new NextGeneration2();
-        currentGeneration  = nextGeneration.calculateNextGeneration(currentGeneration);
-        GenerationPrinter.printIntoConsole(currentGeneration);
-*/
     }
 }

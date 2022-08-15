@@ -2,14 +2,15 @@ package com.gbtec;
 
 import java.util.List;
 
-public class NextGeneration extends Generation {
+public class NextGeneration {
 
     public NextGeneration() {
+
     }
 
-    public List<List<Cell>> calculateNextGeneration(List<List<Cell>> generation) {
+    public List<List<Cell>> calculateNextGeneration(List<List<Cell>> generation, int size) {
 
-        Generation nextGeneration = new Generation();
+        Generation nextGeneration = new Generation(size);
         int generationLength = generation.size(); // number of rows in a generation, in this example 3
 
         for (int y = 0; y < generationLength; y++) {
@@ -23,7 +24,7 @@ public class NextGeneration extends Generation {
 
                 int neighbours = countNeighbours(generation, generationLength, y, currentRow, rowLength, x);
 
-                System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
+                // System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
 
                 // Implementing the rules
                 if (!currentCell.isAlive && neighbours == 3)
@@ -38,19 +39,19 @@ public class NextGeneration extends Generation {
         return nextGeneration.generation;
     }
 
-    private int countNeighboursWithLoops(List<List<Cell>> generation, int x, int y) {
-        int neighbours = 0;
-        for (int neighboursX = x - 1; neighboursX < x + 1; neighboursX++) {
-            for (int neighboursY = y - 1; neighboursY < y + 1; neighboursY++) {
-                // if out of bounds and not self
-                // isAlive --> neighbours++;
-            }
-
-        }
-        return neighbours;
-    }
-
-    private static int countNeighbours(List<List<Cell>> generation, int generationLength, int y, List<Cell> currentRow,
+    /*
+     * private int countNeighboursWithLoops(List<List<Cell>> generation, int x, int y) {
+     * int neighbours = 0;
+     * for (int neighboursX = x - 1; neighboursX < x + 1; neighboursX++) {
+     * for (int neighboursY = y - 1; neighboursY < y + 1; neighboursY++) {
+     * // if out of bounds and not self
+     * // isAlive --> neighbours++;
+     * }
+     * }
+     * return neighbours;
+     * }
+     */
+    static int countNeighbours(List<List<Cell>> generation, int generationLength, int y, List<Cell> currentRow,
         int rowLength, int x) {
         int neighbours = 0;
         // Checking cell right
