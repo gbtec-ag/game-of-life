@@ -32,7 +32,24 @@ class CellTest {
     @Test
     void getStatus_should_get_Status_if_status_is_true(){
         //given
+        Cell cell = new Cell(true);
+
         //when
+        cell.getStatus();
+
         //then
+        assertTrue(cell.isAlive);
+    }
+
+    @Test
+    void getStatus_should_get_Status_if_status_is_false(){
+        //given
+        Cell cell = new Cell(false);
+
+        //when
+        cell.getStatus();
+
+        //then
+        assertFalse(cell.isAlive);
     }
 }
