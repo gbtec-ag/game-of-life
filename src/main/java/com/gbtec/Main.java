@@ -3,9 +3,9 @@ package com.gbtec;
 import java.util.List;
 public class Main {
 
-    public static void main(String[] args) {
-        int x= 7;
-        int numberOfGenerations =5;
+    public static void main(String[] args) throws InterruptedException {
+        int x= 20;
+        int numberOfGenerations =3;
         List<List<Cell>> currentGeneration;
         Generation2 generation = new Generation2(x-1);
         currentGeneration = generation.generation2;
@@ -13,6 +13,7 @@ public class Main {
 
         for(int i=0; i <=numberOfGenerations-2; i++) {
             NextGeneration2 nextGeneration = new NextGeneration2();
+            Thread.sleep(5000);
             currentGeneration = nextGeneration.calculateNextGeneration(currentGeneration, x - 1);
             GenerationPrinter.printIntoConsole(currentGeneration);
         }

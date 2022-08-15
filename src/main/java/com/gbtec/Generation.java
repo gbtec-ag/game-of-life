@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Generation {
+
     public List<List<Cell>> generation = new ArrayList<>();
 
     public Generation() {
@@ -18,7 +19,6 @@ public class Generation {
 
     // List<List<>> gets filled with Cells
     public void initialize() {
-
 
         List<Cell> row1 = generation.get(0);
         row1.get(0).setStatus(false);
@@ -35,19 +35,19 @@ public class Generation {
         row3.get(1).setStatus(true);
         row3.get(2).setStatus(false);
 
-        /*List<Cell> row3 = generation.get(2);
-        row3.get(0).setStatus(false);
-        row3.get(1).setStatus(true);
-        row3.get(2).setStatus(false);
-
-        List<Cell> row3 = generation.get(6);
-        row3.get(0).setStatus(false);
-        row3.get(1).setStatus(true);
-        row3.get(2).setStatus(false);
-
-        List<Cell> row6 = generation.get(6);
-        row3.get(0).setStatus(false);
-        row3.get(1).setStatus(true);
-        row3.get(2).setStatus(false);*/
+        /*
+         * List<Cell> row3 = generation.get(2);
+         * row3.get(0).setStatus(false);
+         * row3.get(1).setStatus(true);
+         * row3.get(2).setStatus(false);
+         * List<Cell> row3 = generation.get(6);
+         * row3.get(0).setStatus(false);
+         * row3.get(1).setStatus(true);
+         * row3.get(2).setStatus(false);
+         * List<Cell> row6 = generation.get(6);
+         * row3.get(0).setStatus(false);
+         * row3.get(1).setStatus(true);
+         * row3.get(2).setStatus(false);
+         */
     }
 }

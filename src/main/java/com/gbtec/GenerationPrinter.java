@@ -6,7 +6,7 @@ public class GenerationPrinter {
 
     public static void printIntoConsole(List<List<Cell>> generation) {
         int generationLength = generation.size();
-        //int RowLength = generation.get(0).size();
+        // int RowLength = generation.get(0).size();
         for (int x = 0; x <= generationLength - 1; x++) {
             List<Cell> currentRow;
             currentRow = generation.get(x);

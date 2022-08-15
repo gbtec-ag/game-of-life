@@ -3,6 +3,7 @@ package com.gbtec;
 public class Cell {
 
     boolean isAlive;
+
     public Cell(boolean alive) {
         isAlive = alive;
     }

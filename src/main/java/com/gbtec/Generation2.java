@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Generation2 {
+
     public List<List<Cell>> generation2 = new ArrayList<>();
 
     public Generation2(int size) {
