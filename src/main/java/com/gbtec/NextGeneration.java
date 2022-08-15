@@ -2,14 +2,15 @@ package com.gbtec;
 
 import java.util.List;
 
-public class NextGeneration extends Generation {
+public class NextGeneration extends Generation2point0 {
 
-    public NextGeneration() {
+    public NextGeneration(List<List<Cell>> generation, int size) {
+        calculateNextGeneration(generation, size);
     }
 
-    public List<List<Cell>> calculateNextGeneration(List<List<Cell>> generation) {
+    public List<List<Cell>> calculateNextGeneration(List<List<Cell>> generation, int size) {
 
-        Generation nextGeneration = new Generation();
+        Generation2point0 nextGeneration = new Generation2point0(size);
         int generationLength = generation.size(); // number of rows in a generation, in this example 3
 
         for (int y = 0; y < generationLength; y++) {
@@ -23,22 +24,22 @@ public class NextGeneration extends Generation {
 
                 int neighbours = countNeighbours(generation, generationLength, y, currentRow, rowLength, x);
 
-                //System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
+                System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
 
                 // Implementing the rules
                 if (!currentCell.isAlive && neighbours == 3)
-                    nextGeneration.generation.get(y).get(x).setStatus(true);
+                    nextGeneration.generation2point0.get(y).get(x).setStatus(true);
                 else if (currentCell.isAlive && neighbours == 2 || neighbours == 3)
-                    nextGeneration.generation.get(y).get(x).setStatus(true);
+                    nextGeneration.generation2point0.get(y).get(x).setStatus(true);
                 else {
-                    nextGeneration.generation.get(y).get(x).setStatus(false);
+                    nextGeneration.generation2point0.get(y).get(x).setStatus(false);
                 }
             }
         }
-        return nextGeneration.generation;
+        return nextGeneration.generation2point0;
     }
 
-    private int countNeighboursWithLoops(List<List<Cell>> generation, int x, int y) {
+/*    private int countNeighboursWithLoops(List<List<Cell>> generation, int x, int y) {
         int neighbours = 0;
         for (int neighboursX = x - 1; neighboursX < x + 1; neighboursX++) {
             for (int neighboursY = y - 1; neighboursY < y + 1; neighboursY++) {
@@ -48,7 +49,7 @@ public class NextGeneration extends Generation {
 
         }
         return neighbours;
-    }
+    }*/
 
     private static int countNeighbours(List<List<Cell>> generation, int generationLength, int y, List<Cell> currentRow,
         int rowLength, int x) {
