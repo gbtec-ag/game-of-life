@@ -1,5 +1,5 @@
 package com.gbtec;
-
+//
 public class Cell {
 
     boolean isAlive;

@@ -28,4 +28,11 @@ class CellTest {
         // then
         assertFalse(cell.isAlive);
     }
+
+    @Test
+    void getStatus_should_get_Status_if_status_is_true(){
+        //given
+        //when
+        //then
+    }
 }
