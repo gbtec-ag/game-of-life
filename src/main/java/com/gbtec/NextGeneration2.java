@@ -23,7 +23,7 @@ public class NextGeneration2 extends Generation {
 
                 int neighbours = countNeighbours(generation, generationLength, y, currentRow, rowLength, x);
 
-                System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
+                //System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
 
                 // Implementing the rules
                 if (!currentCell.isAlive && neighbours == 3)
@@ -38,7 +38,7 @@ public class NextGeneration2 extends Generation {
         return nextGeneration.generation2;
     }
 
-    private int countNeighboursWithLoops(List<List<Cell>> generation, int x, int y) {
+   /* private int countNeighboursWithLoops(List<List<Cell>> generation, int x, int y) {
         int neighbours = 0;
         for (int neighboursX = x - 1; neighboursX < x + 1; neighboursX++) {
             for (int neighboursY = y - 1; neighboursY < y + 1; neighboursY++) {
@@ -49,7 +49,7 @@ public class NextGeneration2 extends Generation {
         }
         return neighbours;
     }
-
+*/
     private static int countNeighbours(List<List<Cell>> generation, int generationLength, int y, List<Cell> currentRow,
                                        int rowLength, int x) {
         int neighbours = 0;
