@@ -2,14 +2,14 @@ package com.gbtec;
 
 import java.util.List;
 
-public class NextGeneration extends Generation {
+public class NextGeneration2 extends Generation {
 
-    public NextGeneration() {
+    public NextGeneration2() {
     }
 
-    public List<List<Cell>> calculateNextGeneration(List<List<Cell>> generation) {
+    public List<List<Cell>> calculateNextGeneration(List<List<Cell>> generation, int size) {
 
-        Generation nextGeneration = new Generation();
+        Generation2 nextGeneration = new Generation2(size);
         int generationLength = generation.size(); // number of rows in a generation, in this example 3
 
         for (int y = 0; y < generationLength; y++) {
@@ -27,15 +27,15 @@ public class NextGeneration extends Generation {
 
                 // Implementing the rules
                 if (!currentCell.isAlive && neighbours == 3)
-                    nextGeneration.generation.get(y).get(x).setStatus(true);
+                    nextGeneration.generation2.get(y).get(x).setStatus(true);
                 else if (currentCell.isAlive && neighbours == 2 || neighbours == 3)
-                    nextGeneration.generation.get(y).get(x).setStatus(true);
+                    nextGeneration.generation2.get(y).get(x).setStatus(true);
                 else {
-                    nextGeneration.generation.get(y).get(x).setStatus(false);
+                    nextGeneration.generation2.get(y).get(x).setStatus(false);
                 }
             }
         }
-        return nextGeneration.generation;
+        return nextGeneration.generation2;
     }
 
     private int countNeighboursWithLoops(List<List<Cell>> generation, int x, int y) {
@@ -51,7 +51,7 @@ public class NextGeneration extends Generation {
     }
 
     private static int countNeighbours(List<List<Cell>> generation, int generationLength, int y, List<Cell> currentRow,
-        int rowLength, int x) {
+                                       int rowLength, int x) {
         int neighbours = 0;
         // Checking cell right
         int lastXIndex = rowLength - 1;
