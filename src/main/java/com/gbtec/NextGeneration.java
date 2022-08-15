@@ -23,7 +23,7 @@ public class NextGeneration extends Generation {
 
                 int neighbours = countNeighbours(generation, generationLength, y, currentRow, rowLength, x);
 
-                System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
+                //System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
 
                 // Implementing the rules
                 if (!currentCell.isAlive && neighbours == 3)
