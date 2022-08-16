@@ -1,11 +1,10 @@
 package com.gbtec;
-//
+
 public class Cell {
+    private boolean isAlive;
 
-    boolean isAlive;
-
-    public Cell(boolean alive) {
-        isAlive = alive;
+    public Cell() {
+        isAlive =false;
     }
 
     public boolean getStatus() {

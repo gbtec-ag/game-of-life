@@ -4,11 +4,11 @@ import java.util.List;
 
 public class GenerationPrinter {
 
-    public static void printIntoConsole(List<List<Cell>> generation) {
-        int generationLength = generation.size();
+    public static void printIntoConsole(Generation generation) {
+        int generationLength = generation.generation.size();
         for (int x = 0; x <= generationLength - 1; x++) {
             List<Cell> currentRow;
-            currentRow = generation.get(x);
+            currentRow = generation.generation.get(x);
             String rowOutput = "";
 
             for (int y = 0; y <= generationLength - 1; y++) {
@@ -25,4 +25,3 @@ public class GenerationPrinter {
         System.out.println("        ");
     }
 }
-//

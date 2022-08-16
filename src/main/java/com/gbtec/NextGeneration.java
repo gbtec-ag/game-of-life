@@ -8,14 +8,14 @@ public class NextGeneration {
 
     }
 
-    public List<List<Cell>> calculateNextGeneration(List<List<Cell>> generation, int size) {
+    public Generation calculateNextGeneration(Generation generation, int size) {
 
         Generation nextGeneration = new Generation(size);
-        int generationLength = generation.size(); // number of rows in a generation, in this example 3
+        int generationLength = generation.generation.size(); // number of rows in a generation, in this example 3
 
         for (int y = 0; y < generationLength; y++) {
 
-            List<Cell> currentRow = generation.get(y);/* row of PreGeneration */
+            List<Cell> currentRow = generation.generation.get(y);/* row of PreGeneration */
             int rowLength = currentRow.size(); // length of row
 
             for (int x = 0; x < rowLength; x++) {
@@ -27,16 +27,16 @@ public class NextGeneration {
                 // System.out.printf("Cell(%s, %s), Neighbours: %s%n", x, y, neighbours);
 
                 // Implementing the rules
-                if (!currentCell.isAlive && neighbours == 3)
+                if (!currentCell.getStatus() && neighbours == 3)
                     nextGeneration.generation.get(y).get(x).setStatus(true);
-                else if (currentCell.isAlive && neighbours == 2 || neighbours == 3)
+                else if (currentCell.getStatus() && neighbours == 2 || neighbours == 3)
                     nextGeneration.generation.get(y).get(x).setStatus(true);
                 else {
                     nextGeneration.generation.get(y).get(x).setStatus(false);
                 }
             }
         }
-        return nextGeneration.generation;
+        return nextGeneration;
     }
 
     /*
@@ -51,14 +51,14 @@ public class NextGeneration {
      * return neighbours;
      * }
      */
-    static int countNeighbours(List<List<Cell>> generation, int generationLength, int y, List<Cell> currentRow,
+    static int countNeighbours(Generation generation, int generationLength, int y, List<Cell> currentRow,
         int rowLength, int x) {
         int neighbours = 0;
         // Checking cell right
         int lastXIndex = rowLength - 1;
         if (x < lastXIndex) {
             Cell neighbourCellRight = currentRow.get(x + 1);
-            if (neighbourCellRight.isAlive) {
+            if (neighbourCellRight.getStatus()) {
                 neighbours++;
             }
         }
@@ -66,25 +66,25 @@ public class NextGeneration {
         Cell neighbourCellLeft;
         if (x >= 1) {
             neighbourCellLeft = currentRow.get(x - 1);
-            if (neighbourCellLeft.isAlive) {
+            if (neighbourCellLeft.getStatus()) {
                 neighbours++;
             }
         }
 
         // Checking cell above currentCell
         if (y >= 1) {
-            List<Cell> neighbourRowTop = generation.get(y - 1);
+            List<Cell> neighbourRowTop = generation.generation.get(y - 1);
             Cell neighbourCellTop = neighbourRowTop.get(x);
-            if (neighbourCellTop.isAlive) {
+            if (neighbourCellTop.getStatus()) {
                 neighbours++;
             }
         }
         // Checking cell top right
         if (y >= 1) {
             if (x < rowLength - 1) {
-                List<Cell> neighbourRowTop = generation.get(y - 1);
+                List<Cell> neighbourRowTop = generation.generation.get(y - 1);
                 Cell neighbourCellTopRight = neighbourRowTop.get(x + 1);
-                if (neighbourCellTopRight.isAlive) {
+                if (neighbourCellTopRight.getStatus()) {
                     neighbours++;
                 }
             }
@@ -92,27 +92,27 @@ public class NextGeneration {
         // Checking cell top left
         if (y >= 1) {
             if (x >= 1) {
-                List<Cell> neighbourRowTop = generation.get(y - 1);
+                List<Cell> neighbourRowTop = generation.generation.get(y - 1);
                 Cell neighbourCellTopLeft = neighbourRowTop.get(x - 1);
-                if (neighbourCellTopLeft.isAlive) {
+                if (neighbourCellTopLeft.getStatus()) {
                     neighbours++;
                 }
             }
         }
         // Checking cell below
         if (y + 1 < generationLength) {
-            List<Cell> neighbourRowBottom = generation.get(y + 1);
+            List<Cell> neighbourRowBottom = generation.generation.get(y + 1);
             Cell neighbourCellBottom = neighbourRowBottom.get(x);
-            if (neighbourCellBottom.isAlive) {
+            if (neighbourCellBottom.getStatus()) {
                 neighbours++;
             }
         }
         // Checking cell bottom left
         if (y < generationLength - 1) {
             if (x >= 1) {
-                List<Cell> neighbourRowBottom = generation.get(y + 1);
+                List<Cell> neighbourRowBottom = generation.generation.get(y + 1);
                 Cell neighbourCellBottomLeft = neighbourRowBottom.get(x - 1);
-                if (neighbourCellBottomLeft.isAlive) {
+                if (neighbourCellBottomLeft.getStatus()) {
                     neighbours++;
                 }
             }
@@ -120,9 +120,9 @@ public class NextGeneration {
         // Checking cell bottom right
         if (y + 1 < generationLength) {
             if (x < rowLength - 1) {
-                List<Cell> neighbourRowBottom = generation.get(y + 1);
+                List<Cell> neighbourRowBottom = generation.generation.get(y + 1);
                 Cell neighbourCellBottomRight = neighbourRowBottom.get(x + 1);
-                if (neighbourCellBottomRight.isAlive) {
+                if (neighbourCellBottomRight.getStatus()) {
                     neighbours++;
                 }
             }
@@ -130,4 +130,3 @@ public class NextGeneration {
         return neighbours;
     }
 }
-//
