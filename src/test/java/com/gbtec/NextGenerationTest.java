@@ -1,8 +1,41 @@
 package com.gbtec;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class NextGenerationTest {
+    @Test
+    void calculate_NextGeneration_should_follow_rules(){
+        //given
+        Generation testGeneration = new Generation(3);
+        List<List<Cell>> currentGeneration = new ArrayList<>();
+        currentGeneration = testGeneration.generation;
+        currentGeneration.get(0).get(0).setStatus(false);
+        currentGeneration.get(0).get(1).setStatus(true);
+        currentGeneration.get(0).get(2).setStatus(false);
+        currentGeneration.get(1).get(0).setStatus(false);
+        currentGeneration.get(1).get(1).setStatus(true);
+        currentGeneration.get(1).get(2).setStatus(false);
+        currentGeneration.get(2).get(0).setStatus(false);
+        currentGeneration.get(2).get(1).setStatus(true);
+        currentGeneration.get(2).get(2).setStatus(false);
+        GenerationPrinter.printIntoConsole(currentGeneration);
+        //when
+        NextGeneration testNextGeneration = new NextGeneration();
+        currentGeneration = testNextGeneration.calculateNextGeneration(testGeneration.generation, 3);
+        GenerationPrinter.printIntoConsole(currentGeneration);
+        //then
+        System.out.println("EXPECTED NEXTGENERATION :");
+        System.out.println("XXX");
+        System.out.println("OOO");
+        System.out.println("XXX");
+
+
+    }
+
     @Test
     void count_neighbours_should_detect_left_Neighbour() {
 
