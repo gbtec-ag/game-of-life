@@ -4,17 +4,17 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        int sizeOfGeneration = 9;
+        int sizeOfGeneration = 7;
         int numberOfNextGenerations =3;
         List<List<Cell>> currentGeneration;
-        Generation generation = new Generation(sizeOfGeneration-1);
+        Generation generation = new Generation(sizeOfGeneration);
         currentGeneration = generation.generation;
         GenerationPrinter.printIntoConsole(currentGeneration);
 
         for(int i=0; i <=numberOfNextGenerations-2; i++) {
             NextGeneration nextGeneration = new NextGeneration();
             Thread.sleep(5000);
-            currentGeneration = nextGeneration.calculateNextGeneration(currentGeneration, sizeOfGeneration - 1);
+            currentGeneration = nextGeneration.calculateNextGeneration(currentGeneration, sizeOfGeneration);
             GenerationPrinter.printIntoConsole(currentGeneration);
         }
     }

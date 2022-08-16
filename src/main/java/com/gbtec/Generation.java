@@ -10,9 +10,9 @@ public class Generation {
 
     public Generation(int size) {
         Random random = new Random();
-        for (int numberOfRows = 0; numberOfRows <= size; numberOfRows++) {
+        for (int numberOfRows = 0; numberOfRows <= size-1; numberOfRows++) {
             ArrayList<Cell> row = new ArrayList<>();
-            for (int numberOfColumns = 0; numberOfColumns <= size; numberOfColumns++) {
+            for (int numberOfColumns = 0; numberOfColumns <= size-1; numberOfColumns++) {
                 row.add(new Cell(random.nextBoolean()));
             }
             generation.add(row);
