@@ -1,12 +1,14 @@
 package com.gbtec;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class CellTest {
+
     @Test
-    void setStatus_should_set_the_status_to_true_if_true_is_given(){
+    void setStatus_should_set_the_status_to_true_if_true_is_given() {
         // given
         Cell cell = new Cell(false);
 
@@ -18,7 +20,7 @@ class CellTest {
     }
 
     @Test
-    void setStatus_should_set_the_status_to_false_if_false_is_given(){
+    void setStatus_should_set_the_status_to_false_if_false_is_given() {
         // given
         Cell cell = new Cell(true);
 
@@ -30,26 +32,26 @@ class CellTest {
     }
 
     @Test
-    void getStatus_should_get_Status_if_status_is_true(){
-        //given
+    void getStatus_should_get_Status_if_status_is_true() {
+        // given
         Cell cell = new Cell(true);
 
-        //when
-        cell.getStatus();
+        // when
+        boolean status = cell.getStatus();
 
-        //then
-        assertTrue(cell.isAlive);
+        // then
+        assertTrue(status);
     }
 
     @Test
-    void getStatus_should_get_Status_if_status_is_false(){
-        //given
+    void getStatus_should_get_Status_if_status_is_false() {
+        // given
         Cell cell = new Cell(false);
 
-        //when
-        cell.getStatus();
+        // when
+        boolean status = cell.getStatus();
 
-        //then
-        assertFalse(cell.isAlive);
+        // then
+        assertFalse(status);
     }
 }
