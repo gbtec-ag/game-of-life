@@ -13,7 +13,7 @@ public class GenerationPrinter {
     public static final int WAIT_MILLIS = 500;
 
     public GenerationPrinter() {
-     }
+    }
 
     public void printDemo() throws InterruptedException {
         System.out.println(ansi().eraseLine().cursorUpLine().render("@|yellow X|@ @|white X|@"));
@@ -35,9 +35,8 @@ public class GenerationPrinter {
         AnsiConsole.systemInstall();
         Ansi ansi = Ansi.ansi();
         System.out.println(ansi.eraseScreen());
-        System.out.println(ansi.cursorMove(0,0));
+        System.out.println(ansi.cursorMove(0, 0));
         AnsiConsole.systemUninstall();
-
 
     }
 

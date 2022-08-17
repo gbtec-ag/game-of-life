@@ -11,15 +11,15 @@ public class Main {
         Generation generation = new Generation(sizeOfGeneration);
         if (wishPattern == 0) {
             GenerationRandomizer.randomizeGeneration(generation, sizeOfGeneration);
-            //introducing the RealisticGenerationPrinter
+            // introducing the RealisticGenerationPrinter
             GenerationPrinter printer2 = new GenerationPrinter();
-            printer2.printGeneration(generation,sizeOfGeneration);
+            printer2.printGeneration(generation, sizeOfGeneration);
 
             for (int i = 0; i <= numberOfNextGenerations - 1; i++) {
                 NextGeneration nextGeneration = new NextGeneration();
                 Thread.sleep(500);
                 generation = nextGeneration.calculateNextGeneration(generation, sizeOfGeneration);
-                printer2.printGeneration(generation,sizeOfGeneration);
+                printer2.printGeneration(generation, sizeOfGeneration);
 
             }
         }
@@ -28,24 +28,23 @@ public class Main {
             numberOfNextGenerations = 54;
             GenerationPattern.createFlower(generation, sizeOfGeneration);
             GenerationPrinter printer2 = new GenerationPrinter();
-            printer2.printGeneration(generation,sizeOfGeneration);
+            printer2.printGeneration(generation, sizeOfGeneration);
 
             for (int i = 0; i <= numberOfNextGenerations - 1; i++) {
                 NextGeneration nextGeneration = new NextGeneration();
                 generation = nextGeneration.calculateNextGeneration(generation, sizeOfGeneration);
-                printer2.printGeneration(generation,sizeOfGeneration);
+                printer2.printGeneration(generation, sizeOfGeneration);
 
             }
         } else if (wishPattern == 2) {
             GenerationPattern.createGlider(generation);
             GenerationPrinter printer2 = new GenerationPrinter();
-            printer2.printGeneration(generation,sizeOfGeneration);
-
+            printer2.printGeneration(generation, sizeOfGeneration);
 
             for (int i = 0; i <= numberOfNextGenerations - 1; i++) {
                 NextGeneration nextGeneration = new NextGeneration();
                 generation = nextGeneration.calculateNextGeneration(generation, sizeOfGeneration);
-                printer2.printGeneration(generation,sizeOfGeneration);
+                printer2.printGeneration(generation, sizeOfGeneration);
             }
         } else {
             System.out.println("------");
