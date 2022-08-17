@@ -5,10 +5,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         int sizeOfGeneration = 100;
         int numberOfNextGenerations = 100;
-        int wishPattern = 2;
+        int wishPattern = 1;
 
-
-        // Selecting which kind of pattern you want
+        // Select which kind of pattern you want
         Generation generation = new Generation(sizeOfGeneration);
         if (wishPattern == 0) {
             GenerationRandomizer.randomizeGeneration(generation, sizeOfGeneration);
@@ -33,7 +32,6 @@ public class Main {
 
             for (int i = 0; i <= numberOfNextGenerations - 1; i++) {
                 NextGeneration nextGeneration = new NextGeneration();
-                // Thread.sleep(500);
                 generation = nextGeneration.calculateNextGeneration(generation, sizeOfGeneration);
                 printer2.printGeneration(generation,sizeOfGeneration);
 
@@ -46,7 +44,6 @@ public class Main {
 
             for (int i = 0; i <= numberOfNextGenerations - 1; i++) {
                 NextGeneration nextGeneration = new NextGeneration();
-                // Thread.sleep(500);
                 generation = nextGeneration.calculateNextGeneration(generation, sizeOfGeneration);
                 printer2.printGeneration(generation,sizeOfGeneration);
             }
