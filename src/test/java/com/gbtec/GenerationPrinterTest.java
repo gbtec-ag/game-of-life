@@ -1,5 +1,7 @@
 package com.gbtec;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 public class GenerationPrinterTest {
@@ -18,9 +20,10 @@ public class GenerationPrinterTest {
         resultGeneration.generation.get(0).get(0).setStatus(true);
         resultGeneration.generation.get(0).get(1).setStatus(true);
 
-        for(int i= 0; i<= testGeneration.generation.size()-1; i++){
-            for (int j=0; j<= testGeneration.generation.size()-1; j++){
-                assertEquals(resultGeneration.generation.get(i).get(j).getStatus(),testGeneration.generation.get(i).get(j).getStatus());
+        for (int i = 0; i <= testGeneration.generation.size() - 1; i++) {
+            for (int j = 0; j <= testGeneration.generation.size() - 1; j++) {
+                assertEquals(resultGeneration.generation.get(i).get(j).getStatus(),
+                    testGeneration.generation.get(i).get(j).getStatus());
             }
         }
     }
@@ -44,10 +47,11 @@ public class GenerationPrinterTest {
         resultGeneration.generation.get(1).get(2).setStatus(true);
         resultGeneration.generation.get(2).get(2).setStatus(true);
 
-        for(int i= 0; i<= testGeneration.generation.size()-1; i++){
-            for (int j=0; j<= testGeneration.generation.size()-1; j++){
-                assertEquals(resultGeneration.generation.get(i).get(j).getStatus(),testGeneration.generation.get(i).get(j).getStatus());
+        for (int i = 0; i <= testGeneration.generation.size() - 1; i++) {
+            for (int j = 0; j <= testGeneration.generation.size() - 1; j++) {
+                assertEquals(resultGeneration.generation.get(i).get(j).getStatus(),
+                    testGeneration.generation.get(i).get(j).getStatus());
             }
+        }
     }
-}
 }

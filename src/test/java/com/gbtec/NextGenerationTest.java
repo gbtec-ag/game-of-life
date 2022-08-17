@@ -1,5 +1,7 @@
 package com.gbtec;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 public class NextGenerationTest {
@@ -25,13 +27,45 @@ public class NextGenerationTest {
 
         for (int i = 0; i <= testGeneration.generation.size() - 1; i++) {
             for (int j = 0; j <= testGeneration.generation.size() - 1; j++) {
-                assertEquals(resultGeneration.generation.get(i).get(j).getStatus(), testGeneration.generation.get(i).get(j).getStatus());
+                assertEquals(resultGeneration.generation.get(i).get(j).getStatus(),
+                    testGeneration.generation.get(i).get(j).getStatus());
             }
 
         }
     }
 
+    @Test
+    void calculate_NextGeneration_should_output_first_Generation_after_two_NextGeneration_runs() {
+        // given
+        Generation testGeneration = new Generation(3);
+        testGeneration.generation.get(0).get(1).setStatus(true);
+        testGeneration.generation.get(1).get(1).setStatus(true);
+        testGeneration.generation.get(2).get(1).setStatus(true);
+        GenerationPrinter.printIntoConsole(testGeneration);
+        // when
+        NextGeneration testNextGeneration = new NextGeneration();
+        for (int i = 0; i <= 1; i++) {
+            testGeneration = testNextGeneration.calculateNextGeneration(testGeneration, 3);
+            GenerationPrinter.printIntoConsole(testGeneration);
+        }
+        // then
+        Generation resultGeneration = new Generation(3);
+        resultGeneration.generation.get(0).get(1).setStatus(true);
+        resultGeneration.generation.get(1).get(1).setStatus(true);
+        resultGeneration.generation.get(2).get(1).setStatus(true);
+        System.out.println("--------");
+        System.out.println("EXPECTED");
+        System.out.println("--------");
+        GenerationPrinter.printIntoConsole(resultGeneration);
 
+        for (int i = 0; i <= testGeneration.generation.size() - 1; i++) {
+            for (int j = 0; j <= testGeneration.generation.size() - 1; j++) {
+                assertEquals(resultGeneration.generation.get(i).get(j).getStatus(),
+                    testGeneration.generation.get(i).get(j).getStatus());
+            }
+
+        }
+    }
 
     @Test
     void count_neighbours_should_detect_left_Neighbour() {
