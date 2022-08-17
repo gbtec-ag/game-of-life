@@ -51,8 +51,7 @@ public class NextGeneration {
      * return neighbours;
      * }
      */
-    static int countNeighbours(Generation generation, int generationLength, int y, List<Cell> currentRow,
-        int rowLength, int x) {
+    static int countNeighbours(Generation generation, int generationLength, int y, List<Cell> currentRow, int rowLength, int x) {
         int neighbours = 0;
         // Checking cell right
         int lastXIndex = rowLength - 1;

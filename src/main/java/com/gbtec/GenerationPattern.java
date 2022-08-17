@@ -1,8 +1,8 @@
 package com.gbtec;
 
 public class GenerationPattern {
-    public GenerationPattern()
-    {
+
+    public GenerationPattern() {
 
     }
 
@@ -15,21 +15,21 @@ public class GenerationPattern {
     }
 
     public static void createFlower(Generation generation, int generationSize) {
-        int centralPoint = (generationSize-1)/2;
-        generation.generation.get(centralPoint-1).get(centralPoint+1).setStatus(true);
-        generation.generation.get(centralPoint-2).get(centralPoint+1).setStatus(true);
-        generation.generation.get(centralPoint-3).get(centralPoint+1).setStatus(true);
-        generation.generation.get(centralPoint-3).get(centralPoint).setStatus(true);
-        generation.generation.get(centralPoint-1).get(centralPoint-1).setStatus(true);
-        generation.generation.get(centralPoint-2).get(centralPoint-1).setStatus(true);
-        generation.generation.get(centralPoint-3).get(centralPoint-1).setStatus(true);
+        int centralPoint = (generationSize - 1) / 2;
+        generation.generation.get(centralPoint - 1).get(centralPoint + 1).setStatus(true);
+        generation.generation.get(centralPoint - 2).get(centralPoint + 1).setStatus(true);
+        generation.generation.get(centralPoint - 3).get(centralPoint + 1).setStatus(true);
+        generation.generation.get(centralPoint - 3).get(centralPoint).setStatus(true);
+        generation.generation.get(centralPoint - 1).get(centralPoint - 1).setStatus(true);
+        generation.generation.get(centralPoint - 2).get(centralPoint - 1).setStatus(true);
+        generation.generation.get(centralPoint - 3).get(centralPoint - 1).setStatus(true);
 
-        generation.generation.get(centralPoint+1).get(centralPoint-1).setStatus(true);
-        generation.generation.get(centralPoint+2).get(centralPoint-1).setStatus(true);
-        generation.generation.get(centralPoint+3).get(centralPoint-1).setStatus(true);
-        generation.generation.get(centralPoint+3).get(centralPoint).setStatus(true);
-        generation.generation.get(centralPoint+1).get(centralPoint+1).setStatus(true);
-        generation.generation.get(centralPoint+2).get(centralPoint+1).setStatus(true);
-        generation.generation.get(centralPoint+3).get(centralPoint+1).setStatus(true);
+        generation.generation.get(centralPoint + 1).get(centralPoint - 1).setStatus(true);
+        generation.generation.get(centralPoint + 2).get(centralPoint - 1).setStatus(true);
+        generation.generation.get(centralPoint + 3).get(centralPoint - 1).setStatus(true);
+        generation.generation.get(centralPoint + 3).get(centralPoint).setStatus(true);
+        generation.generation.get(centralPoint + 1).get(centralPoint + 1).setStatus(true);
+        generation.generation.get(centralPoint + 2).get(centralPoint + 1).setStatus(true);
+        generation.generation.get(centralPoint + 3).get(centralPoint + 1).setStatus(true);
     }
 }
