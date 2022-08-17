@@ -10,33 +10,34 @@ class CellTest {
     @Test
     void setStatus_should_set_the_status_to_true_if_true_is_given() {
         // given
-        Cell cell = new Cell(false);
+        Cell cell = new Cell();
 
         // when
         cell.setStatus(true);
 
         // then
-        assertTrue(cell.isAlive);
+        assertTrue(cell.getStatus());
     }
 
     @Test
     void setStatus_should_set_the_status_to_false_if_false_is_given() {
         // given
-        Cell cell = new Cell(true);
+        Cell cell = new Cell();
 
         // when
         cell.setStatus(false);
 
         // then
-        assertFalse(cell.isAlive);
+        assertFalse(cell.getStatus());
     }
 
     @Test
     void getStatus_should_get_Status_if_status_is_true() {
         // given
-        Cell cell = new Cell(true);
+        Cell cell = new Cell();
 
         // when
+        cell.setStatus(true);
         boolean status = cell.getStatus();
 
         // then
@@ -46,7 +47,7 @@ class CellTest {
     @Test
     void getStatus_should_get_Status_if_status_is_false() {
         // given
-        Cell cell = new Cell(false);
+        Cell cell = new Cell();
 
         // when
         boolean status = cell.getStatus();

@@ -15,9 +15,9 @@ public class GenerationPrinter {
                 Cell currentCell;
                 currentCell = currentRow.get(y);
                 if (!currentCell.getStatus()) {
-                    rowOutput = rowOutput + "X";
+                    rowOutput = rowOutput + "-";
                 } else {
-                    rowOutput = rowOutput + "O";
+                    rowOutput = rowOutput + "o";
                 }
             }
             System.out.println(rowOutput);

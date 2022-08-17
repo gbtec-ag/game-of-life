@@ -2,7 +2,7 @@ package com.gbtec;
 import java.util.Random;
 
 public class GenerationRandomizer {
-    public static Generation randomizeGeneration(Generation generation, int size)
+    public static void randomizeGeneration(Generation generation, int size)
     {
         Random random = new Random();
         for (int y=0; y<size; y++){
@@ -10,6 +10,5 @@ public class GenerationRandomizer {
                 generation.generation.get(y).get(x).setStatus(random.nextBoolean());
             }
         }
-        return generation;
     }
 }

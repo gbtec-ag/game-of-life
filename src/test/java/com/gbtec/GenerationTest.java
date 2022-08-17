@@ -25,13 +25,11 @@ public class GenerationTest {
     void generation_should_create_two_dimensional_list_of_Cells_with_size_20x20() {
         // given
         Generation testGeneration = new Generation(20);
-       // when
+        // when
         boolean status = testGeneration.generation.get(19).get(19).getStatus();
         // then
         if (!status) {
             assertFalse(false);
-        } else {
-            assertTrue(true);
         }
     }
 }
