@@ -11,7 +11,7 @@ public class GenerationTest {
         // given
         Generation testGeneration = new Generation(3);
         // when
-        boolean status = testGeneration.generation.get(2).get(2).getStatus();
+        boolean status = testGeneration.getGeneration().get(2).get(2).getStatus();
         // then
         if (!status) {
             assertFalse(false);
@@ -23,7 +23,7 @@ public class GenerationTest {
         // given
         Generation testGeneration = new Generation(20);
         // when
-        boolean status = testGeneration.generation.get(19).get(19).getStatus();
+        boolean status = testGeneration.getGeneration().get(19).get(19).getStatus();
         // then
         if (!status) {
             assertFalse(false);

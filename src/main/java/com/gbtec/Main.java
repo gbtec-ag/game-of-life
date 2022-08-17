@@ -12,7 +12,7 @@ public class Main {
         if (wishPattern == 0) {
             GenerationRandomizer.randomizeGeneration(generation, sizeOfGeneration);
             //introducing the RealisticGenerationPrinter
-            RealsticGenerationPrinter printer2 = new RealsticGenerationPrinter();
+            GenerationPrinter printer2 = new GenerationPrinter();
             printer2.printGeneration(generation,sizeOfGeneration);
 
             for (int i = 0; i <= numberOfNextGenerations - 1; i++) {
@@ -27,7 +27,7 @@ public class Main {
         else if (wishPattern == 1 && sizeOfGeneration >= 100) {
             numberOfNextGenerations = 54;
             GenerationPattern.createFlower(generation, sizeOfGeneration);
-            RealsticGenerationPrinter printer2 = new RealsticGenerationPrinter();
+            GenerationPrinter printer2 = new GenerationPrinter();
             printer2.printGeneration(generation,sizeOfGeneration);
 
             for (int i = 0; i <= numberOfNextGenerations - 1; i++) {
@@ -38,7 +38,7 @@ public class Main {
             }
         } else if (wishPattern == 2) {
             GenerationPattern.createGlider(generation);
-            RealsticGenerationPrinter printer2 = new RealsticGenerationPrinter();
+            GenerationPrinter printer2 = new GenerationPrinter();
             printer2.printGeneration(generation,sizeOfGeneration);
 
 
