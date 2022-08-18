@@ -3,7 +3,7 @@ package com.gbtec;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        int sizeOfGeneration = 100;
+        int sizeOfGeneration = 50;
         int numberOfNextGenerations = 100;
         int wishPattern = 1;
 
@@ -11,7 +11,7 @@ public class Main {
         Generation generation = new Generation(sizeOfGeneration);
         if (wishPattern == 0) {
             GenerationRandomizer.randomizeGeneration(generation, sizeOfGeneration);
-            // introducing the RealisticGenerationPrinter
+            // introducing the GenerationPrinter
             GenerationPrinter printer2 = new GenerationPrinter();
             printer2.printGeneration(generation, sizeOfGeneration);
 
@@ -20,11 +20,14 @@ public class Main {
                 Thread.sleep(500);
                 generation = nextGeneration.calculateNextGeneration(generation, sizeOfGeneration);
                 printer2.printGeneration(generation, sizeOfGeneration);
-
             }
         }
         // for createFlower, size of Generation should be greater than 100 or ==100
-        else if (wishPattern == 1 && sizeOfGeneration >= 100) {
+        else if (wishPattern == 1) {
+            if (sizeOfGeneration < 100) {
+                int minimumSizeGeneration = 50 - sizeOfGeneration;
+                sizeOfGeneration = sizeOfGeneration + minimumSizeGeneration;
+            }
             numberOfNextGenerations = 54;
             GenerationPattern.createFlower(generation, sizeOfGeneration);
             GenerationPrinter printer2 = new GenerationPrinter();

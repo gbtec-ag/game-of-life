@@ -4,10 +4,8 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
-
 public class GenerationPrinter {
 
     public static final int WAIT_MILLIS = 500;
@@ -36,8 +34,6 @@ public class GenerationPrinter {
         Ansi ansi = Ansi.ansi();
         System.out.println(ansi.eraseScreen());
         System.out.println(ansi.cursorMove(0, 0));
-        AnsiConsole.systemUninstall();
-
     }
 
     private List<String> renderGeneration(Generation generation, int size) {
@@ -50,9 +46,9 @@ public class GenerationPrinter {
             for (int j = 0; j <= size - 1; j++) {
                 Cell currentCell = currentRow.get(j);
                 if (!currentCell.getStatus()) {
-                    line = line + "@|white -|@";
+                    line = line + "@|white ░|@";
                 } else
-                    line = line + "@|blue o|@";
+                    line = line + "@|blue █|@";
             }
             renderedGeneration.add(line);
         }

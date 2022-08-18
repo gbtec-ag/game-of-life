@@ -4,10 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 public class NextGenerationTest {
+
     GenerationPrinter printer = new GenerationPrinter();
+
     @Test
-    void calculate_NextGeneration_should_follow_rules() throws InterruptedException {
+    void calculate_NextGeneration_should_follow_rules() throws InterruptedException, IOException {
         // given
         Generation testGeneration = new Generation(3);
         testGeneration.getGeneration().get(0).get(1).setStatus(true);
@@ -17,13 +21,13 @@ public class NextGenerationTest {
         // when
         NextGeneration testNextGeneration = new NextGeneration();
         testGeneration = testNextGeneration.calculateNextGeneration(testGeneration, 3);
-        printer.printGeneration(testGeneration,3);
+        printer.printGeneration(testGeneration, 3);
         // then
         Generation resultGeneration = new Generation(3);
         resultGeneration.getGeneration().get(1).get(0).setStatus(true);
         resultGeneration.getGeneration().get(1).get(1).setStatus(true);
         resultGeneration.getGeneration().get(1).get(2).setStatus(true);
-        printer.printGeneration(resultGeneration,3);
+        printer.printGeneration(resultGeneration, 3);
 
         for (int i = 0; i <= testGeneration.getGeneration().size() - 1; i++) {
             for (int j = 0; j <= testGeneration.getGeneration().size() - 1; j++) {
@@ -35,18 +39,18 @@ public class NextGenerationTest {
     }
 
     @Test
-    void calculate_NextGeneration_should_output_first_Generation_after_two_NextGeneration_runs() throws InterruptedException {
+    void calculate_NextGeneration_should_output_first_Generation_after_two_NextGeneration_runs() throws InterruptedException,IOException {
         // given
         Generation testGeneration = new Generation(3);
         testGeneration.getGeneration().get(0).get(1).setStatus(true);
         testGeneration.getGeneration().get(1).get(1).setStatus(true);
         testGeneration.getGeneration().get(2).get(1).setStatus(true);
-        printer.printGeneration(testGeneration,3);
+        printer.printGeneration(testGeneration, 3);
         // when
         NextGeneration testNextGeneration = new NextGeneration();
         for (int i = 0; i <= 1; i++) {
             testGeneration = testNextGeneration.calculateNextGeneration(testGeneration, 3);
-            printer.printGeneration(testGeneration,3);
+            printer.printGeneration(testGeneration, 3);
         }
         // then
         Generation resultGeneration = new Generation(3);
@@ -56,7 +60,7 @@ public class NextGenerationTest {
         System.out.println("--------");
         System.out.println("EXPECTED");
         System.out.println("--------");
-        printer.printGeneration(resultGeneration,3);
+        printer.printGeneration(resultGeneration, 3);
 
         for (int i = 0; i <= testGeneration.getGeneration().size() - 1; i++) {
             for (int j = 0; j <= testGeneration.getGeneration().size() - 1; j++) {

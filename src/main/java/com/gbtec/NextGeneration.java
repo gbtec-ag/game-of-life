@@ -39,18 +39,6 @@ public class NextGeneration {
         return nextGeneration;
     }
 
-    /*
-     * private int countNeighboursWithLoops(List<List<Cell>> generation, int x, int y) {
-     * int neighbours = 0;
-     * for (int neighboursX = x - 1; neighboursX < x + 1; neighboursX++) {
-     * for (int neighboursY = y - 1; neighboursY < y + 1; neighboursY++) {
-     * // if out of bounds and not self
-     * // isAlive --> neighbours++;
-     * }
-     * }
-     * return neighbours;
-     * }
-     */
     static int countNeighbours(Generation generation, int generationLength, int y, List<Cell> currentRow, int rowLength, int x) {
         int neighbours = 0;
         // Checking cell right
