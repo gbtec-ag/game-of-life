@@ -1,8 +1,10 @@
 package com.gbtec;
 
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         int sizeOfGeneration = 50;
         int numberOfNextGenerations = 100;
         int wishPattern = 0;

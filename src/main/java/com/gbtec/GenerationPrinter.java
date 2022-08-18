@@ -2,6 +2,7 @@ package com.gbtec;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.fusesource.jansi.AnsiConsole;
@@ -23,15 +24,16 @@ public class GenerationPrinter {
         Thread.sleep(WAIT_MILLIS);
     }
 
-    public void printGeneration(Generation generation, int size) throws InterruptedException {
+    public void printGeneration(Generation generation, int size) throws InterruptedException, IOException {
         List<String> outputString = renderGeneration(generation, size);
         int i = 0;
+        Thread.sleep(WAIT_MILLIS);
+        System.out.println(ansi().eraseScreen());
         while (i <= size - 1) {
             System.out.println(ansi().render(outputString.get(i)));
             i++;
         }
-        Thread.sleep(WAIT_MILLIS/2);
-        System.out.println(ansi().eraseScreen());
+
     }
 
     private List<String> renderGeneration(Generation generation, int size) {
@@ -44,9 +46,9 @@ public class GenerationPrinter {
             for (int j = 0; j <= size - 1; j++) {
                 Cell currentCell = currentRow.get(j);
                 if (!currentCell.getStatus()) {
-                    line = line + "@|white ░|@";
+                    line = line + " ";
                 } else
-                    line = line + "@|blue █|@";
+                    line = line + "@|red █|@";
             }
             renderedGeneration.add(line);
         }
