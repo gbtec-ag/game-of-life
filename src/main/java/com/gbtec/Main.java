@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         int sizeOfGeneration = 50;
         int numberOfNextGenerations = 100;
-        int wishPattern = 1;
+        int wishPattern = 0;
 
         // Select which kind of pattern you want
         Generation generation = new Generation(sizeOfGeneration);

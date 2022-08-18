@@ -4,13 +4,14 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 public class GenerationPrinter {
 
     public static final int WAIT_MILLIS = 500;
 
     public GenerationPrinter() {
+        AnsiConsole.systemInstall();
+        System.out.println(ansi().eraseScreen().cursorMove(0, 0));
     }
 
     public void printDemo() throws InterruptedException {
@@ -29,11 +30,8 @@ public class GenerationPrinter {
             System.out.println(ansi().render(outputString.get(i)));
             i++;
         }
-        Thread.sleep(WAIT_MILLIS);
-        AnsiConsole.systemInstall();
-        Ansi ansi = Ansi.ansi();
-        System.out.println(ansi.eraseScreen());
-        System.out.println(ansi.cursorMove(0, 0));
+        Thread.sleep(WAIT_MILLIS/2);
+        System.out.println(ansi().eraseScreen());
     }
 
     private List<String> renderGeneration(Generation generation, int size) {
