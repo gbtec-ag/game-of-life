@@ -1,7 +1,6 @@
 package com.gbtec;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class GenerationTest {
@@ -9,24 +8,39 @@ public class GenerationTest {
     @Test
     void generation_should_create_two_dimensional_list_of_Cells_with_size_3x3() {
         // given
-        Generation testGeneration = new Generation(3);
+        int resultSize =3;
         // when
-        boolean status = testGeneration.getGeneration().get(2).get(2).getStatus();
+        Generation testGeneration = new Generation(3);
         // then
-        if (!status) {
-            assertFalse(false);
+        for(int i=0;i<= testGeneration.getGeneration().size()-1; i++) {
+            assertEquals(resultSize,testGeneration.getGeneration().get(i).size());
         }
-    }
+      }
 
     @Test
     void generation_should_create_two_dimensional_list_of_Cells_with_size_20x20() {
         // given
-        Generation testGeneration = new Generation(20);
+        int resultSize =20;
         // when
-        boolean status = testGeneration.getGeneration().get(19).get(19).getStatus();
+        Generation testGeneration = new Generation(20);
         // then
-        if (!status) {
-            assertFalse(false);
+        for(int i=0;i<= testGeneration.getGeneration().size()-1; i++) {
+            assertEquals(resultSize,testGeneration.getGeneration().get(i).size());
+        }
+    }
+
+    @Test
+    void generation_should_create_a_matrix__of_dead_cells(){
+        //given
+        boolean shouldStatus = false;
+        //when
+        Generation generation = new Generation(11);
+        //then
+        for (int i = 0;i<=generation.getGeneration().size()-1; i++)
+        {
+            for (int j =0; j<=generation.getGeneration().size()-1;j++){
+                assertEquals(shouldStatus,generation.getGeneration().get(i).get(j).getStatus());
+            }
         }
     }
 }
