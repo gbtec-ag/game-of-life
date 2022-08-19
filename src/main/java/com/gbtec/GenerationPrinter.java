@@ -36,7 +36,7 @@ public class GenerationPrinter {
                 if (!currentCell.getStatusOfCell()) {
                     line = line + " ";
                 } else
-                    line = line + "@|red ◘|@";
+                    line = line + "@|red O|@";
             }
             renderedGeneration.add(line);
         }
