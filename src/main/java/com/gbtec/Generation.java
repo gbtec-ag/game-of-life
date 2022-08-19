@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Generation {
 
-    private List<List<Cell>> generation = new ArrayList<>();
+    private final List<List<Cell>> generation = new ArrayList<>();
 
     public Generation(int size) {
         for (int numberOfRows = 0; numberOfRows <= size - 1; numberOfRows++) {
@@ -20,4 +20,9 @@ public class Generation {
     public List<List<Cell>> getGeneration() {
         return generation;
     }
+
+    public Cell getCell(int x, int y){
+        return generation.get(y).get(x);
+    }
+
 }

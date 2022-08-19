@@ -1,13 +1,12 @@
 package com.gbtec;
 
-import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws InterruptedException{
         int sizeOfGeneration = 50;
         int numberOfNextGenerations = 100;
-        int wishPattern = 0;
+        int wishPattern = 1;
 
         // Select which kind of pattern you want
         Generation generation = new Generation(sizeOfGeneration);
@@ -43,13 +42,13 @@ public class Main {
             }
         } else if (wishPattern == 2) {
             GenerationPattern.createGlider(generation);
-            GenerationPrinter printer2 = new GenerationPrinter();
-            printer2.printGeneration(generation, sizeOfGeneration);
+            GenerationPrinter printer = new GenerationPrinter();
+            printer.printGeneration(generation, sizeOfGeneration);
 
             for (int i = 0; i <= numberOfNextGenerations - 1; i++) {
                 NextGeneration nextGeneration = new NextGeneration();
                 generation = nextGeneration.calculateNextGeneration(generation, sizeOfGeneration);
-                printer2.printGeneration(generation, sizeOfGeneration);
+                printer.printGeneration(generation, sizeOfGeneration);
             }
         } else {
             System.out.println("------");

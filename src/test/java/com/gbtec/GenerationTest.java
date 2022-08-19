@@ -39,7 +39,7 @@ public class GenerationTest {
         for (int i = 0;i<=generation.getGeneration().size()-1; i++)
         {
             for (int j =0; j<=generation.getGeneration().size()-1;j++){
-                assertEquals(shouldStatus,generation.getGeneration().get(i).get(j).getStatus());
+                assertEquals(shouldStatus,generation.getCell(i,j).getStatusOfCell());
             }
         }
     }

@@ -4,19 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 
 public class NextGenerationTest {
 
     GenerationPrinter printer = new GenerationPrinter();
 
     @Test
-    void calculate_NextGeneration_should_follow_rules() throws InterruptedException, IOException {
+    void calculate_NextGeneration_should_follow_rules() throws InterruptedException{
         // given
         Generation testGeneration = new Generation(3);
-        testGeneration.getGeneration().get(0).get(1).setStatus(true);
-        testGeneration.getGeneration().get(1).get(1).setStatus(true);
-        testGeneration.getGeneration().get(2).get(1).setStatus(true);
+        testGeneration.getGeneration().get(0).get(1).createCell();
+        testGeneration.getGeneration().get(1).get(1).createCell();
+        testGeneration.getGeneration().get(2).get(1).createCell();
 
         // when
         NextGeneration testNextGeneration = new NextGeneration();
@@ -24,27 +23,27 @@ public class NextGenerationTest {
         printer.printGeneration(testGeneration, 3);
         // then
         Generation resultGeneration = new Generation(3);
-        resultGeneration.getGeneration().get(1).get(0).setStatus(true);
-        resultGeneration.getGeneration().get(1).get(1).setStatus(true);
-        resultGeneration.getGeneration().get(1).get(2).setStatus(true);
+        resultGeneration.getGeneration().get(1).get(0).createCell();
+        resultGeneration.getGeneration().get(1).get(1).createCell();
+        resultGeneration.getGeneration().get(1).get(2).createCell();
         printer.printGeneration(resultGeneration, 3);
 
         for (int i = 0; i <= testGeneration.getGeneration().size() - 1; i++) {
             for (int j = 0; j <= testGeneration.getGeneration().size() - 1; j++) {
-                assertEquals(resultGeneration.getGeneration().get(i).get(j).getStatus(),
-                    testGeneration.getGeneration().get(i).get(j).getStatus());
+                assertEquals(resultGeneration.getCell(j,i).getStatusOfCell(),
+                    testGeneration.getCell(j,i).getStatusOfCell());
             }
 
         }
     }
 
     @Test
-    void calculate_NextGeneration_should_output_first_Generation_after_two_NextGeneration_runs() throws InterruptedException,IOException {
+    void calculate_NextGeneration_should_output_first_Generation_after_two_NextGeneration_runs() throws InterruptedException{
         // given
         Generation testGeneration = new Generation(3);
-        testGeneration.getGeneration().get(0).get(1).setStatus(true);
-        testGeneration.getGeneration().get(1).get(1).setStatus(true);
-        testGeneration.getGeneration().get(2).get(1).setStatus(true);
+        testGeneration.getGeneration().get(0).get(1).createCell();
+        testGeneration.getGeneration().get(1).get(1).createCell();
+        testGeneration.getGeneration().get(2).get(1).createCell();
         printer.printGeneration(testGeneration, 3);
         // when
         NextGeneration testNextGeneration = new NextGeneration();
@@ -54,9 +53,9 @@ public class NextGenerationTest {
         }
         // then
         Generation resultGeneration = new Generation(3);
-        resultGeneration.getGeneration().get(0).get(1).setStatus(true);
-        resultGeneration.getGeneration().get(1).get(1).setStatus(true);
-        resultGeneration.getGeneration().get(2).get(1).setStatus(true);
+        resultGeneration.getGeneration().get(0).get(1).createCell();
+        resultGeneration.getGeneration().get(1).get(1).createCell();
+        resultGeneration.getGeneration().get(2).get(1).createCell();
         System.out.println("--------");
         System.out.println("EXPECTED");
         System.out.println("--------");
@@ -64,8 +63,8 @@ public class NextGenerationTest {
 
         for (int i = 0; i <= testGeneration.getGeneration().size() - 1; i++) {
             for (int j = 0; j <= testGeneration.getGeneration().size() - 1; j++) {
-                assertEquals(resultGeneration.getGeneration().get(i).get(j).getStatus(),
-                    testGeneration.getGeneration().get(i).get(j).getStatus());
+                assertEquals(resultGeneration.getCell(j,i).getStatusOfCell(),
+                    testGeneration.getCell(j,i).getStatusOfCell());
             }
 
         }
@@ -76,11 +75,11 @@ public class NextGenerationTest {
 
         // given
         Generation testGeneration = new Generation(3);
-        testGeneration.getGeneration().get(0).get(0).setStatus(true);
-        testGeneration.getGeneration().get(0).get(1).setStatus(true);
+        testGeneration.getGeneration().get(0).get(0).createCell();
+        testGeneration.getGeneration().get(0).get(1).createCell();
         // when
         int neighbours;
-        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 0, testGeneration.getGeneration().get(0), 3, 1);
+        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 0, 3, 1);
         // then
         assertEquals(1, neighbours);
     }
@@ -90,11 +89,11 @@ public class NextGenerationTest {
 
         // given
         Generation testGeneration = new Generation(3);
-        testGeneration.getGeneration().get(0).get(0).setStatus(true);
-        testGeneration.getGeneration().get(0).get(1).setStatus(true);
+        testGeneration.getCell(0,0).createCell();
+        testGeneration.getCell(1,0).createCell();
         // when
         int neighbours;
-        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 2, testGeneration.getGeneration().get(0), 3, 0);
+        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 0, 3, 0);
         // then
         assertEquals(1, neighbours);
     }
@@ -104,11 +103,11 @@ public class NextGenerationTest {
 
         // given
         Generation testGeneration = new Generation(3);
-        testGeneration.getGeneration().get(0).get(0).setStatus(true);
-        testGeneration.getGeneration().get(1).get(0).setStatus(true);
+        testGeneration.getCell(0,0).createCell();
+        testGeneration.getCell(0,1).createCell();
         // when
         int neighbours;
-        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 0, testGeneration.getGeneration().get(0), 3, 0);
+        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 0,3, 0);
         // then
         assertEquals(1, neighbours);
     }
@@ -118,11 +117,11 @@ public class NextGenerationTest {
 
         // given
         Generation testGeneration = new Generation(3);
-        testGeneration.getGeneration().get(0).get(0).setStatus(true);
-        testGeneration.getGeneration().get(1).get(0).setStatus(true);
+        testGeneration.getCell(0,0).createCell();
+        testGeneration.getCell(0,1).createCell();
         // when
         int neighbours;
-        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 1, testGeneration.getGeneration().get(0), 3, 0);
+        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 1, 3, 0);
         // then
         assertEquals(1, neighbours);
     }
@@ -132,12 +131,11 @@ public class NextGenerationTest {
 
         // given
         Generation testGeneration = new Generation(3);
-        testGeneration.getGeneration().get(0).get(0).setStatus(true);
-        testGeneration.getGeneration().get(1).get(1).setStatus(true);
-
+        testGeneration.getCell(0,0).createCell();
+        testGeneration.getCell(1,1).createCell();
         // when
         int neighbours;
-        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 1, testGeneration.getGeneration().get(1), 3, 1);
+        neighbours = NextGeneration.countNeighbours(testGeneration, 3, 1,3, 1);
         // then
         assertEquals(1, neighbours);
     }
@@ -147,11 +145,10 @@ public class NextGenerationTest {
 
         // given
         Generation testGeneration = new Generation(2);
-        testGeneration.getGeneration().get(0).get(1).setStatus(true);
-        testGeneration.getGeneration().get(1).get(0).setStatus(true);
-        // when
+        testGeneration.getCell(1,0).createCell();
+        testGeneration.getCell(0,1).createCell();// when
         int neighbours;
-        neighbours = NextGeneration.countNeighbours(testGeneration, 2, 1, testGeneration.getGeneration().get(1), 2, 0);
+        neighbours = NextGeneration.countNeighbours(testGeneration, 2, 1,2, 0);
         // then
         assertEquals(1, neighbours);
     }
@@ -161,11 +158,10 @@ public class NextGenerationTest {
 
         // given
         Generation testGeneration = new Generation(2);
-        testGeneration.getGeneration().get(0).get(1).setStatus(true);
-        testGeneration.getGeneration().get(1).get(0).setStatus(true);
-        // when
+        testGeneration.getCell(1,0).createCell();
+        testGeneration.getCell(0,1).createCell();// when
         int neighbours;
-        neighbours = NextGeneration.countNeighbours(testGeneration, 2, 0, testGeneration.getGeneration().get(0), 2, 1);
+        neighbours = NextGeneration.countNeighbours(testGeneration, 2, 0,2, 1);
         // then
         assertEquals(1, neighbours);
     }
@@ -175,11 +171,11 @@ public class NextGenerationTest {
 
         // given
         Generation testGeneration = new Generation(2);
-        testGeneration.getGeneration().get(0).get(0).setStatus(true);
-        testGeneration.getGeneration().get(1).get(1).setStatus(true);
+        testGeneration.getCell(0,0).createCell();
+        testGeneration.getCell(1,1).createCell();
         // when
         int neighbours;
-        neighbours = NextGeneration.countNeighbours(testGeneration, 2, 0, testGeneration.getGeneration().get(0), 2, 0);
+        neighbours = NextGeneration.countNeighbours(testGeneration, 2, 0,2, 0);
         // then
         assertEquals(1, neighbours);
     }

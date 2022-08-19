@@ -1,58 +1,49 @@
 package com.gbtec;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class CellTest {
 
     @Test
-    void setStatus_should_set_the_status_to_true_if_true_is_given() {
+    void CreateCell_should_create_a_living_cell() {
         // given
         Cell cell = new Cell();
 
         // when
-        cell.setStatus(true);
+        cell.createCell();
 
         // then
-        assertTrue(cell.getStatus());
+        boolean expectedBoolean = true;
+        assertEquals(expectedBoolean, cell.getStatusOfCell());
     }
 
     @Test
-    void setStatus_should_set_the_status_to_false_if_false_is_given() {
+    void KillCell_should_kill_a_living_cell() {
         // given
         Cell cell = new Cell();
 
         // when
-        cell.setStatus(false);
+        cell.createCell();
 
         // then
-        assertFalse(cell.getStatus());
+        cell.killCell();
+        boolean expectedBoolean = false;
+        assertEquals(expectedBoolean, cell.getStatusOfCell());
     }
 
     @Test
-    void getStatus_should_get_Status_if_status_is_true() {
+    void getStatusOfCell_should_get_status_of_the_cell_() {
         // given
         Cell cell = new Cell();
 
         // when
-        cell.setStatus(true);
-        boolean status = cell.getStatus();
+        boolean actualBoolean = cell.getStatusOfCell();
 
         // then
-        assertTrue(status);
+        boolean expectedBoolean = false;
+        assertEquals(expectedBoolean, actualBoolean);
     }
 
-    @Test
-    void getStatus_should_get_Status_if_status_is_false() {
-        // given
-        Cell cell = new Cell();
-
-        // when
-        boolean status = cell.getStatus();
-
-        // then
-        assertFalse(status);
-    }
 }

@@ -2,17 +2,19 @@ package com.gbtec;
 
 public class Cell {
 
-    private boolean isAlive;
+    private boolean status;
 
     public Cell() {
-        isAlive = false;
     }
 
-    public boolean getStatus() {
-        return isAlive;
+    public void createCell() {
+        status=true;
     }
 
-    public void setStatus(boolean status) {
-        isAlive = status;
+    public void killCell() {
+        status = false;
+    }
+    public boolean getStatusOfCell(){
+        return status;
     }
 }
