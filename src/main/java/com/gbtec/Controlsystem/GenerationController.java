@@ -1,4 +1,10 @@
-package com.gbtec;
+package com.gbtec.Controlsystem;
+
+import com.gbtec.Initialization.Generation;
+import com.gbtec.Initialization.GenerationPattern;
+import com.gbtec.Initialization.GenerationRandomizer;
+import com.gbtec.Initialization.NextGeneration;
+import com.gbtec.Visualization.GenerationPrinter;
 
 public class GenerationController {
 

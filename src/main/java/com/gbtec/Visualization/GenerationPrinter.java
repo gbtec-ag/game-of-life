@@ -1,9 +1,12 @@
-package com.gbtec;
+package com.gbtec.Visualization;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.gbtec.Initialization.Cell;
+import com.gbtec.Initialization.Generation;
 import org.fusesource.jansi.AnsiConsole;
 public class GenerationPrinter {
 

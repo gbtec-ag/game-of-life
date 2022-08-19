@@ -1,4 +1,4 @@
-package com.gbtec;
+package com.gbtec.Initialization;
 
 import java.util.ArrayList;
 import java.util.List;

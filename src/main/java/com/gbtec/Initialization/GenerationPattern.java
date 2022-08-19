@@ -1,4 +1,4 @@
-package com.gbtec;
+package com.gbtec.Initialization;
 
 public class GenerationPattern {
 

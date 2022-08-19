@@ -1,4 +1,4 @@
-package com.gbtec;
+package com.gbtec.Initialization;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class NextGeneration {
         return nextGeneration;
     }
 
-    static int countNeighbours(Generation generation, int generationLength, int y, int rowLength, int x) {
+    public static int countNeighbours(Generation generation, int generationLength, int y, int rowLength, int x) {
         int neighbours = 0;
         // Checking cell right
         int lastXIndex = rowLength - 1;
