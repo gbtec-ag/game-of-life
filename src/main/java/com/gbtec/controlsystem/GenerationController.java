@@ -4,7 +4,7 @@ import com.gbtec.model.Generation;
 import com.gbtec.initialization.GenerationPattern;
 import com.gbtec.initialization.GenerationRandomizer;
 import com.gbtec.initialization.NextGeneration;
-import com.gbtec.visualization.GenerationPrinter;
+import com.gbtec.presentation.GenerationPrinter;
 
 public class GenerationController {
 

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.gbtec.model.Generation;
 import com.gbtec.initialization.NextGeneration;
-import com.gbtec.visualization.GenerationPrinter;
+import com.gbtec.presentation.GenerationPrinter;
 import org.junit.jupiter.api.Test;
 
 
