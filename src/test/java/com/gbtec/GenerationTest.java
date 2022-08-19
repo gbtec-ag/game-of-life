@@ -2,7 +2,7 @@ package com.gbtec;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.gbtec.Initialization.Generation;
+import com.gbtec.model.Generation;
 import org.junit.jupiter.api.Test;
 
 public class GenerationTest {

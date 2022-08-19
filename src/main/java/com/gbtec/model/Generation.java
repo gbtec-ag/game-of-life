@@ -1,4 +1,6 @@
-package com.gbtec.Initialization;
+package com.gbtec.model;
+
+import com.gbtec.model.Cell;
 
 import java.util.ArrayList;
 import java.util.List;

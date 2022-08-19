@@ -2,9 +2,9 @@ package com.gbtec;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.gbtec.Initialization.Generation;
-import com.gbtec.Initialization.NextGeneration;
-import com.gbtec.Visualization.GenerationPrinter;
+import com.gbtec.model.Generation;
+import com.gbtec.initialization.NextGeneration;
+import com.gbtec.visualization.GenerationPrinter;
 import org.junit.jupiter.api.Test;
 
 

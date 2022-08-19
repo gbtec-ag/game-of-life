@@ -1,4 +1,4 @@
-package com.gbtec.Initialization;
+package com.gbtec.model;
 
 public class Cell {
 

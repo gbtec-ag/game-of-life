@@ -1,12 +1,12 @@
-package com.gbtec.Visualization;
+package com.gbtec.visualization;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gbtec.Initialization.Cell;
-import com.gbtec.Initialization.Generation;
+import com.gbtec.model.Cell;
+import com.gbtec.model.Generation;
 import org.fusesource.jansi.AnsiConsole;
 public class GenerationPrinter {
 
@@ -37,9 +37,9 @@ public class GenerationPrinter {
             for (int j = 0; j <= size - 1; j++) {
                 Cell currentCell = generation.getCell(i,j);
                 if (!currentCell.getStatusOfCell()) {
-                    line = line + " ";
+                    line = line + "@|red X|@";
                 } else
-                    line = line + "@|red O|@";
+                    line = line + "@|white O|@";
             }
             renderedGeneration.add(line);
         }

@@ -1,12 +1,12 @@
 package com.gbtec;
 
 
-import com.gbtec.Controlsystem.GenerationController;
+import com.gbtec.controlsystem.GenerationController;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException{
 
-        GenerationController generationController = new GenerationController(0,100,2);
+        GenerationController generationController = new GenerationController(1,100,2);
     }
 }
