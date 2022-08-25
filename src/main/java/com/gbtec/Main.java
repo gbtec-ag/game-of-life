@@ -7,6 +7,6 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException{
 
-        GenerationController generationController = new GenerationController(1,100,2);
+        GenerationController generationController = new GenerationController(0,100,12);
     }
 }

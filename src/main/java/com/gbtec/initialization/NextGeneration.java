@@ -11,6 +11,8 @@ public class NextGeneration {
 
     }
 
+    int neighbours = 0;
+
     public Generation calculateNextGeneration(Generation generation, int size) {
 
         Generation nextGeneration = new Generation(size);
@@ -23,7 +25,7 @@ public class NextGeneration {
 
             for (int x = 0; x < rowLength; x++) {
                 // Cell of preGeneration
-                Cell currentCell = generation.getCell(x,y);
+                Cell currentCell = generation.getCell(x, y);
 
                 int neighbours = countNeighbours(generation, generationLength, y, rowLength, x);
 
@@ -47,70 +49,47 @@ public class NextGeneration {
         // Checking cell right
         int lastXIndex = rowLength - 1;
         if (x < lastXIndex) {
-            Cell neighbourCellRight =generation.getCell(x + 1,y);
-            if (neighbourCellRight.getStatusOfCell()) {
-                neighbours++;
-            }
+            neighbours = neighbours + incrementNeighbourCount(generation.getCell(x + 1, y));
         }
-        // Checking cell left
 
+        // Checking cell left
         if (x >= 1) {
-            Cell neighbourCellLeft = generation.getCell(x - 1,y);
-            if (neighbourCellLeft.getStatusOfCell()) {
-                neighbours++;
-            }
+            neighbours = incrementNeighbourCount(generation.getCell(x - 1, y));
         }
 
         // Checking cell above currentCell
         if (y >= 1) {
-            Cell neighbourCellTop = generation.getCell(x,y-1);
-            if (neighbourCellTop.getStatusOfCell()) {
-                neighbours++;
-            }
+            neighbours = neighbours + incrementNeighbourCount(generation.getCell(x, y - 1));
         }
         // Checking cell top right
         if (y >= 1) {
             if (x < rowLength - 1) {
-                Cell neighbourCellTopRight = generation.getCell(x+1,y-1);
-                if (neighbourCellTopRight.getStatusOfCell()) {
-                    neighbours++;
-                }
+               neighbours = neighbours + incrementNeighbourCount(generation.getCell(x + 1, y - 1));
             }
         }
         // Checking cell top left
-        if (y >= 1) {
-            if (x >= 1) {
-                Cell neighbourCellTopLeft = generation.getCell(x-1,y-1);
-                if (neighbourCellTopLeft.getStatusOfCell()) {
-                    neighbours++;
-                }
-            }
+        if (y >= 1 &&x >= 1) {
+               neighbours = neighbours + incrementNeighbourCount(generation.getCell(x - 1, y - 1));
         }
         // Checking cell below
         if (y + 1 < generationLength) {
-            Cell neighbourCellBottom = generation.getCell(x,y+1);
-            if (neighbourCellBottom.getStatusOfCell()) {
-                neighbours++;
-            }
+            neighbours = neighbours + incrementNeighbourCount(generation.getCell(x, y + 1));
         }
         // Checking cell bottom left
-        if (y < generationLength - 1) {
-            if (x >= 1) {
-                Cell neighbourCellBottomLeft = generation.getCell(x-1,y+1);
-                if (neighbourCellBottomLeft.getStatusOfCell()) {
-                    neighbours++;
-                }
-            }
+        if (y < generationLength - 1 && x >= 1) {
+                neighbours= neighbours + incrementNeighbourCount(generation.getCell(x - 1, y + 1));
         }
         // Checking cell bottom right
-        if (y + 1 < generationLength) {
-            if (x < rowLength - 1) {
-                Cell neighbourCellBottomRight = generation.getCell(x+1,y+1);
-                if (neighbourCellBottomRight.getStatusOfCell()) {
-                    neighbours++;
-                }
-            }
+        if (y + 1 < generationLength && x < rowLength - 1) {
+                neighbours = neighbours + incrementNeighbourCount(generation.getCell(x + 1, y + 1));
         }
         return neighbours;
+    }
+
+    public static int incrementNeighbourCount(Cell cell) {
+        if (cell.getStatusOfCell()) {
+            return 1;
+        }
+        return 0;
     }
 }
