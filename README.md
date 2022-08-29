@@ -22,7 +22,6 @@ https://www.codecademy.com/learn/learn-java
 ## Development
 
 * Checkout this repository
-* Change to branch `template`
 * Create your own branch named after your Jira ticket and prefix it with `feat/` (e.g. `feat/DES-1234`)
 * Publish that branch
 * Everytime you finish a subtask, push all related commits
