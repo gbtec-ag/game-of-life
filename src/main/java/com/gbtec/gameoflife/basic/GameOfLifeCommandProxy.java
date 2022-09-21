@@ -79,6 +79,18 @@ public abstract class GameOfLifeCommandProxy {
         simpMessagingTemplate.convertAndSend(PRINTING_GOL_GENERATION_TOPIC_PATH, val);
     }
 
+    protected void drawGeneration(int[][] generationData) {
+        boolean[][] tempData = new boolean[generationData.length][];
+        for (int y = 0; y < generationData.length; y++) {
+            tempData[y] = new boolean[generationData[y].length];
+            for (int x = 0; x < generationData[y].length; x++) {
+                tempData[y][x] = generationData[y][x] == 1;
+            }
+        }
+
+        drawGeneration(tempData);
+    }
+
     @Data
     private static class GenerationResponse {
         private boolean[][] generationData;
