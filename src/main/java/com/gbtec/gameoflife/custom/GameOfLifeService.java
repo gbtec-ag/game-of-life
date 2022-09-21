@@ -16,15 +16,26 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     @Override
     public void init() {
-        int dataSize = 8;
-        boolean[][] generationData = new boolean[dataSize][dataSize];
-        Random random = new Random();
-        for (int y = 0; y < dataSize; y++) {
-            for (int x = 0; x < dataSize; x++) {
-                generationData[y][x] = random.nextBoolean();
-            }
-        }
+        int[][] generationData = {
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0, 0, 1, 0},
+                {0, 1, 0, 0, 0, 1, 0, 0},
+                {0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0}
+        };
 
         drawGeneration(generationData);
+
+        // Instead of "int[][]" you can also use "boolean[][]"
+
+        /* To generate random values use class "Random"
+         *
+         * Random random = new Random();
+         * random.nextBoolean(); // Generates "true" or "false"
+         * random.nextInt(0, 2); // Generates "0" or "1"
+         */
     }
 }
