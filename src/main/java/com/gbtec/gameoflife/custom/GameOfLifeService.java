@@ -16,11 +16,11 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     @Override
     public void init() {
-        int dataSize = 16;
+        int dataSize = 8;
         boolean[][] generationData = new boolean[dataSize][dataSize];
         Random random = new Random();
-        for (int y = 0; y < 16; y++) {
-            for (int x = 0; x < 16; x++) {
+        for (int y = 0; y < dataSize; y++) {
+            for (int x = 0; x < dataSize; x++) {
                 generationData[y][x] = random.nextBoolean();
             }
         }
