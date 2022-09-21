@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conway´s Game of Life</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"> <!-- https://getbootstrap.com/docs/5.2/getting-started/introduction/ -->
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div id="main-content" class="container">
+
+    <br>
+
+    <div class="row">
+            <div id="alertBox" class="hidden" role="alert">
+                ...
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button id="buttonInit" class="btn btn-outline-primary">Init</button>
+            <button id="buttonNext" class="btn btn-outline-primary">Next</button>
+            <button id="buttonStop" class="btn btn-outline-primary" type="submit">Stop</button>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                <button id="buttonPlay" class="btn btn-outline-primary" type="submit">Play</button>
+                <input id="inputPlayDelay" type="number" class="form-control" value="1000" placeholder="0" aria-label="Delay between generations in milliseconds">
+                <div class="input-group-append">
+                    <span class="input-group-text">ms</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button id="buttonConnect" type="button" class="btn btn-outline-success">Connect</button>
+            <button id="buttonConnecting" class="btn btn-outline-secondary d-none" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Connecting ...
+            </button>
+            <button id="buttonDisconnect" type="button" class="btn btn-outline-warning d-none">Disconnect</button>
+        </div>
+    </div>
+
+    <br>
+
+    <canvas id="gof-matrix-canvas" style="border: 1px solid #d0d7de;"></canvas>
+</div>
+</body>
+</html>
