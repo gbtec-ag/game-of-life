@@ -11,18 +11,120 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
+        <!-- http://www.network-science.de/ascii/ | big | stretch: yes
+		  _____               _
+		 / ____|             (_)
+		| (___   _ __   _ __  _  _ __    __ _
+		 \___ \ | '_ \ | '__|| || '_ \  / _` |
+		 ____) || |_) || |   | || | | || (_| |
+		|_____/ | .__/ |_|   |_||_| |_| \__, |
+				| |                      __/ |
+				|_|                     |___/	-->
+        <dependency> <!-- Appends better message on the response for better debugging -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream</artifactId>
+        </dependency>
+
+        <!--
+        __          __    _      _
+        \ \        / /   | |    (_)
+         \ \  /\  / /___ | |__   _   __ _  _ __  ___
+          \ \/  \/ // _ \| '_ \ | | / _` || '__|/ __|
+           \  /\  /|  __/| |_) || || (_| || |   \__ \
+            \/  \/  \___||_.__/ | | \__,_||_|   |___/
+                               _/ |
+                              |__/                   	-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sockjs-client</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>stomp-websocket</artifactId>
+            <version>2.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+
+        <!--
+         __  __  _
+        |  \/  |(_)
+        | \  / | _  ___   ___
+        | |\/| || |/ __| / __|
+        | |  | || |\__ \| (__
+        |_|  |_||_||___/ \___|	-->
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!--
+         _______          _    _
+        |__   __|        | |  (_)
+           | |  ___  ___ | |_  _  _ __    __ _
+           | | / _ \/ __|| __|| || '_ \  / _` |
+           | ||  __/\__ \| |_ | || | | || (_| |
+           |_| \___||___/ \__||_||_| |_| \__, |
+                                          __/ |
+                                         |___/	-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
