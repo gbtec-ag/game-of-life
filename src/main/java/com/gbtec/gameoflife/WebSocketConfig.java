@@ -1,4 +1,4 @@
-package com.gbtec;
+package com.gbtec.gameoflife;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

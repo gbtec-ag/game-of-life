@@ -1,4 +1,4 @@
-package com.gbtec;
+package com.gbtec.gameoflife;
 
 import org.springframework.boot.SpringApplication;
 

@@ -139,7 +139,7 @@
 <!--                        <manifest>-->
 <!--                            <addClasspath>true</addClasspath>-->
 <!--                            <classpathPrefix>dependency-jars/</classpathPrefix>-->
-<!--                            <mainClass>com.gbtec.GameOfLifeApplication</mainClass>-->
+<!--                            <mainClass>com.gbtec.gameoflife.GameOfLifeApplication</mainClass>-->
 <!--                        </manifest>-->
 <!--                    </archive>-->
 <!--                </configuration>-->
