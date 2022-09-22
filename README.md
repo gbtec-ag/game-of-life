@@ -1,5 +1,4 @@
 ## Preparation
-
 * Log into [GitHub](https://github.com/gbtec-ag) and [Jira](https://gbtecag.atlassian.net/) using the invitations you received by email
 * Download and install [IntelliJ Community](https://www.jetbrains.com/idea/download/#section=windows)
 * Go to IntelliJ Settings
@@ -14,19 +13,36 @@
     * Download and use [gbtec.importorder](https://github.com/gbtec-ag/biccloud-dev-tools/blob/master/eclipse/preferences/Java/Code%20Style/Organize%20Imports/gbtec.importorder) in "Import Order from file"
 
 ## Learning path
-
 1. You can learn Java basics at:  
 https://www.codecademy.com/learn/learn-java
 2. Find good information about John Conway's Game of Life in the internet and understand the rules
 
+## Working with GIT
+* Checkout this repository from GitHub
+* Create a new branch from `Development`. Name your branch like the number of your Jura ticket, starting with `feat/` prefix (e.g. `feat/DES-1234`)
+* Push this branch to the remote repository
+* While working on the code, commit the code changes in small chunks describing your changes shortly in the commit message
+* Everytime you finish a subtask, push all related commits to the remote repository
+
+## Application
+* This app is splits into two parts: client and server
+* To start the whole application (in your IDE / IntelliJ):
+  * Go to the project explorer
+  * Find a file named `GameOfLIfeApplication`
+  * Right-click on the file
+  * Select `Run 'GameOfLifeApplication'`
+* After the application is started, you can reach the client in your browser via following url: `localhost:8081`
+* The client-part provides buttons `Init`, `Next`, `Play` and `Stop` which will trigger methods inside the server
+* With button `Play` you have also additional integer value which should be used as a delay for continuous rendering of generations
+* To have you generation printed on the UI you need first to connect to the server. This is what the `Connect` button is for
+* If you have done some changes in the code, you need to restart the application and also reconnect the client by clicking `Connect` on the web UI
+
 ## Development
-
-* Checkout this repository
-* Create your own branch named after your Jira ticket and prefix it with `feat/` (e.g. `feat/DES-1234`)
-* Publish that branch
-* Everytime you finish a subtask, push all related commits
-
-## Running the application
-
-* Run with `mvn clean package && java -jar target/game-of-life-1.0.0-SNAPSHOT.jar`
-* Stop with `Ctrl+C`
+* Your entry point is the file named `GameOfLifeService` inside a package named `custom`
+* There you already have an example implementation inside a `init`-method
+* Also, you have methods named `next`, `play` and `stop` available
+  * Like described in the `Application`-section, this methods will trigger if you click corresponding buttons on the ui
+* To render your generation on the UI, you need to call `drawGeneration` method with the data which needs to be rendered
+  * See example in the `init` method
+  * The length and height of your generation data matrix must equal (e.g. `16x16`), otherwise it will render incorrectly
+* Feel free to create additional classes if it helps to you to organize your code
