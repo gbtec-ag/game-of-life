@@ -2,6 +2,7 @@ package com.gbtec.gameoflife.basic;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.SneakyThrows;
  * Provides methods which allows to interact with the UI
  */
 @RequiredArgsConstructor
+@Slf4j
 public abstract class GameOfLifeCommandProxy {
 
     private static final String PRINTING_GOL_GENERATION_TOPIC_PATH = "/gol/generation";
@@ -24,7 +26,7 @@ public abstract class GameOfLifeCommandProxy {
      * for a new run.
      */
     public void init() {
-        System.out.println("init() is not implemented yet!");
+        log.info("init() is not implemented yet!");
     }
 
     /**
@@ -32,7 +34,7 @@ public abstract class GameOfLifeCommandProxy {
      * Every execution of this method should trigger the computation of the next generation.
      */
     public void next() {
-        System.out.println("next() is not implemented yet!");
+        log.info("next() is not implemented yet!");
     }
 
     /**
@@ -41,7 +43,7 @@ public abstract class GameOfLifeCommandProxy {
      * @param delayMs Delay between generations in milliseconds
      */
     public void play(int delayMs) {
-        System.out.println("play() is not implemented yet!");
+        log.info("play() is not implemented yet!");
     }
 
     /**
@@ -49,7 +51,7 @@ public abstract class GameOfLifeCommandProxy {
      * This method should stop if currently running
      */
     public void stop() {
-        System.out.println("stop() is not implemented yet!");
+        log.info("stop() is not implemented yet!");
     }
 
     /**
