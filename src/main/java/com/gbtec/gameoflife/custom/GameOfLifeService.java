@@ -38,4 +38,13 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
          * random.nextInt(0, 2); // Generates "0" or "1"
          */
     }
+
+//    @Override
+//    public void next() {}
+
+//    @Override
+//    public void play(int delayMs) {}
+
+//    @Override
+//    public void stop() {}
 }
