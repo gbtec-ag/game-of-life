@@ -14,6 +14,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     @Override
     public void init() {
+        // Instead of "int[][]" you can also use "boolean[][]"
         int[][] generationData = {
                 {0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0},
@@ -26,8 +27,6 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         };
 
         drawGeneration(generationData);
-
-        // Instead of "int[][]" you can also use "boolean[][]"
 
         /* To generate random values use class "Random"
          *
