@@ -1,7 +1,5 @@
 package com.gbtec.gameoflife.custom;
 
-import java.util.Random;
-
 import com.gbtec.gameoflife.basic.GameOfLifeCommandProxy;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
