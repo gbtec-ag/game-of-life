@@ -2,12 +2,12 @@ package com.gbtec.gameoflife.basic;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Provides methods which allows to interact with the UI
@@ -55,21 +55,10 @@ public abstract class GameOfLifeCommandProxy {
     }
 
     /**
-     * Sends the generationData to the view via websockets. Pre-condition is that the client is connected and registered
+     * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered
      * to the topic.
      * @param generationData Generation data which should be sent to the view
      */
-//    @SneakyThrows
-//    protected void drawGeneration(List<List<Boolean>> generationData) {
-//        GenerationResponse generationResponse = new GenerationResponse();
-//        generationResponse.setGenerationData(generationData);
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String val = objectMapper.writeValueAsString(generationResponse);
-//
-//        simpMessagingTemplate.convertAndSend(PRINTING_GOL_GENERATION_TOPIC_PATH, val);
-//    }
-
     @SneakyThrows
     protected void drawGeneration(boolean[][] generationData) {
         GenerationResponse generationResponse = new GenerationResponse();
@@ -81,6 +70,11 @@ public abstract class GameOfLifeCommandProxy {
         simpMessagingTemplate.convertAndSend(PRINTING_GOL_GENERATION_TOPIC_PATH, val);
     }
 
+    /**
+     * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered
+     * to the topic.
+     * @param generationData Generation data which should be sent to the view
+     */
     protected void drawGeneration(int[][] generationData) {
         boolean[][] tempData = new boolean[generationData.length][];
         for (int y = 0; y < generationData.length; y++) {
