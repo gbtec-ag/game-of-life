@@ -14,16 +14,17 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     @Override
     public void init() {
+        // @formatter:off
         // Instead of "int[][]" you can also use "boolean[][]"
         int[][] generationData = {
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 1, 0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0, 0, 1, 0},
-                {0, 1, 0, 0, 0, 1, 0, 0},
-                {0, 0, 1, 1, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0}
+                { 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 1, 0, 1, 0, 0, 0 },
+                { 1, 0, 0, 0, 0, 0, 1, 0 },
+                { 0, 1, 0, 0, 0, 1, 0, 0 },
+                { 0, 0, 1, 1, 1, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0 }
         };
 
         drawGeneration(generationData);
@@ -34,14 +35,15 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
          * random.nextBoolean(); // Generates "true" or "false"
          * random.nextInt(0, 2); // Generates "0" or "1"
          */
+        // @formatter:on
     }
 
-//    @Override
-//    public void next() {}
+    // @Override
+    // public void next() {}
 
-//    @Override
-//    public void play(int delayMs) {}
+    // @Override
+    // public void play(int delayMs) {}
 
-//    @Override
-//    public void stop() {}
+    // @Override
+    // public void stop() {}
 }
