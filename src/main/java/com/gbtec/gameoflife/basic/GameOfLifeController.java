@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-public class GameOfLifeCtrl {
+public class GameOfLifeController {
 
     private final GameOfLifeService gameOfLifeService;
 
