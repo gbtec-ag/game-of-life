@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class GameOfLifeCommandProxy {
 
-    private static final String PRINTING_GOL_GENERATION_TOPIC_PATH = "/gol/generation";
+    private static final String WEBSOCKET_GENERATION_DATA_TOPIC_PATH = "/generation";
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
@@ -67,7 +67,7 @@ public abstract class GameOfLifeCommandProxy {
         ObjectMapper objectMapper = new ObjectMapper();
         String val = objectMapper.writeValueAsString(generationResponse);
 
-        simpMessagingTemplate.convertAndSend(PRINTING_GOL_GENERATION_TOPIC_PATH, val);
+        simpMessagingTemplate.convertAndSend(WEBSOCKET_GENERATION_DATA_TOPIC_PATH, val);
     }
 
     /**

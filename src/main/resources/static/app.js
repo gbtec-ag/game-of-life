@@ -37,7 +37,7 @@ function connect() {
             setConnected();
             console.log('Connected: ' + frame);
 
-            stompClient.subscribe('/gol/generation', function (generationData) {
+            stompClient.subscribe('/generation', function (generationData) {
                 drawCellsFromData(JSON.parse(generationData.body).generationData);
             });
         },
@@ -101,7 +101,7 @@ window.addEventListener('load', () => {
 });
 
 function drawCellsFromData(generationData) {
-    const canvas = document.querySelector("#gof-matrix-canvas");
+    const canvas = document.querySelector("#generationDataCanvas");
     const context = canvas.getContext("2d");
     const canvasSize = 700;
 
