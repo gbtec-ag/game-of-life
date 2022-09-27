@@ -35,7 +35,7 @@ https://www.codecademy.com/learn/learn-java
 * The client-part provides buttons `Init`, `Next`, `Play` and `Stop` which will trigger methods inside the server
 * With button `Play` you have also additional integer value which should be used as a delay for continuous rendering of generations
 * To have your generation printed you need to connect to the server first using the `Connect` button.
-* If you have done some changes in the code, you need to restart the application and also reconnect the client by clicking `Connect` on the web UI
+* If you have done some changes in the code, you need to restart the application and also reconnect the client by clicking `Connect` in the web UI.
 
 ## Development
 * Your entry point is the file named `GameOfLifeService` inside a package named `custom`
