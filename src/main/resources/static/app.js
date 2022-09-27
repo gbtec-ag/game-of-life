@@ -71,23 +71,23 @@ $(function () {
 
     $("#buttonInit").click(function() {
         // https://api.jquery.com/jquery.post/
-        $.post("/action/gol/init");
+        $.post("/action/init");
     });
 
     $("#buttonNext").click(function() {
         // https://api.jquery.com/jquery.post/
-        $.post("/action/gol/next");
+        $.post("/action/next");
     });
 
     $("#buttonStop").click(function() {
         // https://api.jquery.com/jquery.post/
-        $.post("/action/gol/stop");
+        $.post("/action/stop");
     });
 
     $("#buttonPlay").click(function() {
         // https://api.jquery.com/jquery.post/
         $.ajax({
-            url: "/action/gol/play",
+            url: "/action/play",
             type: "POST",
             data: JSON.stringify({delayMs: parseInt($("#inputPlayDelay").val())}),
             contentType: "application/json; charset=utf-8",
