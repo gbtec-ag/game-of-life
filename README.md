@@ -19,7 +19,7 @@ https://www.codecademy.com/learn/learn-java
 
 ## Working with GIT
 * Checkout this repository from GitHub
-* Create a new branch from `Development`. Name your branch like the number of your Jura ticket, starting with `feat/` prefix (e.g. `feat/DES-1234`)
+* Create a new branch from `development`. Name your branch like the number of your Jira ticket, starting with `feat/` prefix (e.g. `feat/DES-1234`)
 * Push this branch to the remote repository
 * While working on the code, commit the code changes in small chunks describing your changes shortly in the commit message
 * Everytime you finish a subtask, push all related commits to the remote repository
