@@ -25,7 +25,7 @@ https://www.codecademy.com/learn/learn-java
 * Everytime you finish a subtask, push all related commits to the remote repository
 
 ## Application
-* This app is splits into two parts: client and server
+* This app is split into two parts: client and server
 * To start the whole application (in your IDE / IntelliJ):
   * Go to the project explorer
   * Find a file named `GameOfLIfeApplication`
