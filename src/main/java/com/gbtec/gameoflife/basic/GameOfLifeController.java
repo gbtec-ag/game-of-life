@@ -19,7 +19,7 @@ public class GameOfLifeController {
     private final GameOfLifeService gameOfLifeService;
 
     /**
-     * Init should trigger the initialization or reset of game of life and deliver the data to the view via websockets
+     * <p> Triggers the initialization or resetting of game of life and delivers the data to the view via websockets
      */
     @PostMapping(path = "/action/init")
     public ResponseEntity<Void> init() {
@@ -28,7 +28,7 @@ public class GameOfLifeController {
     }
 
     /**
-     * Next should compute the next generation and deliver the updated data to the view via websockets
+     * <p> Computes the next generation and delivers the updated data to the view via websockets
      */
     @PostMapping(path = "/action/next")
     public ResponseEntity<Void> next() {
@@ -37,7 +37,7 @@ public class GameOfLifeController {
     }
 
     /**
-     * Stop should stop automatic computation, in case "play" was triggered
+     * <p> Stops automatic computation if "play" was triggered
      */
     @PostMapping(path = "/action/stop")
     public ResponseEntity<Void> stop() {
@@ -46,8 +46,9 @@ public class GameOfLifeController {
     }
 
     /**
-     * Play should compute one generation after other considering given "playData"
-     * Every new generation should be delivered to the view via websockets
+     * <p> Computes one generation after the other considering given "playData"
+     *
+     * Every new generation is delivered to the view via websockets
      */
     @PostMapping(path = "/action/play")
     public ResponseEntity<Void> play(@RequestBody @Valid PlayData playData) {
