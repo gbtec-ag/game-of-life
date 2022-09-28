@@ -41,7 +41,7 @@ https://www.codecademy.com/learn/learn-java
 * Your entry point is the file named `GameOfLifeService` inside a package named `custom`
 * As a reference, see the example implementation inside the `init` method
 * Also, you have methods named `next`, `play` and `stop` available
-  * Like described in the `Application`-section, this methods will trigger if you click corresponding buttons on the ui
+  * Like described in the `Application`-section, these methods will trigger if you click the corresponding buttons in the UI
 * To render your generation from the UI, you need to call the `drawGeneration` method with the data which needs to be rendered
   * See example in the `init` method
   * The length and height of your generation data matrix must match (e.g. `16x16`), otherwise it will render incorrectly
