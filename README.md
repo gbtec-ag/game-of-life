@@ -42,6 +42,8 @@ https://www.codecademy.com/learn/learn-java
 * As a reference, see the example implementation inside the `init` method
 * Also, you have methods named `next`, `play` and `stop` available
   * Like described in the `Application`-section, these methods will trigger if you click the corresponding buttons in the UI
+  * You will find the base implementation of the methods in `GameOfLifeCommandProxy.java`
+  * Reimplement this methods inside the `GameOfLifeService.java`
 * To render your generation from the UI, you need to call the `drawGeneration` method with the data which needs to be rendered
   * See example in the `init` method
   * The length and height of your generation data matrix must match (e.g. `16x16`), otherwise it will render incorrectly

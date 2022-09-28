@@ -37,13 +37,4 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
          */
         // @formatter:on
     }
-
-    // @Override
-    // public void next() {}
-
-    // @Override
-    // public void play(int delayMs) {}
-
-    // @Override
-    // public void stop() {}
 }
