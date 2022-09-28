@@ -1,29 +1,36 @@
 let stompClient = null;
 
-function setConnected() {
-    $("#buttonConnect").addClass("d-none");
-    $("#buttonDisconnect").removeClass("d-none");
-    $("#buttonConnecting").addClass("d-none");
+// UI Elements
+let alertBox = null;
 
-    $("#alertBox").removeClass();
-    $("#alertBox").addClass("alert alert-success");
-    $("#alertBox").text("Connected :)");
+let buttonConnect = null;
+let buttonDisconnect = null;
+let buttonConnecting = null;
+
+function setConnected() {
+    buttonConnect.addClass("d-none");
+    buttonDisconnect.removeClass("d-none");
+    buttonConnecting.addClass("d-none");
+
+    alertBox.removeClass();
+    alertBox.addClass("alert alert-success");
+    alertBox.text("Connected :)");
 }
 
 function setDisconnected() {
-    $("#buttonConnect").removeClass("d-none");
-    $("#buttonDisconnect").addClass("d-none");
-    $("#buttonConnecting").addClass("d-none");
+    buttonConnect.removeClass("d-none");
+    buttonDisconnect.addClass("d-none");
+    buttonConnecting.addClass("d-none");
 
-    $("#alertBox").removeClass();
-    $("#alertBox").addClass("alert alert-warning");
-    $("#alertBox").text("Server not connected!");
+    alertBox.removeClass();
+    alertBox.addClass("alert alert-warning");
+    alertBox.text("Server not connected!");
 }
 
 function setConnectionPending() {
-    $("#buttonConnect").addClass("d-none");
-    $("#buttonDisconnect").addClass("d-none");
-    $("#buttonConnecting").removeClass("d-none");
+    buttonConnect.addClass("d-none");
+    buttonDisconnect.addClass("d-none");
+    buttonConnecting.removeClass("d-none");
 }
 
 function connect() {
@@ -45,9 +52,9 @@ function connect() {
             setDisconnected();
             console.log('Connection Failed: ' + frame);
 
-            $("#alertBox").removeClass();
-            $("#alertBox").addClass("alert alert-danger");
-            $("#alertBox").text("Connection failed!");
+            alertBox.removeClass();
+            alertBox.addClass("alert alert-danger");
+            alertBox.text("Connection failed!");
         }
     );
 }
@@ -66,8 +73,8 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $("#buttonConnect").click(function() { connect(); });
-    $("#buttonDisconnect").click(function() { disconnect(); });
+    buttonConnect.click(function() { connect(); });
+    buttonDisconnect.click(function() { disconnect(); });
 
     $("#buttonInit").click(function() {
         // https://api.jquery.com/jquery.post/
@@ -98,6 +105,16 @@ $(function () {
 
 window.addEventListener('load', () => {
     setDisconnected();
+
+    // init UI elements
+    alertBox = $("#alertBox");
+
+    buttonConnect = $("#buttonConnect");
+    buttonDisconnect = $("#buttonDisconnect");
+    buttonConnecting = $("#buttonConnecting");
+
+
+
 });
 
 function drawCellsFromData(generationData) {
