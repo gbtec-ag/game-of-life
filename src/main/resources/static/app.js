@@ -36,7 +36,7 @@ function setConnectionPending() {
 function connect() {
     setConnectionPending();
 
-    let socket = new SockJS('/gs-guide-websocket');
+    let socket = new SockJS('/gui-websocket-endpoint');
     stompClient = Stomp.over(socket);
     stompClient.connect(
         {}, // headers
