@@ -38,7 +38,7 @@ https://www.codecademy.com/learn/learn-java
 * If you have done some changes in the code, you need to restart the application and also reconnect the client by clicking `Connect` in the web UI.
 
 ## Development
-* Your entry point is the file named `GameOfLifeService` inside a package named `custom`
+* Your entry point is the file named `GameOfLifeService` inside a package named `implementation`
 * As a reference, see the example implementation inside the `init` method
 * Also, you have methods named `next`, `play` and `stop` available
   * Like described in the `Application`-section, these methods will trigger if you click the corresponding buttons in the UI

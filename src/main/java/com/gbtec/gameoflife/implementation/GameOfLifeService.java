@@ -1,6 +1,6 @@
-package com.gbtec.gameoflife.custom;
+package com.gbtec.gameoflife.implementation;
 
-import com.gbtec.gameoflife.basic.GameOfLifeCommandProxy;
+import com.gbtec.gameoflife.framework.GameOfLifeCommandProxy;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;

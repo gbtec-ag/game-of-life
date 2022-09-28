@@ -1,4 +1,4 @@
-package com.gbtec.gameoflife.basic;
+package com.gbtec.gameoflife.framework;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

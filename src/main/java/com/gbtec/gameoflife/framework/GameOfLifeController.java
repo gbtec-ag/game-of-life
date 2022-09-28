@@ -1,9 +1,9 @@
-package com.gbtec.gameoflife.basic;
+package com.gbtec.gameoflife.framework;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
-import com.gbtec.gameoflife.custom.GameOfLifeService;
+import com.gbtec.gameoflife.implementation.GameOfLifeService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
