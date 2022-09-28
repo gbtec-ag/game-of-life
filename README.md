@@ -31,7 +31,7 @@ https://www.codecademy.com/learn/learn-java
   * Find a file named `GameOfLIfeApplication`
   * Right-click on the file
   * Select `Run 'GameOfLifeApplication'`
-* After the application is started, you can reach the client in your browser via following url: `localhost:8081`
+* After the application is started, you can reach the client in your browser via http://localhost:8081
 * The client-part provides buttons `Init`, `Next`, `Play` and `Stop` which will trigger methods inside the server
 * With button `Play` you have also additional integer value which should be used as a delay for continuous rendering of generations
 * To have your generation printed you need to connect to the server first using the `Connect` button.
@@ -42,7 +42,7 @@ https://www.codecademy.com/learn/learn-java
 * As a reference, see the example implementation inside the `init` method
 * Also, you have methods named `next`, `play` and `stop` available
   * Like described in the `Application`-section, this methods will trigger if you click corresponding buttons on the ui
-* To render your generation on the UI, you need to call `drawGeneration` method with the data which needs to be rendered
+* To render your generation from the UI, you need to call the `drawGeneration` method with the data which needs to be rendered
   * See example in the `init` method
-  * The length and height of your generation data matrix must equal (e.g. `16x16`), otherwise it will render incorrectly
-* Feel free to create additional classes if it helps to you to organize your code
+  * The length and height of your generation data matrix must match (e.g. `16x16`), otherwise it will render incorrectly
+* Feel free to create additional classes if it helps to organize your code
