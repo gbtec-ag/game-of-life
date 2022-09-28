@@ -104,8 +104,6 @@ $(function () {
 });
 
 window.addEventListener('load', () => {
-    setDisconnected();
-
     // init UI elements
     alertBox = $("#alertBox");
 
@@ -113,8 +111,8 @@ window.addEventListener('load', () => {
     buttonDisconnect = $("#buttonDisconnect");
     buttonConnecting = $("#buttonConnecting");
 
-
-
+    // initiate dialog and button as disconnected
+    setDisconnected();
 });
 
 function drawCellsFromData(generationData) {
