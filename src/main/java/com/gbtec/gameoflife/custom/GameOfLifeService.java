@@ -29,11 +29,11 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
         drawGeneration(generationData);
 
-        /* To generate random values use class "Random"
-         *
-         * Random random = new Random();
-         * random.nextBoolean(); // Generates "true" or "false"
-         * random.nextInt(0, 2); // Generates "0" or "1"
+        /* To generate random values, you can use the class "java.util.Random". This class is providing two functions
+         * which are really handy for our case: "nextBoolean" and "nextInt".
+         * - "nextBoolean" will give you randomly "true" or "false"
+         * - "nextInt" will give you a random int number. To limit te numbers given by this method to "0" and "1"
+         *      you must set the origin to 0 and the bound to 2 like "nextInt(0, 2)"
          */
         // @formatter:on
     }
