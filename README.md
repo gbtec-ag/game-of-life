@@ -28,7 +28,7 @@ https://www.codecademy.com/learn/learn-java
 * This app is split into two parts: client and server
 * To start the whole application (in your IDE / IntelliJ):
   * Go to the project explorer
-  * Find a file named `GameOfLIfeApplication`
+  * Find a file named `GameOfLifeApplication`
   * Right-click on the file
   * Select `Run 'GameOfLifeApplication'`
 * After the application is started, you can reach the client in your browser via http://localhost:8081
@@ -41,9 +41,9 @@ https://www.codecademy.com/learn/learn-java
 * Your entry point is the file named `GameOfLifeService` inside a package named `implementation`
 * As a reference, see the example implementation inside the `init` method
 * Also, you have methods named `next`, `play` and `stop` available
-  * Like described in the `Application`-section, these methods will trigger if you click the corresponding buttons in the UI
+  * Like described in the `Application` section, these methods will trigger if you click the corresponding buttons in the UI
   * You will find the base implementation of the methods in `GameOfLifeCommandProxy.java`
-  * Reimplement this methods inside the `GameOfLifeService.java`
+  * Override these methods in `GameOfLifeService.java`
 * To render your generation from the UI, you need to call the `drawGeneration` method with the data which needs to be rendered
   * See example in the `init` method
   * The length and height of your generation data matrix must match (e.g. `16x16`), otherwise it will render incorrectly
