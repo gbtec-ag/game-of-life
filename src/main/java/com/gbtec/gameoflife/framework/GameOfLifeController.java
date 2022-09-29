@@ -19,7 +19,7 @@ public class GameOfLifeController {
     private final GameOfLifeService gameOfLifeService;
 
     /**
-     * <p> Triggers the initialization or resetting of game of life and delivers the data to the view via websockets
+     * <p>Triggers the initialization or resetting of game of life and delivers the data to the view via websockets</p>
      */
     @PostMapping(path = "/action/init")
     public ResponseEntity<Void> init() {
@@ -28,7 +28,7 @@ public class GameOfLifeController {
     }
 
     /**
-     * <p> Computes the next generation and delivers the updated data to the view via websockets
+     * <p>Computes the next generation and delivers the updated data to the view via websockets</p>
      */
     @PostMapping(path = "/action/next")
     public ResponseEntity<Void> next() {
@@ -37,7 +37,7 @@ public class GameOfLifeController {
     }
 
     /**
-     * <p> Stops automatic computation if "play" was triggered
+     * <p>Stops automatic computation if "play" was triggered</p>
      */
     @PostMapping(path = "/action/stop")
     public ResponseEntity<Void> stop() {
@@ -46,8 +46,7 @@ public class GameOfLifeController {
     }
 
     /**
-     * <p> Computes one generation after the other considering given "playData"
-     *
+     * <p>Computes one generation after the other considering given "playData"</p>
      * Every new generation is delivered to the view via websockets
      */
     @PostMapping(path = "/action/play")
@@ -56,5 +55,6 @@ public class GameOfLifeController {
         return ResponseEntity.ok().build();
     }
 
-    public record PlayData(@Min(0) int delayMs) {}
+    public record PlayData(@Min(0) int delayMs) {
+    }
 }
