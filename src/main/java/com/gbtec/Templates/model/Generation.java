@@ -1,4 +1,4 @@
-package com.gbtec.model;
+package com.gbtec.Templates.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

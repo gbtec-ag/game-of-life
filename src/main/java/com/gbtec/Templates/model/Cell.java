@@ -1,4 +1,4 @@
-package com.gbtec.model;
+package com.gbtec.Templates.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

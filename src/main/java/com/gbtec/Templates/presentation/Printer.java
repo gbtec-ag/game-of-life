@@ -1,12 +1,12 @@
-package com.gbtec.presentation;
+package com.gbtec.Templates.presentation;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import com.gbtec.model.Cell;
-import com.gbtec.model.Generation;
+import com.gbtec.Templates.model.Cell;
+import com.gbtec.Templates.model.Generation;
 
 import org.fusesource.jansi.AnsiConsole;
 

@@ -1,6 +1,6 @@
-package com.gbtec.service;
+package com.gbtec.Templates.service;
 
-import com.gbtec.model.Generation;
+import com.gbtec.Templates.model.Generation;
 
 public class GenerationReader {
 
