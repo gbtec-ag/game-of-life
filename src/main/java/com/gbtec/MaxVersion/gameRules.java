@@ -97,14 +97,6 @@ public class gameRules {
                 }
             }
         }
-        /*
-        for (int x = 0; x < gridNewGen.length; x++) {
-            for (int y = 0; y < gridNewGen.length; y++) {
-                System.out.print(gridNewGen[x][y] + "  ");
-            }
-            System.out.println();
-        }
-        */
         return gridNewGen;
     }
 }
