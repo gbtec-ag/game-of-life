@@ -122,13 +122,13 @@ function drawCellsFromData(generationData) {
 
     // Set the generation size considering the min and max matrix size
     const matrixMinSize = 5;
-    const matrixMaxSIze = 256;
+    const matrixMaxSize = 256;
     let matrixSize = generationData.length;
     if (matrixSize < matrixMinSize) {
         matrixSize = matrixMinSize;
     }
-    else if (matrixSize > matrixMaxSIze) {
-        matrixSize = matrixMaxSIze
+    else if (matrixSize > matrixMaxSize) {
+        matrixSize = matrixMaxSize
     }
 
     canvas.width = canvasSize;
