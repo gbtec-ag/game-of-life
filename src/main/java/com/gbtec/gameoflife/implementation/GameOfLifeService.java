@@ -1,7 +1,7 @@
 package com.gbtec.gameoflife.implementation;
 
 import com.gbtec.gameoflife.framework.GameOfLifeCommandProxy;
-
+import com.gbtec.gameoflife.implementation.MaxVersion.gameRules;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
     }
 
     @Override
-    public void init() {
+    public void init(){
         // @formatter:off
         // Instead of "int[][]" you can also use "boolean[][]"
         int[][] generationData = {
@@ -27,7 +27,17 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
                 { 0, 0, 0, 0, 0, 0, 0, 0 }
         };
         // @formatter:on
-
+        for (int c = 0; c < 40; c++) {
+            drawGeneration(generationData);         // printing the grid
+            generationData = gameRules.checkRules(generationData); // checking the rules for next generation
+            if (c < 39) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
         drawGeneration(generationData);
 
         // @formatter:off
