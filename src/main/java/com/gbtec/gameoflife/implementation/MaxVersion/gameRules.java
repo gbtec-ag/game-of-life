@@ -1,4 +1,4 @@
-package com.gbtec.MaxVersion;
+package com.gbtec.gameoflife.implementation.MaxVersion;
 
 public class gameRules {
 

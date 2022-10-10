@@ -1,10 +1,10 @@
-package com.gbtec;
+package com.gbtec.gameoflife.implementation;
 
-import com.gbtec.MaxVersion.gameRules;
-import static com.gbtec.MaxVersion.presentation.printTheGrid;
+import com.gbtec.gameoflife.implementation.MaxVersion.gameRules;
+import static com.gbtec.gameoflife.implementation.MaxVersion.presentation.printTheGrid;
 
-public class Main {
-    public static void main(String[] args) throws InterruptedException {
+public class OldMain {
+    public static void oldMain(String[] args) throws InterruptedException {
         /* int[][] grid = {{0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 1, 0, 0, 1, 0, 0},
                         {0, 1, 0, 1, 1, 0, 1, 0},
