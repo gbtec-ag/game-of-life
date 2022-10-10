@@ -25,6 +25,7 @@ https://www.codecademy.com/learn/learn-java
 * Everytime you finish a subtask, push all related commits to the remote repository
 
 ## Application
+> AdBlock blocks eventually some Parts of the frontend application. So you may need to deactivate you AdBlock before using this application.
 * This app is split into two parts: client and server
 * To start the whole application (in your IDE / IntelliJ):
   * Go to the project explorer
