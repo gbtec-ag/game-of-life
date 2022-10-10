@@ -42,7 +42,6 @@ function connect() {
         {}, // headers
         function (frame) { // connectCallback
             setConnected();
-            console.log('Connected: ' + frame);
 
             stompClient.subscribe('/generation', function (generationData) {
                 drawCellsFromData(JSON.parse(generationData.body).generationData);
@@ -50,7 +49,6 @@ function connect() {
         },
         function (frame) { // errorCallback
             setDisconnected();
-            console.log('Connection Failed: ' + frame);
 
             alertBox.removeClass();
             alertBox.addClass("alert alert-danger");
@@ -65,8 +63,6 @@ function disconnect() {
     if (stompClient !== null) {
         stompClient.disconnect();
     }
-
-    console.log("Disconnected");
 }
 
 $(function () {
