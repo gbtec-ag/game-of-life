@@ -1,9 +1,6 @@
 package com.gbtec.gameoflife.implementation.MaxVersion;
 
-public class gameRules {
-
-    // static
-
+public class GameRules {
     public static int[][] checkRules(int[][] grid) {
 
         int[][] gridNewGen = new int[grid.length][grid.length];
