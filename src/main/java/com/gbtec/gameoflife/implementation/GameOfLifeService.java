@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GameOfLifeService extends GameOfLifeCommandProxy {
-
+    // @formatter:off
+    // Instead of "int[][]" you can also use "boolean[][]"
     private int[][] generationData = new int[][]{
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -30,16 +31,8 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
-    // @formatter:off
-    // Instead of "int[][]" you can also use "boolean[][]"
-
     // @formatter:on
-    private int[][] firstGenerationData;
-
-    {
-        firstGenerationData = generationData;
-    }
-
+    private int[][] firstGenerationData = generationData;
     private boolean printRunning;
 
     public GameOfLifeService(SimpMessagingTemplate simpMessagingTemplate) {
@@ -70,8 +63,23 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
     public void play(int delayMs) {
         printRunning = true;
         while (printRunning) {
-            generationData = GameRules.checkRules(generationData); // checking the rules for next generation
-            drawGeneration(generationData);         // printing the grid
+            int[][] newGenerationData = GameRules.checkRules(generationData); // checking the rules for next generation
+            drawGeneration(newGenerationData);         // printing the grid
+/*
+            if (newGenerationData == generationData) {
+                stop();
+            } else {
+                generationData = newGenerationData;
+            }
+*/
+/*
+            if (newGenerationData == firstGenerationData) {
+                stop();
+            } else {
+                generationData = newGenerationData;
+            }
+*/
+// alternative: play button after push into stop button to force action
 
             try {
                 Thread.sleep(delayMs);
@@ -83,6 +91,13 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 /*
  * Idea: a function where the method 'play' stops when
  * the game has reached a static position without change
+ * -> two ways to execute: (1) comparing current Gen with
+ * firstGen or (2) current Gen with last Gen
+ * and
+ * a toroid grid (execution?)
+ * -> necessary to change the game rules to consider the
+ * edges as a continuum into the other / opposite site of
+ * the grid
  */
     public void stop() {
         printRunning = false;
