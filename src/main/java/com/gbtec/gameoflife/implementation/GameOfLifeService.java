@@ -39,6 +39,10 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         super(simpMessagingTemplate);
     }
 
+     public int[][] returnGenerationData() {
+        return generationData;
+    }
+
     @Override
     public void init() {
         drawGeneration(firstGenerationData);
@@ -99,8 +103,8 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
  * edges as a continuum into the other / opposite site of
  * the grid
  */
+    @Override
     public void stop() {
         printRunning = false;
     }
-
 }
