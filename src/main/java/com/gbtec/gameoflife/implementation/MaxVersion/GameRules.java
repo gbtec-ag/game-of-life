@@ -96,4 +96,8 @@ public class GameRules {
         }
         return gridNewGen;
     }
+
+    public static int testAddition(int x, int y) {
+        return x+y;
+    }
 }
