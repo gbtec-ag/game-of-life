@@ -9,9 +9,19 @@ import org.springframework.stereotype.Service;
 public class GameOfLifeService extends GameOfLifeCommandProxy {
     // @formatter:off
     // Instead of "int[][]" you can also use "boolean[][]"
+
     private int[][] generationData = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0},
+            {0, 0, 1, 0, 0},
+            {1, 1, 1, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+    };
+
+    /*
+    private int[][] generationData = new int[][]{
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
             {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -29,18 +39,16 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     };
+    */
     // @formatter:on
     private int[][] firstGenerationData = generationData;
     private boolean printRunning;
+    // private int equalIndex = 0;
 
     public GameOfLifeService(SimpMessagingTemplate simpMessagingTemplate) {
         super(simpMessagingTemplate);
-    }
-
-     public int[][] returnGenerationData() {
-        return generationData;
     }
 
     @Override
@@ -59,28 +67,29 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     @Override
     public void next() {
-        generationData = GameRules.checkRules(generationData); // checking the rules for next generation
+        generationData = GameRules.createNewGen(generationData); // checking the rules for next generation
         drawGeneration(generationData);         // printing the grid
     }
 
     @Override
     public void play(int delayMs) {
+        /* Possibility that you also input if u want a toroid grid when calling the method (either 'play' or 'init'
+        *  which would make more sense)
+        */
         printRunning = true;
         while (printRunning) {
-            int[][] newGenerationData = GameRules.checkRules(generationData); // checking the rules for next generation
+            int[][] newGenerationData = GameRules.createNewGen(generationData); // checking the rules for next generation
             drawGeneration(newGenerationData);         // printing the grid
+
+            generationData = newGenerationData;
+
 /*
-            if (newGenerationData == generationData) {
-                stop();
-            } else {
-                generationData = newGenerationData;
-            }
-*/
-/*
-            if (newGenerationData == firstGenerationData) {
-                stop();
-            } else {
-                generationData = newGenerationData;
+            for (int i = 0; i < newGenerationData.length - 1; i++) {
+                for (int j = 0; j < newGenerationData.length - 1; j++) {
+                    if (newGenerationData[i][j] != generationData[i][j]) {
+                        // action
+                    } else // stop();
+                }
             }
 */
 // alternative: play button after push into stop button to force action
@@ -92,17 +101,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             }
         }
     }
-/*
- * Idea: a function where the method 'play' stops when
- * the game has reached a static position without change
- * -> two ways to execute: (1) comparing current Gen with
- * firstGen or (2) current Gen with last Gen
- * and
- * a toroid grid (execution?)
- * -> necessary to change the game rules to consider the
- * edges as a continuum into the other / opposite site of
- * the grid
- */
+
     @Override
     public void stop() {
         printRunning = false;
