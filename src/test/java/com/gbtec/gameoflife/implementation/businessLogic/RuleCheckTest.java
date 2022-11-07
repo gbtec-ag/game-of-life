@@ -2,61 +2,27 @@ package com.gbtec.gameoflife.implementation.businessLogic;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class RuleCheckTest {
 
-    @Test
-    void checkRules_should_check_for_rule_stay_alive_3_neighbors() {
+    @ParameterizedTest
+    @CsvSource({
+            "1,1,0", // live cell should die with 1 neighbor
+            "1,2,1", // live cell should stay alive with 2 neighbors
+            "1,3,1", // live cell should stay alive with 3 neighbors
+            "1,4,0", // live cell should die with 4 neighbors
+            "0,2,0", // dead cell should stay dead with 2 neighbors
+            "0,3,1", // dead cell should be reborn with 3 neighbors
+            "0,4,0", // dead cell should stay dead with 4 neighbors
+    })
+    void should_calculate_next_cell_correctly(String currentCell, String sumNeighbors, String expected) {
         // When
-        int arrayValue = RuleCheck.checkRules(1, 3);
+        int result = RuleCheck.checkRules(Integer.parseInt(currentCell), Integer.parseInt(sumNeighbors));
 
         // Then
-        Assertions.assertEquals(1, arrayValue);
-    }
-
-    @Test
-    void checkRules_should_check_for_rule_stay_alive_2_neighbors() {
-        // When
-        int arrayValue = RuleCheck.checkRules(1, 2);
-
-        // Then
-        Assertions.assertEquals(1, arrayValue);
-    }
-
-    @Test
-    void checkRules_should_check_for_rule_dies_4_or_more_neighbors() {
-        // When
-        int arrayValue = RuleCheck.checkRules(1, 4);
-
-        // Then
-        Assertions.assertEquals(0, arrayValue);
-    }
-
-    @Test
-    void checkRules_should_check_for_rule_dies_1_or_less_neighbors() {
-        // When
-        int arrayValue = RuleCheck.checkRules(1, 1);
-
-        // Then
-        Assertions.assertEquals(0, arrayValue);
-    }
-
-    @Test
-    void checkRules_should_check_for_rule_stays_dead() {
-        // When
-        int arrayValue = RuleCheck.checkRules(0, 0);
-
-        // Then
-        Assertions.assertEquals(0, arrayValue);
-    }
-
-    @Test
-    void checkRules_should_check_for_rule_born() {
-        // When
-        int arrayValue = RuleCheck.checkRules(0, 3);
-
-        // Then
-        Assertions.assertEquals(1, arrayValue);
+        Assertions.assertEquals(Integer.parseInt(expected), result);
     }
 
     // ####################################################################
