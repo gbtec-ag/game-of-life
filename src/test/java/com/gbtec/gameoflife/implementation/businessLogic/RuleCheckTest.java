@@ -7,22 +7,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class RuleCheckTest {
 
-    @ParameterizedTest
-    @CsvSource({
-            "1,1,0", // live cell should die with 1 neighbor
-            "1,2,1", // live cell should stay alive with 2 neighbors
-            "1,3,1", // live cell should stay alive with 3 neighbors
-            "1,4,0", // live cell should die with 4 neighbors
-            "0,2,0", // dead cell should stay dead with 2 neighbors
-            "0,3,1", // dead cell should be reborn with 3 neighbors
-            "0,4,0", // dead cell should stay dead with 4 neighbors
-    })
-    void should_calculate_next_cell_correctly(String currentCell, String sumNeighbors, String expected) {
-        // When
-        int result = RuleCheck.checkRules(Integer.parseInt(currentCell), Integer.parseInt(sumNeighbors));
-
-        // Then
-        Assertions.assertEquals(Integer.parseInt(expected), result);
+    // @ParameterizedTest
+    // @CsvSource({
+    // })
+    void should_calculate_next_cell_correctly() {
+        // implement
     }
 
     // ####################################################################
