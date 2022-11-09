@@ -48,3 +48,12 @@ https://www.codecademy.com/learn/learn-java
   * See example in the `init` method
   * The length and height of your generation data matrix must match (e.g. `16x16`), otherwise it will render incorrectly
 * Feel free to create additional classes if it helps to organize your code
+
+## Tasks
+
+1. Create a Jira Story (if it doesn't exist yet). Create subtasks within that story.
+2. Implement `src/test/java/com/gbtec/gameoflife/implementation/businessLogic/RuleCheckTest.java` as a parameterized test defining all edge cases.
+3. Implement `src/main/java/com/gbtec/gameoflife/implementation/businessLogic/RuleCheck.java#L5` so that all tests are green.
+4. Test the implementation in the UI.
+5. Rework `src/main/java/com/gbtec/gameoflife/implementation/businessLogic/RuleCheck.java#L10` in a way to avoid duplication.
+6. Verify the implementation by running all existing tests - they should be still green.
