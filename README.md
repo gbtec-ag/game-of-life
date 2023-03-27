@@ -1,5 +1,5 @@
 ## Preparation
-* Log into [GitHub](https://github.com/gbtec-ag) and [Jira](https://gbtecag.atlassian.net/) using the invitations you received by email
+* Log into [GitHub](https://github.com/gbtec-ag)
 * Download and install [IntelliJ Community](https://www.jetbrains.com/idea/download/#section=windows)
 * Go to IntelliJ Settings
   * Go to "Plugins" and install "Adapter for Eclipse Code Formatter"
