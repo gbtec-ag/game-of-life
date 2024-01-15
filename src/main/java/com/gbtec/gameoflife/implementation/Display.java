@@ -31,7 +31,8 @@ public class Display extends GameOfLifeCommandProxy {
     /**
      * Checks if the given generation data matches the following requirements: <br>
      * - All lines must have the same length <br>
-     * - The length and height of the matrix must match (e.g. 16x16)
+     * - The length and height of the matrix must match (e.g. 16x16) <br>
+     * - The length and height of the matrix must match the value set in GameOfLife.properties
      *
      * @param generationData The generation data that should be checked
      */
