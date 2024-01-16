@@ -55,6 +55,16 @@ public abstract class GameOfLifeCommandProxy {
     }
 
     /**
+     * Method will be executed if you click on any cell on the UI
+     * @param x X coordinate of the clicked cell
+     * @param y Y coordinate of the clicked cell
+     */
+    public void clickCell(int x, int y) {
+        log.info(String.format("clickCell(%s,%s) is not implemented yet!", x, y));
+    }
+
+
+    /**
      * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered
      * to the topic.
      * @param generationData Generation data which should be sent to the view

@@ -1,16 +1,14 @@
 package com.gbtec.gameoflife.framework;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-
 import com.gbtec.gameoflife.implementation.GameOfLifeService;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 @RequiredArgsConstructor
 @RestController
@@ -57,4 +55,14 @@ public class GameOfLifeController {
 
     public record PlayData(@Min(0) int delayMs) {
     }
+
+    @PostMapping(path = "/action/clickCell")
+    public ResponseEntity<Void> clickCell(@RequestBody @Valid ClickCellData clickCellData) {
+        gameOfLifeService.clickCell(clickCellData.x(), clickCellData.y());
+        return ResponseEntity.ok().build();
+    }
+
+    public record ClickCellData(@Min(0) int x, @Min(0) int y) {
+    }
+
 }
