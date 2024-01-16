@@ -12,6 +12,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
     private static Display display;
 
     private static boolean isRunning = false;
+    private static boolean isInitialized = false;
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     public GameOfLifeService(SimpMessagingTemplate simpMessagingTemplate) {
@@ -23,15 +24,23 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
     @Override
     public void init() {
 
-        PropertiesLoader.loadProperties();
-        display = new Display(simpMessagingTemplate);
+        if (!isInitialized) {
+            PropertiesLoader.loadProperties();
+            display = new Display(simpMessagingTemplate);
+            isInitialized = true;
+        }
 
+        if (isRunning)
+            return;
         display.setGenerationData(Tools.generateRandomGenerationData(Integer.parseInt(PropertiesLoader.getProperty("displayMatrixSize"))));
 
     }
 
     @Override
     public void next() {
+        if (!isInitialized)
+            return;
+
         int matrixSize = Integer.parseInt(PropertiesLoader.getProperty("displayMatrixSize"));
         boolean[][] currentGenerationData = display.getCurrentGenerationData();
         boolean[][] nextGenerationData = new boolean[matrixSize][matrixSize];
@@ -59,7 +68,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     @Override
     public void play(int delayMs) {
-        if (isRunning)
+        if (isRunning || !isInitialized)
             return;
         isRunning = true;
 
