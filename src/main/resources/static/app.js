@@ -151,6 +151,10 @@ window.addEventListener('load', () => {
 
     // initiate dialog and button as disconnected
     setDisconnected();
+
+    // https://api.jquery.com/jquery.post/
+    $.post("/action/onLoad");
+
 });
 
 function drawCellsFromData(generationData) {

@@ -63,6 +63,10 @@ public abstract class GameOfLifeCommandProxy {
         log.info(String.format("clickCell(%s,%s) is not implemented yet!", x, y));
     }
 
+    public void onLoad() {
+        log.info("onLoad() is not implemented yet!");
+    }
+
 
     /**
      * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered

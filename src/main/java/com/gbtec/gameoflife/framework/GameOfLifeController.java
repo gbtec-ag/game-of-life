@@ -65,4 +65,10 @@ public class GameOfLifeController {
     public record ClickCellData(@Min(0) int x, @Min(0) int y) {
     }
 
+    @PostMapping(path = "/action/onLoad")
+    public ResponseEntity<Void> onLoad() {
+        gameOfLifeService.onLoad();
+        return ResponseEntity.ok().build();
+    }
+
 }
