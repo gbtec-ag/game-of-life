@@ -81,4 +81,13 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             }
         }
     }
+
+    @Override
+    public void clickCell(int x, int y) {
+        boolean[][] generationData = display.getCurrentGenerationData();
+
+        generationData[x][y] = !generationData[x][y];
+
+        display.setGenerationData(generationData);
+    }
 }
