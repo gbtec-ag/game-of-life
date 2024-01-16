@@ -205,3 +205,10 @@ function drawCellsFromData(generationData) {
         nextYPos += cellSize + cellSpaceSize;
     }
 }
+
+
+
+
+
+// Tab pages
+

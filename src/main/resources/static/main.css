@@ -1,0 +1,64 @@
+.row {
+    width: 1070px;
+}
+
+.col-md-2 {
+    min-width: max-content;
+    margin-top: 5px;
+}
+
+.row button {
+    margin: 0;
+}
+
+#displayContent {
+    display: flex;
+}
+
+#generationDataCanvas {
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+#tabs {
+    width: 350px;
+    height: 700px;
+    border: 1px solid #d0d7de;
+    padding: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+#tabButtons {
+    width: 330px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#tabContent {
+    width: 330px;
+    height: 632px;
+    border: 1px solid #d0d7de;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+@media (max-width: 990px) {
+    #displayContent {
+        flex-direction: column;
+    }
+    #tabs {
+        margin-left: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
+canvas {
+    border: 1px solid #d0d7de;
+}
