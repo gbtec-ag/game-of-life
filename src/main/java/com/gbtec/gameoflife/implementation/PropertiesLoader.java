@@ -34,4 +34,13 @@ public class PropertiesLoader {
         return properties.getProperty(key);
     }
 
+
+    /**
+     * Returns the size of the matrix that should be used to display the generation data
+     * @return The size of the matrix
+     */
+    public static int getDisplayMatrixSize() {
+        return Integer.parseInt(properties.getProperty("displayMatrixSize"));
+    }
+
 }

@@ -49,7 +49,7 @@ public class Display extends GameOfLifeCommandProxy {
 
         currentLength[1] = generationData.length;
 
-        int matrixSize = Integer.parseInt(PropertiesLoader.getProperty("displayMatrixSize"));
+        int matrixSize = PropertiesLoader.getDisplayMatrixSize();
         if (currentLength[0] != currentLength[1] && currentLength[0] != matrixSize) {
             throw new IllegalArgumentException(String.format("The given generation data is not valid. The length and height of the matrix must match %sx%s (set in GameOfLife.properties)!", matrixSize, matrixSize));
         }

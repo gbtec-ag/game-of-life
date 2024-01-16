@@ -32,7 +32,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
         if (isRunning)
             return;
-        display.setGenerationData(Tools.generateRandomGenerationData(Integer.parseInt(PropertiesLoader.getProperty("displayMatrixSize"))));
+        display.setGenerationData(Tools.generateRandomGenerationData(PropertiesLoader.getDisplayMatrixSize()));
 
     }
 
@@ -41,7 +41,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         if (!isInitialized)
             return;
 
-        int matrixSize = Integer.parseInt(PropertiesLoader.getProperty("displayMatrixSize"));
+        int matrixSize = PropertiesLoader.getDisplayMatrixSize();
         boolean[][] currentGenerationData = display.getCurrentGenerationData();
         boolean[][] nextGenerationData = new boolean[matrixSize][matrixSize];
 
