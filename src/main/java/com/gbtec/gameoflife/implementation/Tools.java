@@ -40,17 +40,22 @@ public class Tools {
         boolean[][] generationData = GameOfLifeService.getDisplay().getCurrentGenerationData();
         int neighbourCount = 0;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (i == 1 && j == 1)
+        for (int relativeX = 0; relativeX < 3; relativeX++) {
+            for (int relativeY = 0; relativeY < 3; relativeY++) {
+                if (relativeX == 1 && relativeY == 1) {
+                    // The current cell itself
                     continue;
+                }
 
-                int neighbourX = x + i - 1;
-                int neighbourY = y + j - 1;
+                int neighbourX = x + relativeX - 1;
+                int neighbourY = y + relativeY - 1;
 
-                if (neighbourX < 0 || neighbourX >= generationData.length || neighbourY < 0 || neighbourY >= Integer.parseInt(PropertiesLoader.getProperty("displayMatrixSize")))
+                if (neighbourX < 0 || neighbourX >= generationData.length || neighbourY < 0 || neighbourY >= Integer.parseInt(PropertiesLoader.getProperty("displayMatrixSize"))) {
+                    // Outside the matrix
                     continue;
+                }
 
+                // Check if neighbour is alive -> increment neighbour count
                 neighbourCount += generationData[neighbourX][neighbourY] ? 1 : 0;
 
             }

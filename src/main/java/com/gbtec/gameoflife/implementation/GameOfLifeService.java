@@ -12,7 +12,6 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
     private static Display display;
 
     private static boolean isRunning = false;
-    private static int delay = 0;
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     public GameOfLifeService(SimpMessagingTemplate simpMessagingTemplate) {
@@ -37,14 +36,14 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         boolean[][] currentGenerationData = display.getCurrentGenerationData();
         boolean[][] nextGenerationData = new boolean[matrixSize][matrixSize];
 
-        for (int i = 0; i < matrixSize; i++) {
-            for (int j = 0; j < matrixSize; j++) {
-                int livingNeighbourCount = Tools.getLivingNeighbourCount(i, j);
-                if (currentGenerationData[i][j]) {
-                    nextGenerationData[i][j] = livingNeighbourCount >= 2 && livingNeighbourCount <= 3;
+        for (int x = 0; x < matrixSize; x++) {
+            for (int y = 0; y < matrixSize; y++) {
+                int livingNeighbourCount = Tools.getLivingNeighbourCount(x, y);
+                if (currentGenerationData[x][y]) {
+                    nextGenerationData[x][y] = livingNeighbourCount >= 2 && livingNeighbourCount <= 3;
                 } else {
                     if (livingNeighbourCount == 3) {
-                        nextGenerationData[i][j] = true;
+                        nextGenerationData[x][y] = true;
                     }
                 }
             }
@@ -60,9 +59,8 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     @Override
     public void play(int delayMs) {
-        if (isRunning && delayMs <= 0 && delay == delayMs)
+        if (isRunning)
             return;
-        delay = delayMs;
         isRunning = true;
 
         while (isRunning) {
