@@ -38,6 +38,8 @@ public class Tools {
      */
     public static int getLivingNeighbourCount(int x, int y) {
         boolean[][] generationData = GameOfLifeService.getDisplay().getCurrentGenerationData();
+        int displayMatrixSize = PropertiesLoader.getDisplayMatrixSize();
+        boolean isInfiniteDisplay = PropertiesLoader.getInfiniteDisplay();
         int neighbourCount = 0;
 
         for (int relativeX = 0; relativeX < 3; relativeX++) {
@@ -50,9 +52,23 @@ public class Tools {
                 int neighbourX = x + relativeX - 1;
                 int neighbourY = y + relativeY - 1;
 
-                if (neighbourX < 0 || neighbourX >= generationData.length || neighbourY < 0 || neighbourY >= Integer.parseInt(PropertiesLoader.getProperty("displayMatrixSize"))) {
-                    // Outside the matrix
-                    continue;
+                if (neighbourX < 0 || neighbourX >= generationData.length || neighbourY < 0 || neighbourY >= displayMatrixSize) {
+                    // Cell outside the matrix
+                    if (isInfiniteDisplay) {
+                        if (neighbourX < 0) {
+                            neighbourX = generationData.length + neighbourX;
+                        } else if (neighbourX >= generationData.length) {
+                            neighbourX = neighbourX - generationData.length;
+                        }
+
+                        if (neighbourY < 0) {
+                            neighbourY = displayMatrixSize + neighbourY;
+                        } else if (neighbourY >= displayMatrixSize) {
+                            neighbourY = neighbourY - displayMatrixSize;
+                        }
+                    } else {
+                        continue;
+                    }
                 }
 
                 // Check if neighbour is alive -> increment neighbour count

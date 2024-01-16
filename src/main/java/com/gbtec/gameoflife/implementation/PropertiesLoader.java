@@ -43,4 +43,12 @@ public class PropertiesLoader {
         return Integer.parseInt(properties.getProperty("displayMatrixSize"));
     }
 
+    /**
+     * Returns true if the display should be infinite (e.g. the left side of the matrix is connected to the right side)
+     * @return True if the display should be infinite
+     */
+    public static boolean getInfiniteDisplay() {
+        return Boolean.parseBoolean(properties.getProperty("infiniteDisplay"));
+    }
+
 }
