@@ -67,6 +67,10 @@ public abstract class GameOfLifeCommandProxy {
         log.info("onLoad() is not implemented yet!");
     }
 
+    public void onConnect() {
+        log.info("onConnect() is not implemented yet!");
+    }
+
 
     /**
      * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered

@@ -71,4 +71,10 @@ public class GameOfLifeController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping(path = "action/onConnect")
+    public ResponseEntity<Void> onConnect() {
+        gameOfLifeService.onConnect();
+        return ResponseEntity.ok().build();
+    }
+
 }

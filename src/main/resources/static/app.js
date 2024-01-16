@@ -61,6 +61,9 @@ function connect() {
             alertBox.text("Connection failed!");
         }
     );
+
+    $.post("/action/onConnect");
+
 }
 
 function disconnect() {
