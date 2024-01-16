@@ -118,8 +118,8 @@ $(function () {
             nextYPos = 0,
             cellSize = Math.trunc(canvasSize / matrixSize) - cellSpaceSize;
 
-        for (let y = 0; y < matrixSize; y++) {
-            for (let x = 0; x < matrixSize; x++) {
+        for (let x = 0; x < matrixSize; x++) {
+            for (let y = 0; y < matrixSize; y++) {
 
                 if (clickY > nextYPos && clickY < nextYPos + cellSize && clickX > nextXPos && clickX < nextXPos + cellSize) {
                     $.ajax({
