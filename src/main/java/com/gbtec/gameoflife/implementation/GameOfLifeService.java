@@ -13,25 +13,23 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     private static boolean isRunning = false;
     private static boolean isInitialized = false;
-    private final SimpMessagingTemplate simpMessagingTemplate;
+    private static SimpMessagingTemplate usedSimpMessagingTemplate;
 
     public GameOfLifeService(SimpMessagingTemplate simpMessagingTemplate) {
         super(simpMessagingTemplate);
-        this.simpMessagingTemplate = simpMessagingTemplate;
+        usedSimpMessagingTemplate = simpMessagingTemplate;
     }
 
 
     @Override
     public void init() {
 
-        if (!isInitialized) {
-            PropertiesLoader.loadProperties();
-            display = new Display(simpMessagingTemplate);
-            isInitialized = true;
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
 
-        if (isRunning)
-            return;
         display.setGenerationData(Tools.generateRandomGenerationData(PropertiesLoader.getDisplayMatrixSize()));
 
     }
@@ -93,4 +91,33 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
         display.setGenerationData(generationData);
     }
+
+    @Override
+    public void onLoad() {
+        resetGame();
+    }
+
+    @Override
+    public void onConnect() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        resetGame();
+    }
+
+    public static void resetGame() {
+        isRunning = false;
+
+        if (!isInitialized) {
+            PropertiesLoader.loadProperties();
+            display = new Display(usedSimpMessagingTemplate);
+            isInitialized = true;
+        }
+
+        display.setGenerationData(Tools.getEmptyGenerationData());
+
+    }
+
 }

@@ -80,4 +80,20 @@ public class Tools {
         return neighbourCount;
     }
 
+    /**
+     * Creates an empty generation data
+     * @return The empty generation data
+     */
+    public static boolean[][] getEmptyGenerationData() {
+        boolean[][] generationData = new boolean[PropertiesLoader.getDisplayMatrixSize()][PropertiesLoader.getDisplayMatrixSize()];
+
+        for (int x = 0; x < PropertiesLoader.getDisplayMatrixSize(); x++) {
+            for (int y = 0; y < PropertiesLoader.getDisplayMatrixSize(); y++) {
+                generationData[x][y] = false;
+            }
+        }
+
+        return generationData;
+    }
+
 }
