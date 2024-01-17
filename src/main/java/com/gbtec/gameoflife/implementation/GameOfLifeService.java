@@ -30,7 +30,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             throw new RuntimeException(e);
         }
 
-        display.setGenerationData(Tools.generateRandomGenerationData(PropertiesLoader.getDisplayMatrixSize()));
+        display.setGenerationData(Tools.generateRandomGenerationData(PropertiesLoader.getDisplayMatrixSize()), Display.Type.MAIN);
 
     }
 
@@ -40,7 +40,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             return;
 
         int matrixSize = PropertiesLoader.getDisplayMatrixSize();
-        boolean[][] currentGenerationData = display.getCurrentGenerationData();
+        boolean[][] currentGenerationData = display.getGenerationData(Display.Type.MAIN);
         boolean[][] nextGenerationData = new boolean[matrixSize][matrixSize];
 
         for (int x = 0; x < matrixSize; x++) {
@@ -56,7 +56,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             }
         }
 
-        display.setGenerationData(nextGenerationData);
+        display.setGenerationData(nextGenerationData, Display.Type.MAIN);
     }
 
     @Override
@@ -85,11 +85,11 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         if (isRunning)
             return;
 
-        boolean[][] generationData = display.getCurrentGenerationData();
+        boolean[][] generationData = display.getGenerationData(Display.Type.MAIN);
 
         generationData[x][y] = !generationData[x][y];
 
-        display.setGenerationData(generationData);
+        display.setGenerationData(generationData, Display.Type.MAIN);
     }
 
     @Override
@@ -113,11 +113,44 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         if (!isInitialized) {
             PropertiesLoader.loadProperties();
             display = new Display(usedSimpMessagingTemplate);
+            DataStorage.readFromFile();
             isInitialized = true;
         }
 
-        display.setGenerationData(Tools.getEmptyGenerationData());
+        display.setGenerationData(Tools.getEmptyGenerationData(), Display.Type.MAIN);
 
     }
 
+
+    // Tab services
+
+
+    @Override
+    public void onStartConditionsSwap() {
+        boolean[][] mainDisplayData = display.getGenerationData(Display.Type.MAIN);
+        boolean[][] previewDisplayData = display.getGenerationData(Display.Type.PREVIEW);
+
+        display.setGenerationData(previewDisplayData, Display.Type.MAIN);
+        display.setGenerationData(mainDisplayData, Display.Type.PREVIEW);
+    }
+
+    @Override
+    public void onStartConditionsClear() {
+        display.setGenerationData(Tools.getEmptyGenerationData(), Display.Type.PREVIEW);
+    }
+
+    @Override
+    public void onStartConditionsPreview(int storageId) {
+        display.setGenerationData(DataStorage.getData(storageId).generationData(), Display.Type.PREVIEW);
+    }
+
+    @Override
+    public void onStartConditionsSave(int storageId) {
+        DataStorage.setData(storageId, display.getGenerationData(Display.Type.PREVIEW));
+    }
+
+    @Override
+    public void onInitPreviewDisplay() {
+        display.setGenerationData(Tools.getEmptyGenerationData(), Display.Type.PREVIEW);
+    }
 }

@@ -37,7 +37,7 @@ public class Tools {
      * @return The number of living neighbours
      */
     public static int getLivingNeighbourCount(int x, int y) {
-        boolean[][] generationData = GameOfLifeService.getDisplay().getCurrentGenerationData();
+        boolean[][] generationData = GameOfLifeService.getDisplay().getGenerationData(Display.Type.MAIN);
         int displayMatrixSize = PropertiesLoader.getDisplayMatrixSize();
         boolean isInfiniteDisplay = PropertiesLoader.getInfiniteDisplay();
         int neighbourCount = 0;

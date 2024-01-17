@@ -2,12 +2,15 @@ package com.gbtec.gameoflife.framework;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.gbtec.gameoflife.implementation.Display;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * Provides methods which allows to interact with the UI
@@ -16,7 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class GameOfLifeCommandProxy {
 
-    private static final String WEBSOCKET_GENERATION_DATA_TOPIC_PATH = "/generation";
+    private static final String WEBSOCKET_GENERATION_DATA_TOPIC_PATH_MAIN = "/generation/main";
+    private static final String WEBSOCKET_GENERATION_DATA_TOPIC_PATH_PREVIEW = "/generation/preview";
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
@@ -77,29 +81,73 @@ public abstract class GameOfLifeCommandProxy {
         log.info("onConnect() is not implemented yet!");
     }
 
+    /**
+     * Method will be executed if the Load button in the Start Conditions tab is clicked
+     * This method should load the generation data from the preview display into the main display
+     */
+    public void onStartConditionsSwap() {
+        log.info("onStartConditionsSwap() is not implemented yet!");
+    }
+
+    /**
+     * Method will be executed if the Clear button in the Start Conditions tab is clicked
+     * This method should clear the generation data in the preview display
+     */
+    public void onStartConditionsClear() {
+        log.info("onStartConditionsClear() is not implemented yet!");
+    }
+
+    /**
+     * Method will be executed if the Preview button in the Start Conditions tab is clicked
+     * This method should load the generation data stored at the given storage id into the preview display
+     * @param storageId Storage id of the generation data which should be loaded into the preview display
+     */
+    public void onStartConditionsPreview(int storageId) {
+        log.info("onStartConditionsPreview() is not implemented yet!");
+    }
+
+    /**
+     * Method will be executed if the Save button in the Start Conditions tab is clicked
+     * This method should save the generation data from the main display into the storage
+     * @param storageId Storage id where the generation data should be saved
+     */
+    public void onStartConditionsSave(int storageId) {
+        log.info("onStartConditionsSave() is not implemented yet!");
+    }
+
+    /**
+     * Method will be executed if the Start Conditions Tab is loaded
+     * This method should initialize the preview display
+     */
+    public void onInitPreviewDisplay() {
+        log.info("onInitPreviewDisplay() is not implemented yet!");
+    }
+
 
     /**
      * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered
      * to the topic.
      * @param generationData Generation data which should be sent to the view
+     * @param displayType Type of the display which should be updated
      */
     @SneakyThrows
-    protected void drawGeneration(boolean[][] generationData) {
+    protected void drawGeneration(boolean[][] generationData, @NotNull Display.Type displayType) {
         GenerationResponse generationResponse = new GenerationResponse();
         generationResponse.setGenerationData(generationData);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String val = objectMapper.writeValueAsString(generationResponse);
 
-        simpMessagingTemplate.convertAndSend(WEBSOCKET_GENERATION_DATA_TOPIC_PATH, val);
+        simpMessagingTemplate.convertAndSend(displayType.equals(Display.Type.MAIN) ? WEBSOCKET_GENERATION_DATA_TOPIC_PATH_MAIN : WEBSOCKET_GENERATION_DATA_TOPIC_PATH_PREVIEW, val);
     }
 
     /**
      * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered
      * to the topic.
      * @param generationData Generation data which should be sent to the view
+     * @param displayType Type of the display which should be updated
      */
-    protected void drawGeneration(int[][] generationData) {
+    protected void drawGeneration(int[][] generationData, @NotNull Display.Type displayType) {
         boolean[][] tempData = new boolean[generationData.length][];
         for (int y = 0; y < generationData.length; y++) {
             tempData[y] = new boolean[generationData[y].length];
@@ -108,7 +156,7 @@ public abstract class GameOfLifeCommandProxy {
             }
         }
 
-        drawGeneration(tempData);
+        drawGeneration(tempData, displayType);
     }
 
     @Data

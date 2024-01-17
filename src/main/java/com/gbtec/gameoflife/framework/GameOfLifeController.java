@@ -86,4 +86,37 @@ public class GameOfLifeController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping(path = "action/startConditionsSwap")
+    public ResponseEntity<Void> onStartConditionsSwap() {
+        gameOfLifeService.onStartConditionsSwap();
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(path = "action/startConditionsClear")
+    public ResponseEntity<Void> onStartConditionsClear() {
+        gameOfLifeService.onStartConditionsClear();
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(path = "action/startConditionsPreview")
+    public ResponseEntity<Void> onStartConditionsPreview(@RequestBody @Valid StorageData storageData) {
+        gameOfLifeService.onStartConditionsPreview(storageData.storageId());
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(path = "action/startConditionsSave")
+    public ResponseEntity<Void> onStartConditionsSave(@RequestBody @Valid StorageData storageData) {
+        gameOfLifeService.onStartConditionsSave(storageData.storageId());
+        return ResponseEntity.ok().build();
+    }
+
+    public record StorageData(@Min(0) int storageId) {
+    }
+
+    @PostMapping(path = "action/initPreviewDisplay")
+    public ResponseEntity<Void> onInitPreviewDisplay() {
+        gameOfLifeService.onInitPreviewDisplay();
+        return ResponseEntity.ok().build();
+    }
+
 }

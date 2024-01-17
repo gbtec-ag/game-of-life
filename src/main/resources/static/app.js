@@ -49,8 +49,11 @@ function connect() {
         function (frame) { // connectCallback
             setConnected();
 
-            stompClient.subscribe('/generation', function (generationData) {
-                drawCellsFromData(JSON.parse(generationData.body).generationData);
+            stompClient.subscribe('/generation/main', function (generationData) {
+                drawCellsFromData(JSON.parse(generationData.body).generationData, false);
+            });
+            stompClient.subscribe('/generation/preview', function (generationData) {
+                drawCellsFromData(JSON.parse(generationData.body).generationData, true);
             });
         },
         function (frame) { // errorCallback
@@ -160,13 +163,20 @@ window.addEventListener('load', () => {
 
 });
 
-function drawCellsFromData(generationData) {
-    const canvas = document.querySelector("#generationDataCanvas");
+function drawCellsFromData(generationData, previewDisplay) {
+    let canvas;
+
+    if (previewDisplay) {
+        canvas = document.querySelector("#generationDataPreview");
+    } else {
+        canvas = document.querySelector("#generationDataCanvas");
+    }
+
     const context = canvas.getContext("2d");
 
     // Set the generation size considering the min and max matrix size
     const matrixMinSize = 5;
-    const matrixMaxSize = 256;
+    const matrixMaxSize = 113;
     matrixSize = generationData.length;
     if (matrixSize < matrixMinSize) {
         matrixSize = matrixMinSize;
@@ -178,8 +188,8 @@ function drawCellsFromData(generationData) {
     canvas.height = canvasSize;
 
     // Set the cell size considering the min and max values
-    const cellMinSize = 8;
-    const cellMaxSize = 64;
+    const cellMinSize = 4;
+    const cellMaxSize = 28;
     let cellSize = Math.trunc(canvasSize / matrixSize) - cellSpaceSize;
     if (cellSize < cellMinSize) {
         cellSize = cellMinSize;
@@ -212,3 +222,64 @@ function drawCellsFromData(generationData) {
 
 // Tab pages
 
+$(function () {
+
+    $("#tabButtonStartConditions").click(function () {
+        $.post("action/initPreviewDisplay");
+        document.getElementById("tabButtonStartConditions").className = "btn btn-outline-primary";
+        document.getElementById("tabButtonStatistics").className = "btn btn-outline-secondary";
+        document.getElementById("tabButtonRules").className = "btn btn-outline-secondary";
+
+        document.getElementById("tabContent").innerHTML =
+            "                <canvas id=\"generationDataPreview\"></canvas>\n" +
+            "                <div class=\"buttonLine\">\n" +
+            "                    <button id=\"startConditionsSwap\" type=\"submit\" class=\"btn btn-outline-success\">Swap</button>\n" +
+            "                    <button id=\"startConditionsClear\" type=\"reset\" class=\"btn btn-outline-warning\">Clear</button>\n" +
+            "                </div>\n" +
+            "                <div class=\"tabSectionSeperator\"></div>\n" +
+            "                <div class=\"buttonLine\">\n" +
+            "                    <button id=\"startConditionsPreview\" type=\"button\" class=\"btn btn-outline-primary\">Preview from Storage</button>\n" +
+            "                    <button id=\"startConditionsSave\" type=\"submit\" class=\"btn btn-outline-success\">Save from Preview</button>\n" +
+            "                </div>\n" +
+            "                <div class=\"buttonLine\">\n" +
+            "                    <input id=\"startConditionsStorageNumberInput\" type=\"number\" placeholder=\"0\" aria-label=\"The number of the storage where the generation data which should be loaded is stored\">\n" +
+            "                </div>\n" +
+            "            </div>";
+
+
+        $("#startConditionsSwap").click(function () {
+            // https://api.jquery.com/jquery.post/
+            $.post("/action/startConditionsSwap");
+        });
+
+        $("#startConditionsClear").click(function () {
+            // https://api.jquery.com/jquery.post/
+            $.post("/action/startConditionsClear");
+        });
+
+        $("#startConditionsPreview").click(function () {
+            // https://api.jquery.com/jquery.post/
+            $.ajax({
+                url: "/action/startConditionsPreview",
+                type: "POST",
+                data: JSON.stringify({storageId: parseInt($("#startConditionsStorageNumberInput").val())}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            })
+        });
+
+        $("#startConditionsSave").click(function () {
+            // https://api.jquery.com/jquery.post/
+            $.ajax({
+                url: "/action/startConditionsSave",
+                type: "POST",
+                data: JSON.stringify({storageId: parseInt($("#startConditionsStorageNumberInput").val())}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            })
+        });
+
+    });
+
+
+});

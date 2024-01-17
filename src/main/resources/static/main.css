@@ -62,3 +62,45 @@ button {
 canvas {
     border: 1px solid #d0d7de;
 }
+
+canvas#generationDataPreview {
+    width: 310px;
+    height: 310px;
+}
+
+.tabSectionSeperator {
+    width: 310px;
+    height: 0;
+    border: 1px solid #d0d7de;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.buttonLine {
+    margin: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#startConditionsPreview {
+    margin-right: 10px;
+}
+
+#startConditionsSave {
+    margin-left: 10px;
+}
+
+.buttonLine input {
+    width: 270px;
+    margin-top: 10px;
+    padding: .375rem .75rem;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    border: 1px solid #ced4da;
+    appearance: none;
+    background-clip: padding-box;
+}
