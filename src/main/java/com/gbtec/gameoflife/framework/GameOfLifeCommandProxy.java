@@ -63,10 +63,16 @@ public abstract class GameOfLifeCommandProxy {
         log.info(String.format("clickCell(%s,%s) is not implemented yet!", x, y));
     }
 
+    /**
+     * Method will be executed if the UI is loaded
+     */
     public void onLoad() {
         log.info("onLoad() is not implemented yet!");
     }
 
+    /**
+     * Method will be executed if the UI starts to connect to the server
+     */
     public void onConnect() {
         log.info("onConnect() is not implemented yet!");
     }

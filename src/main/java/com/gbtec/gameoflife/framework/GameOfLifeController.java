@@ -56,6 +56,9 @@ public class GameOfLifeController {
     public record PlayData(@Min(0) int delayMs) {
     }
 
+    /**
+     * <p>Makes the creation of every possible generation data by the user possible</p>
+     */
     @PostMapping(path = "/action/clickCell")
     public ResponseEntity<Void> clickCell(@RequestBody @Valid ClickCellData clickCellData) {
         gameOfLifeService.clickCell(clickCellData.x(), clickCellData.y());
@@ -65,12 +68,18 @@ public class GameOfLifeController {
     public record ClickCellData(@Min(0) int x, @Min(0) int y) {
     }
 
+    /**
+     * <p>Makes it possible to execute code after the UI is loaded</p>
+     */
     @PostMapping(path = "/action/onLoad")
     public ResponseEntity<Void> onLoad() {
         gameOfLifeService.onLoad();
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * <p>Makes it possible to execute code after the UI is connected to the backend via websockets</p>
+     */
     @PostMapping(path = "action/onConnect")
     public ResponseEntity<Void> onConnect() {
         gameOfLifeService.onConnect();
