@@ -141,7 +141,10 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     @Override
     public void onStartConditionsPreview(int storageId) {
-        display.setGenerationData(DataStorage.getData(storageId).generationData(), Display.Type.PREVIEW);
+        DataStorage.Data data = DataStorage.getData(storageId);
+        if (data == null)
+            return;
+        display.setGenerationData(data.generationData(), Display.Type.PREVIEW);
     }
 
     @Override
