@@ -1,5 +1,6 @@
 package com.gbtec.gameoflife.implementation;
 
+import javax.validation.constraints.NotNull;
 import java.util.Random;
 
 /**
@@ -94,6 +95,19 @@ public class Tools {
         }
 
         return generationData;
+    }
+
+    public static int getLivingCellCount(@NotNull boolean[][] generationData) {
+        int livingCellCount = 0;
+        int matrixSize = PropertiesLoader.getDisplayMatrixSize();
+
+        for (int x = 0; x < matrixSize; x++) {
+            for (int y = 0; y < matrixSize; y++) {
+                livingCellCount += generationData[x][y] ? 1 : 0;
+            }
+        }
+
+        return livingCellCount;
     }
 
 }

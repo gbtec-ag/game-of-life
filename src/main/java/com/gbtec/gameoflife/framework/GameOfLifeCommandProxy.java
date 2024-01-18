@@ -123,6 +123,14 @@ public abstract class GameOfLifeCommandProxy {
         log.info("onInitPreviewDisplay() is not implemented yet!");
     }
 
+    /**
+     * Method will be executed if the Statistics Tab is loaded
+     * This method should initialize the statistics
+     */
+    public void onInitStatistics() {
+        log.info("onInitStatistics() is not implemented yet!");
+    }
+
 
     /**
      * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered
@@ -163,4 +171,22 @@ public abstract class GameOfLifeCommandProxy {
     private static class GenerationResponse {
         private boolean[][] generationData;
     }
+
+    @SneakyThrows
+    protected void setStatistics(int generation, int aliveCells) {
+        StatisticsResponse statisticsResponse = new StatisticsResponse();
+        statisticsResponse.setGeneration(generation);
+        statisticsResponse.setAliveCells(aliveCells);
+
+        String value = new ObjectMapper().writeValueAsString(statisticsResponse);
+
+        simpMessagingTemplate.convertAndSend("/statistics", value);
+    }
+
+    @Data
+    private static class StatisticsResponse {
+        private int generation;
+        private int aliveCells;
+    }
+
 }

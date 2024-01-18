@@ -14,6 +14,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
     private static boolean isRunning = false;
     private static boolean isInitialized = false;
     private static SimpMessagingTemplate usedSimpMessagingTemplate;
+    private static int generationCount = 1;
 
     public GameOfLifeService(SimpMessagingTemplate simpMessagingTemplate) {
         super(simpMessagingTemplate);
@@ -31,6 +32,9 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         }
 
         display.setGenerationData(Tools.generateRandomGenerationData(PropertiesLoader.getDisplayMatrixSize()), Display.Type.MAIN);
+
+        generationCount = 1;
+        setStatistics(generationCount, Tools.getLivingCellCount(display.getGenerationData(Display.Type.MAIN)));
 
     }
 
@@ -57,6 +61,8 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         }
 
         display.setGenerationData(nextGenerationData, Display.Type.MAIN);
+        generationCount++;
+        setStatistics(generationCount, Tools.getLivingCellCount(nextGenerationData));
     }
 
     @Override
@@ -89,6 +95,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
         generationData[x][y] = !generationData[x][y];
 
+        setStatistics(generationCount, Tools.getLivingCellCount(generationData));
         display.setGenerationData(generationData, Display.Type.MAIN);
     }
 
@@ -109,6 +116,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     public static void resetGame() {
         isRunning = false;
+        generationCount = 1;
 
         if (!isInitialized) {
             PropertiesLoader.loadProperties();
@@ -117,6 +125,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             isInitialized = true;
         }
 
+        display.setGenerationData(Tools.getEmptyGenerationData(), Display.Type.PREVIEW);
         display.setGenerationData(Tools.getEmptyGenerationData(), Display.Type.MAIN);
 
     }
@@ -132,6 +141,9 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
         display.setGenerationData(previewDisplayData, Display.Type.MAIN);
         display.setGenerationData(mainDisplayData, Display.Type.PREVIEW);
+
+        generationCount = 1;
+        setStatistics(generationCount, Tools.getLivingCellCount(previewDisplayData));
     }
 
     @Override
@@ -155,5 +167,10 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
     @Override
     public void onInitPreviewDisplay() {
         display.setGenerationData(Tools.getEmptyGenerationData(), Display.Type.PREVIEW);
+    }
+
+    @Override
+    public void onInitStatistics() {
+        setStatistics(generationCount, Tools.getLivingCellCount(display.getGenerationData(Display.Type.MAIN)));
     }
 }

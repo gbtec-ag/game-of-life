@@ -55,6 +55,10 @@ function connect() {
             stompClient.subscribe('/generation/preview', function (generationData) {
                 drawCellsFromData(JSON.parse(generationData.body).generationData, true);
             });
+            stompClient.subscribe('/statistics', function (statistics) {
+                const body = JSON.parse(statistics.body);
+                updateStatistics(body.generation, body.aliveCells);
+            });
         },
         function (frame) { // errorCallback
             setDisconnected();
@@ -217,9 +221,6 @@ function drawCellsFromData(generationData, previewDisplay) {
 }
 
 
-
-
-
 // Tab pages
 
 $(function () {
@@ -281,5 +282,39 @@ $(function () {
 
     });
 
+    $("#tabButtonStatistics").click(function () {
+        $.post("action/initStatistics");
+        document.getElementById("tabButtonStartConditions").className = "btn btn-outline-secondary";
+        document.getElementById("tabButtonStatistics").className = "btn btn-outline-primary";
+        document.getElementById("tabButtonRules").className = "btn btn-outline-secondary";
+
+        document.getElementById("tabContent").innerHTML =
+            "                <div class=\"statisticsLine\">\n" +
+            "                    <h2>Generation</h2>\n" +
+            "                    <br/>\n" +
+            "                    <h1 id=\"generationStatistics\">1</h1>\n" +
+            "                </div>\n" +
+            "                <div class=\"statisticsLine\">\n" +
+            "                    <h2>Alive</h2>\n" +
+            "                    <br/>\n" +
+            "                    <h1 id=\"aliveCellsStatistics\">0</h1>\n" +
+            "                </div>";
+    });
+
 
 });
+
+function updateStatistics(generation, aliveCells) {
+    const generationStatistics = document.getElementById("generationStatistics"),
+        aliveCellsStatistics = document.getElementById("aliveCellsStatistics");
+    if (generationStatistics == null || aliveCellsStatistics == null) {
+        return;
+    }
+
+    if (generation != null) {
+        document.getElementById("generationStatistics").innerHTML = generation;
+    }
+    if (aliveCells != null) {
+        document.getElementById("aliveCellsStatistics").innerHTML = aliveCells;
+    }
+}

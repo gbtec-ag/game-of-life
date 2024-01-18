@@ -104,3 +104,19 @@ canvas#generationDataPreview {
     appearance: none;
     background-clip: padding-box;
 }
+
+.statisticsLine {
+    margin: 5px;
+
+}
+
+.statisticsLine h2 {
+    text-align: center;
+    margin-top: 75px;
+}
+
+.statisticsLine h1 {
+    text-align: center;
+    margin-top: -50px;
+    font-size: 100px;
+}

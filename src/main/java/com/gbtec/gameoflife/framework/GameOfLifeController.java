@@ -119,4 +119,10 @@ public class GameOfLifeController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping(path = "action/initStatistics")
+    public ResponseEntity<Void> onInitStatistics() {
+        gameOfLifeService.onInitStatistics();
+        return ResponseEntity.ok().build();
+    }
+
 }
