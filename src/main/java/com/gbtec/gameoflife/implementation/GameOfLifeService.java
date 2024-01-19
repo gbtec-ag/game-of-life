@@ -1,9 +1,13 @@
 package com.gbtec.gameoflife.implementation;
 
 import com.gbtec.gameoflife.framework.GameOfLifeCommandProxy;
+import com.gbtec.gameoflife.framework.GameOfLifeController;
 import lombok.Getter;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 
 @Service
 public class GameOfLifeService extends GameOfLifeCommandProxy {
@@ -44,19 +48,11 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             return;
 
         int matrixSize = PropertiesLoader.getDisplayMatrixSize();
-        boolean[][] currentGenerationData = display.getGenerationData(Display.Type.MAIN);
         boolean[][] nextGenerationData = new boolean[matrixSize][matrixSize];
 
         for (int x = 0; x < matrixSize; x++) {
             for (int y = 0; y < matrixSize; y++) {
-                int livingNeighbourCount = Tools.getLivingNeighbourCount(x, y);
-                if (currentGenerationData[x][y]) {
-                    nextGenerationData[x][y] = livingNeighbourCount >= 2 && livingNeighbourCount <= 3;
-                } else {
-                    if (livingNeighbourCount == 3) {
-                        nextGenerationData[x][y] = true;
-                    }
-                }
+                nextGenerationData[x][y] = Tools.willCellBeAlive(x, y);
             }
         }
 
@@ -172,5 +168,20 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
     @Override
     public void onInitStatistics() {
         setStatistics(generationCount, Tools.getLivingCellCount(display.getGenerationData(Display.Type.MAIN)));
+    }
+
+    @Override
+    public void onSaveRules(@NotNull GameOfLifeController.GameRuleData[] gameRules, int matrixSize, boolean infiniteDisplay) {
+        if (isRunning)
+            return;
+        PropertiesLoader.setGameRules(gameRules);
+        PropertiesLoader.setDisplayMatrixSize(matrixSize);
+        PropertiesLoader.setInfiniteDisplay(infiniteDisplay);
+        resetGame();
+    }
+
+    @Override
+    public void onLoadRules() {
+        sendRules(PropertiesLoader.getGameRules(), PropertiesLoader.getDisplayMatrixSize(), PropertiesLoader.getInfiniteDisplay());
     }
 }

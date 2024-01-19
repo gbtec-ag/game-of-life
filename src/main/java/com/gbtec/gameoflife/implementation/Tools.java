@@ -1,6 +1,10 @@
 package com.gbtec.gameoflife.implementation;
 
+import com.gbtec.gameoflife.framework.GameOfLifeController;
+
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -97,6 +101,11 @@ public class Tools {
         return generationData;
     }
 
+    /**
+     * Returns the number of living cells in the given generation data
+     * @param generationData The generation data
+     * @return The number of living cells
+     */
     public static int getLivingCellCount(@NotNull boolean[][] generationData) {
         int livingCellCount = 0;
         int matrixSize = PropertiesLoader.getDisplayMatrixSize();
@@ -108,6 +117,40 @@ public class Tools {
         }
 
         return livingCellCount;
+    }
+
+    /**
+     * Returns true if the given cell will be alive in the next generation
+     * @param x X coordinate of the cell
+     * @param y Y coordinate of the cell
+     * @return True if the cell will be alive
+     */
+    public static boolean willCellBeAlive(int x, int y) {
+        boolean[][] generationData = GameOfLifeService.getDisplay().getGenerationData(Display.Type.MAIN);
+        boolean nowAlive = generationData[x][y];
+        int livingNeighbourCount = Tools.getLivingNeighbourCount(x, y);
+        List<GameOfLifeController.GameRuleData> enabledGameRules = PropertiesLoader.getEnabledGameRules();
+
+        GameOfLifeController.GameRuleData firstRule = enabledGameRules.stream().filter(gameRule -> {
+            if (gameRule.nowAlive() != nowAlive) {
+                return false;
+            }
+            return switch (gameRule.operator()) {
+                case "=" -> livingNeighbourCount == gameRule.number();
+                case ">" -> livingNeighbourCount > gameRule.number();
+                case "<" -> livingNeighbourCount < gameRule.number();
+                case ">=" -> livingNeighbourCount >= gameRule.number();
+                case "<=" -> livingNeighbourCount <= gameRule.number();
+                case "!=" -> livingNeighbourCount != gameRule.number();
+                default -> false;
+            };
+        }).findFirst().orElse(null);
+
+        if (firstRule == null) {
+            return generationData[x][y];
+        } else {
+            return firstRule.alive();
+        }
     }
 
 }

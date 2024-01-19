@@ -1,16 +1,15 @@
 package com.gbtec.gameoflife.framework;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.gbtec.gameoflife.implementation.Display;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 
 /**
  * Provides methods which allows to interact with the UI
@@ -44,6 +43,7 @@ public abstract class GameOfLifeCommandProxy {
     /**
      * Method will be executed if you click the "Play" button on the UI
      * This method should compute and draw generations one by one considering the given delay between generations
+     *
      * @param delayMs Delay between generations in milliseconds
      */
     public void play(int delayMs) {
@@ -60,6 +60,7 @@ public abstract class GameOfLifeCommandProxy {
 
     /**
      * Method will be executed if you click on any cell on the UI
+     *
      * @param x X coordinate of the clicked cell
      * @param y Y coordinate of the clicked cell
      */
@@ -100,6 +101,7 @@ public abstract class GameOfLifeCommandProxy {
     /**
      * Method will be executed if the Preview button in the Start Conditions tab is clicked
      * This method should load the generation data stored at the given storage id into the preview display
+     *
      * @param storageId Storage id of the generation data which should be loaded into the preview display
      */
     public void onStartConditionsPreview(int storageId) {
@@ -109,6 +111,7 @@ public abstract class GameOfLifeCommandProxy {
     /**
      * Method will be executed if the Save button in the Start Conditions tab is clicked
      * This method should save the generation data from the main display into the storage
+     *
      * @param storageId Storage id where the generation data should be saved
      */
     public void onStartConditionsSave(int storageId) {
@@ -135,8 +138,9 @@ public abstract class GameOfLifeCommandProxy {
     /**
      * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered
      * to the topic.
+     *
      * @param generationData Generation data which should be sent to the view
-     * @param displayType Type of the display which should be updated
+     * @param displayType    Type of the display which should be updated
      */
     @SneakyThrows
     protected void drawGeneration(boolean[][] generationData, @NotNull Display.Type displayType) {
@@ -152,8 +156,9 @@ public abstract class GameOfLifeCommandProxy {
     /**
      * Sends the generation data to the view via websockets. Pre-condition is that the client is connected and registered
      * to the topic.
+     *
      * @param generationData Generation data which should be sent to the view
-     * @param displayType Type of the display which should be updated
+     * @param displayType    Type of the display which should be updated
      */
     protected void drawGeneration(int[][] generationData, @NotNull Display.Type displayType) {
         boolean[][] tempData = new boolean[generationData.length][];
@@ -172,6 +177,12 @@ public abstract class GameOfLifeCommandProxy {
         private boolean[][] generationData;
     }
 
+    /**
+     * Sends the statistics to the view via websockets. Pre-condition is that the client is connected and registered
+     *
+     * @param generation Current generation
+     * @param aliveCells Number of alive cells
+     */
     @SneakyThrows
     protected void setStatistics(int generation, int aliveCells) {
         StatisticsResponse statisticsResponse = new StatisticsResponse();
@@ -187,6 +198,50 @@ public abstract class GameOfLifeCommandProxy {
     private static class StatisticsResponse {
         private int generation;
         private int aliveCells;
+    }
+
+    /**
+     * Method will be executed if the 'Save Rules' button in the Rules tab is pressed
+     *
+     * @param gameRules       Rules which should be saved
+     * @param matrixSize      Matrix size which should be saved
+     * @param infiniteDisplay True if the display should be infinite
+     */
+    public void onSaveRules(GameOfLifeController.GameRuleData[] gameRules, int matrixSize, boolean infiniteDisplay) {
+        log.info("onSaveRules() is not implemented yet!");
+    }
+
+    /**
+     * Method will be executed if the Rules tab is loaded
+     */
+    public void onLoadRules() {
+        log.info("onLoadRules() is not implemented yet!");
+    }
+
+    /**
+     * Sends the rules to the view via websockets. Pre-condition is that the client is connected and registered
+     *
+     * @param gameRules       Rules which should be sent to the view
+     * @param matrixSize      Matrix size which should be sent to the view
+     * @param infiniteDisplay True if the display should be infinite
+     */
+    @SneakyThrows
+    protected void sendRules(GameOfLifeController.GameRuleData[] gameRules, int matrixSize, boolean infiniteDisplay) {
+        RulesResponse rulesResponse = new RulesResponse();
+        rulesResponse.setGameRules(gameRules);
+        rulesResponse.setMatrixSize(matrixSize);
+        rulesResponse.setInfiniteDisplay(infiniteDisplay);
+
+        String value = new ObjectMapper().writeValueAsString(rulesResponse);
+
+        simpMessagingTemplate.convertAndSend("/rulesUpdate", value);
+    }
+
+    @Data
+    private static class RulesResponse {
+        private GameOfLifeController.GameRuleData[] gameRules;
+        private int matrixSize;
+        private boolean infiniteDisplay;
     }
 
 }

@@ -21,7 +21,7 @@ button {
 }
 
 #tabs {
-    width: 350px;
+    width: 732px;
     height: 700px;
     border: 1px solid #d0d7de;
     padding: 10px;
@@ -31,18 +31,19 @@ button {
 }
 
 #tabButtons {
-    width: 330px;
+    width: 712px;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
 #tabContent {
-    width: 330px;
+    width: 712px;
     height: 632px;
     border: 1px solid #d0d7de;
     margin-top: 10px;
     padding: 10px;
+    overflow: hidden;
 }
 
 @media (max-width: 990px) {
@@ -64,14 +65,14 @@ canvas {
 }
 
 canvas#generationDataPreview {
-    width: 310px;
-    height: 310px;
+    width: 351px;
+    height: 351px;
 }
 
 .tabSectionSeperator {
-    width: 310px;
+    width: 692px;
     height: 0;
-    border: 1px solid #d0d7de;
+    border-top: 1px solid #d0d7de;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -119,4 +120,69 @@ canvas#generationDataPreview {
     text-align: center;
     margin-top: -50px;
     font-size: 100px;
+}
+
+.rule {
+    width:692px;
+    height: 39px;
+    margin-top: 10px;
+    padding: 5px;
+    display: flex;
+    border: 1px solid #d0d7de;
+}
+
+.rule h6 {
+    margin-left: 4px;
+    margin-top: 5px;
+}
+
+.rule .verticalSeperator {
+    margin: 0 10px;
+    width: 1px;
+    height: 29px;
+    border-left: 1px solid #d0d7de;
+}
+
+.rule p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 29px;
+}
+
+.color-keyword {
+    color: #0033B3;
+    font-style: normal;
+}
+
+.color-staticField {
+    color: #871094;
+    font-style: italic;
+}
+
+.color-operatorSign {
+    color: #000000;
+    font-style: normal;
+}
+
+.color-parenthesis {
+    color: #000000;
+    font-style: normal;
+}
+
+.color-number {
+    color: #1750EB;
+    font-style: normal;
+}
+
+.rule .enabled {
+    margin-left: 10px;
+}
+
+#matrixSize {
+    margin-left: 10px;
+}
+
+#saveRules {
+    display: block;
+    margin: 0 auto;
 }

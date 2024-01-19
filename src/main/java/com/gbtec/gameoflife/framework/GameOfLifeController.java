@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @RequiredArgsConstructor
 @RestController
@@ -122,6 +123,24 @@ public class GameOfLifeController {
     @PostMapping(path = "action/initStatistics")
     public ResponseEntity<Void> onInitStatistics() {
         gameOfLifeService.onInitStatistics();
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(path = "/action/saveRules")
+    public ResponseEntity<Void> onSaveRules(@RequestBody @Valid RulesData rulesData) {
+        gameOfLifeService.onSaveRules(rulesData.gameRules(), rulesData.matrixSize(), rulesData.infiniteDisplay());
+        return ResponseEntity.ok().build();
+    }
+
+    public record RulesData(GameRuleData[] gameRules, int matrixSize, boolean infiniteDisplay) {
+    }
+
+    public record GameRuleData(int ruleId, boolean enabled, boolean nowAlive, @NotNull String operator, int number, boolean alive) {
+    }
+
+    @PostMapping(path = "/action/loadRules")
+    public ResponseEntity<Void> onLoadRules() {
+        gameOfLifeService.onLoadRules();
         return ResponseEntity.ok().build();
     }
 
