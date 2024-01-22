@@ -1,4 +1,4 @@
-package com.gbtec.gameoflife;
+package com.gbtec.snake;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

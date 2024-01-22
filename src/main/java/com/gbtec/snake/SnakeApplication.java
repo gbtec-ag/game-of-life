@@ -1,13 +1,13 @@
-package com.gbtec.gameoflife;
+package com.gbtec.snake;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GameOfLifeApplication {
+public class SnakeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GameOfLifeApplication.class, args);
+        SpringApplication.run(SnakeApplication.class, args);
     }
 
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Conway´s Game of Life</title>
+    <title>Snake</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"> <!-- https://getbootstrap.com/docs/5.2/getting-started/introduction/ -->
     <link href="/main.css" rel="stylesheet">
     <script src="/webjars/jquery/jquery.min.js"></script>
@@ -25,17 +25,8 @@
     <div class="row">
         <div class="col-md-2">
             <button id="buttonInit" class="btn btn-outline-primary">Init</button>
-            <button id="buttonNext" class="btn btn-outline-primary">Next</button>
+            <button id="buttonPlay" class="btn btn-outline-primary" type="submit">Play</button>
             <button id="buttonStop" class="btn btn-outline-primary" type="submit">Stop</button>
-        </div>
-        <div class="col-md-2">
-            <div class="input-group">
-                <button id="buttonPlay" class="btn btn-outline-primary" type="submit">Play</button>
-                <input id="inputPlayDelay" type="number" class="form-control" value="1000" placeholder="0" aria-label="Delay between generations in milliseconds">
-                <div class="input-group-append">
-                    <span class="input-group-text">ms</span>
-                </div>
-            </div>
         </div>
         <div class="col-md-2">
             <button id="buttonConnect" type="button" class="btn btn-outline-success">Connect</button>
@@ -50,6 +41,11 @@
     <br>
 
     <canvas id="generationDataCanvas" style="border: 1px solid #d0d7de;"></canvas>
+    <div id="imageStorage">
+        <img id="snakeHead" src="images/SNAKE_HEAD.png" alt="Snake Head" style="display: none;"/>
+        <img id="snakeBody" src="images/SNAKE_BODY.png" alt="Snake Body" style="display: none;"/>
+        <img id="food" src="images/FOOD.png" alt="Food" style="display: none;"/>
+    </div>
 </div>
 </body>
 </html>

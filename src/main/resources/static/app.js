@@ -15,6 +15,7 @@ function setConnected() {
     alertBox.removeClass();
     alertBox.addClass("alert alert-success");
     alertBox.text("Connected :)");
+    $.post("/action/onConnect");
 }
 
 function setDisconnected() {
@@ -43,8 +44,8 @@ function connect() {
         function (frame) { // connectCallback
             setConnected();
 
-            stompClient.subscribe('/generation', function (generationData) {
-                drawCellsFromData(JSON.parse(generationData.body).generationData);
+            stompClient.subscribe('/display', function (displayData) {
+                drawCellsFromData(JSON.parse(displayData.body).displayData);
             });
         },
         function (frame) { // errorCallback
@@ -69,33 +70,26 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    buttonConnect.click(function() { connect(); });
-    buttonDisconnect.click(function() { disconnect(); });
+    buttonConnect.click(function () {
+        connect();
+    });
+    buttonDisconnect.click(function () {
+        disconnect();
+    });
 
-    $("#buttonInit").click(function() {
+    $("#buttonInit").click(function () {
         // https://api.jquery.com/jquery.post/
         $.post("/action/init");
     });
 
-    $("#buttonNext").click(function() {
-        // https://api.jquery.com/jquery.post/
-        $.post("/action/next");
-    });
-
-    $("#buttonStop").click(function() {
+    $("#buttonStop").click(function () {
         // https://api.jquery.com/jquery.post/
         $.post("/action/stop");
     });
 
-    $("#buttonPlay").click(function() {
+    $("#buttonPlay").click(function () {
         // https://api.jquery.com/jquery.post/
-        $.ajax({
-            url: "/action/play",
-            type: "POST",
-            data: JSON.stringify({delayMs: parseInt($("#inputPlayDelay").val())}),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-        })
+        $.post("/action/play");
     });
 });
 
@@ -111,7 +105,7 @@ window.addEventListener('load', () => {
     setDisconnected();
 });
 
-function drawCellsFromData(generationData) {
+function drawCellsFromData(displayData) {
     const canvas = document.querySelector("#generationDataCanvas");
     const context = canvas.getContext("2d");
     const canvasSize = 700;
@@ -119,11 +113,10 @@ function drawCellsFromData(generationData) {
     // Set the generation size considering the min and max matrix size
     const matrixMinSize = 5;
     const matrixMaxSize = 256;
-    let matrixSize = generationData.length;
+    let matrixSize = displayData.length;
     if (matrixSize < matrixMinSize) {
         matrixSize = matrixMinSize;
-    }
-    else if (matrixSize > matrixMaxSize) {
+    } else if (matrixSize > matrixMaxSize) {
         matrixSize = matrixMaxSize
     }
 
@@ -137,8 +130,7 @@ function drawCellsFromData(generationData) {
     let cellSize = Math.trunc(canvasSize / matrixSize) - cellSpaceSize;
     if (cellSize < cellMinSize) {
         cellSize = cellMinSize;
-    }
-    else if (cellSize > cellMaxSize) {
+    } else if (cellSize > cellMaxSize) {
         cellSize = cellMaxSize
     }
 
@@ -147,16 +139,41 @@ function drawCellsFromData(generationData) {
     let nextYPos = 0;
     for (let y = 0; y < matrixSize; y++) {
         for (let x = 0; x < matrixSize; x++) {
-            if (generationData[y][x]) {
-                context.fillStyle = 'blue';
-            } else {
-                context.fillStyle = 'lightgray';
+
+            const cell = displayData[y][x],
+                type = cell.type,
+                orientation = cell.orientation;
+
+            if (type === "SNAKE_HEAD") {
+                context.drawImage(getImage(type, orientation), 0, 0, 50, 50, nextXPos, nextYPos, cellSize, cellSize);
+                context.fillStyle = "rgba(255, 255, 255, 0)";
+            } else if (type === "SNAKE_BODY") {
+                context.drawImage(getImage(type, orientation), 0, 0, 50, 50, nextXPos, nextYPos, cellSize, cellSize);
+                context.fillStyle = "rgba(255, 255, 255, 0)";
+            } else if (type === "FOOD") {
+                context.drawImage(getImage(type, orientation), 0, 0, 50, 50, nextXPos, nextYPos, cellSize, cellSize);
+                context.fillStyle = "rgba(255, 255, 255, 0)";
+            } else if (type === "WALL") {
+                context.fillStyle = "blue";
+            } else if (type === "EMPTY") {
+                context.fillStyle = "lightgrey";
             }
+
             context.fillRect(nextXPos, nextYPos, cellSize, cellSize);
             nextXPos += cellSize + cellSpaceSize;
         }
 
         nextXPos = 0;
         nextYPos += cellSize + cellSpaceSize;
+    }
+}
+
+function getImage(type, orientation) {
+    if (type === "SNAKE_HEAD") {
+        return document.getElementById("snakeHead");
+    } else if (type === "SNAKE_BODY") {
+        return document.getElementById("snakeBody");
+    } else if (type === "FOOD") {
+        return document.getElementById("food");
     }
 }
