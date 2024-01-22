@@ -25,8 +25,7 @@ public abstract class GameOfLifeCommandProxy {
      * Here you should initialize the first generation, prepare the application or even reset / prepare the environment
      * for a new run.
      */
-    public void init() {
-        log.info("init() is not implemented yet!");
+    public void init() {log.info("init() is not implemented yet!");
     }
 
     /**

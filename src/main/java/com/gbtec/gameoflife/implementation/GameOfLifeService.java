@@ -16,18 +16,19 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
 
     int[][] generationData;
     int[][] tempGenerationData;
+
     @Override
     public void init() {
         // @formatter:off
         // Instead of "int[][]" you can also use "boolean[][]"
-        int[][] generationData = {
+        generationData = new int[][] {
                 { 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 1, 0, 1, 0, 0, 0 },
-                { 1, 0, 0, 0, 0, 0, 1, 0 },
-                { 0, 1, 0, 0, 0, 1, 0, 0 },
-                { 0, 0, 1, 1, 1, 0, 0, 0 },
+                { 0, 0, 0, 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0 }
         };
         // @formatter:on
@@ -43,6 +44,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
          */
         // @formatter:on
     }
+
     public void next() {
 
         for (int y = 0; y < generationData.length; y++) {
@@ -55,14 +57,13 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         }
         // other for loop bc all changes are done at this point, y and x are needed for copy
         for (int y = 0; y < generationData.length; y++) {
-            for(int x = 0; x < generationData[y].length; x++){
+            for (int x = 0; x < generationData[y].length; x++) {
                 generationData[y][x] = tempGenerationData[y][x];
             }
         }
-
         drawGeneration(generationData);
-        
     }
+
     private int countNeighbors(int y, int x) {
         int neighborCount = 0;
 
@@ -76,7 +77,7 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
                 if (neighborY > -1 && neighborX > -1 && neighborY < generationData.length && neighborX < generationData.length) {
                     // prove if neighbor is alive
                     if (generationData[neighborY][neighborX] == 1) {
-                        if (r + c != 0){ // every neighbor beside [1][-1], [-1][1], [0][0]
+                        if (r + c != 0) { // every neighbor beside [1][-1], [-1][1], [0][0]
                             neighborCount++;
                         } else if (r == -1 || r == 1) { // every neighbor beside [0][0] (not counts himself)
                             neighborCount++;
@@ -87,10 +88,11 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
         }
         return neighborCount;
     }
+
     private void applyRules(int neighborCount, int y, int x) {
         // proving rules in generationData, applying in tempGenerationData
-        if(generationData[y][x] == 1) {
-            if(neighborCount <2) {
+        if (generationData[y][x] == 1) {
+            if (neighborCount < 2) {
                 tempGenerationData[y][x] = 0;
             } else if (neighborCount > 3) {
                 tempGenerationData[y][x] = 0;
@@ -99,6 +101,24 @@ public class GameOfLifeService extends GameOfLifeCommandProxy {
             }
         } else if (generationData[y][x] == 0 && neighborCount == 3) {
             tempGenerationData[y][x] = 1;
+        }
+    }
+
+    public boolean isRunning = false;
+
+    @Override
+    public void stop() {
+        isRunning = false;
+    }
+    public void play(int delayMs) {
+        isRunning = true;
+        while (isRunning == true) {
+            next();
+            try {
+                Thread.sleep(delayMs);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
