@@ -1,29 +1,20 @@
 package com.gbtec.snake.framework;
 
-import javax.validation.constraints.Min;
-
 import com.gbtec.snake.implementation.SnakeService;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @RequiredArgsConstructor
 @RestController
 public class SnakeController {
 
     private final SnakeService gameOfLifeService;
-
-    /**
-     * <p>Triggers the initialization or resetting of snake and delivers the data to the view via websockets</p>
-     */
-    @PostMapping(path = "/action/init")
-    public ResponseEntity<Void> init() {
-        gameOfLifeService.init();
-        return ResponseEntity.ok().build();
-    }
 
     /**
      * <p>Stops automatic computation if "play" was triggered</p>
@@ -43,7 +34,16 @@ public class SnakeController {
         return ResponseEntity.ok().build();
     }
 
-    public record PlayData(@Min(0) int delayMs) {
+    /**
+     * <p>Changes the orientation of the snake</p>
+     */
+    @PostMapping(path = "/action/changeOrientation")
+    public ResponseEntity<Void> onOrientationChange(@RequestBody @Valid OrientationData data) {
+        gameOfLifeService.onOrientationChange(data.orientation());
+        return ResponseEntity.ok().build();
+    }
+
+    public record OrientationData(@NotNull SnakeOrientation orientation) {
     }
 
     /**

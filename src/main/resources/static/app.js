@@ -77,11 +77,6 @@ $(function () {
         disconnect();
     });
 
-    $("#buttonInit").click(function () {
-        // https://api.jquery.com/jquery.post/
-        $.post("/action/init");
-    });
-
     $("#buttonStop").click(function () {
         // https://api.jquery.com/jquery.post/
         $.post("/action/stop");
@@ -124,7 +119,7 @@ function drawCellsFromData(displayData) {
     canvas.height = canvasSize;
 
     // Set the cell size considering the min and max values
-    const cellSpaceSize = 3;
+    const cellSpaceSize = 1;
     const cellMinSize = 8;
     const cellMaxSize = 64;
     let cellSize = Math.trunc(canvasSize / matrixSize) - cellSpaceSize;
@@ -145,13 +140,16 @@ function drawCellsFromData(displayData) {
                 orientation = cell.orientation;
 
             if (type === "SNAKE_HEAD") {
-                context.drawImage(getImage(type, orientation), 0, 0, 50, 50, nextXPos, nextYPos, cellSize, cellSize);
+                context.drawImage(getImage(type, orientation), 0, 0, 40, 40, nextXPos, nextYPos, cellSize, cellSize);
                 context.fillStyle = "rgba(255, 255, 255, 0)";
             } else if (type === "SNAKE_BODY") {
-                context.drawImage(getImage(type, orientation), 0, 0, 50, 50, nextXPos, nextYPos, cellSize, cellSize);
+                context.drawImage(getImage(type, orientation), 0, 0, 40, 40, nextXPos, nextYPos, cellSize, cellSize);
+                context.fillStyle = "rgba(255, 255, 255, 0)";
+            } else if (type === "SNAKE_TAIL") {
+                context.drawImage(getImage(type, orientation), 0, 0, 40, 40, nextXPos, nextYPos, cellSize, cellSize);
                 context.fillStyle = "rgba(255, 255, 255, 0)";
             } else if (type === "FOOD") {
-                context.drawImage(getImage(type, orientation), 0, 0, 50, 50, nextXPos, nextYPos, cellSize, cellSize);
+                context.drawImage(getImage(type, orientation), 0, 0, 40, 40, nextXPos, nextYPos, cellSize, cellSize);
                 context.fillStyle = "rgba(255, 255, 255, 0)";
             } else if (type === "WALL") {
                 context.fillStyle = "blue";
@@ -169,11 +167,42 @@ function drawCellsFromData(displayData) {
 }
 
 function getImage(type, orientation) {
-    if (type === "SNAKE_HEAD") {
-        return document.getElementById("snakeHead");
-    } else if (type === "SNAKE_BODY") {
-        return document.getElementById("snakeBody");
+    if (type === "SNAKE_BODY") {
+        return document.getElementById(type + "(" + orientation + ")");
+    } else if (type === "SNAKE_HEAD" || type === "SNAKE_TAIL") {
+        return document.getElementById(type + "(" + orientation.split("_")[1] + ")");
     } else if (type === "FOOD") {
-        return document.getElementById("food");
+        return document.getElementById(type);
     }
+}
+
+document.onkeydown = function (e) {
+    let orientation;
+    switch (e.key) {
+        case "ArrowUp":
+            orientation = "UP";
+            break;
+        case "ArrowDown":
+            orientation = "DOWN";
+            break;
+        case "ArrowLeft":
+            orientation = "LEFT";
+            break;
+        case "ArrowRight":
+            orientation = "RIGHT";
+            break;
+    }
+
+    if (orientation === undefined) {
+        return;
+    }
+
+    $.ajax({
+        url: "/action/changeOrientation",
+        type: "POST",
+        data: JSON.stringify({orientation: orientation}),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+
 }

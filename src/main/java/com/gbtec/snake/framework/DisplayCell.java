@@ -13,7 +13,7 @@ public class DisplayCell {
     private final Orientation orientation;
 
     public DisplayCell(@NotNull Type type, @Nullable Orientation orientation) {
-        if (type == Type.SNAKE_HEAD || type == Type.SNAKE_BODY) {
+        if (type == Type.SNAKE_HEAD || type == Type.SNAKE_BODY || type == Type.SNAKE_TAIL) {
             if (orientation == null) {
                 throw new IllegalArgumentException("Orientation must not be null for type " + type);
             }
@@ -35,7 +35,8 @@ public class DisplayCell {
 
     public enum Type {
         SNAKE_HEAD(UpdateType.UPDATABLE),
-        SNAKE_BODY(UpdateType.TIME_BASED),
+        SNAKE_BODY(UpdateType.UPDATABLE),
+        SNAKE_TAIL(UpdateType.UPDATABLE),
         FOOD(UpdateType.UPDATABLE),
         WALL(UpdateType.STATIC),
         EMPTY(UpdateType.UPDATABLE);
@@ -53,10 +54,6 @@ public class DisplayCell {
          * Can be updated by the user
          */
         UPDATABLE,
-        /**
-         * Is cleared by the application after a set time
-         */
-        TIME_BASED,
         /**
          * Is set before the start of the game and can not be changed during runtime
          */

@@ -23,15 +23,6 @@ public abstract class SnakeCommandProxy {
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     /**
-     * Method will be executed if you click the "Init" button on the UI
-     * Here you should initialize the first environment, prepare the application or even reset / prepare the environment
-     * for a new run.
-     */
-    public void init() {
-        log.info("init() is not implemented yet!");
-    }
-
-    /**
      * Method will be executed if you click the "Play" button on the UI
      * This method should compute and set the new data to the canvas
      */
@@ -47,8 +38,20 @@ public abstract class SnakeCommandProxy {
         log.info("stop() is not implemented yet!");
     }
 
+    /**
+     * Method will be executed if the UI is connected to the backend via websockets
+     * This method should be used to initialize the UI
+     */
     public void onConnect() {
         log.info("onConnect() is not implemented yet!");
+    }
+
+    /**
+     * Method will be executed if the User changes the orientation of the snake
+     * @param orientation The new orientation
+     */
+    public void onOrientationChange(@NotNull SnakeOrientation orientation) {
+        log.info(String.format("onOrientationChange(%s) is not implemented yet!", orientation));
     }
 
     /**
