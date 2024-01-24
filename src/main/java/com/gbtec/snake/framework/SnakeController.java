@@ -14,14 +14,14 @@ import javax.validation.constraints.NotNull;
 @RestController
 public class SnakeController {
 
-    private final SnakeService gameOfLifeService;
+    private final SnakeService snakeService;
 
     /**
      * <p>Stops automatic computation if "play" was triggered</p>
      */
     @PostMapping(path = "/action/stop")
     public ResponseEntity<Void> stop() {
-        gameOfLifeService.stop();
+        snakeService.stop();
         return ResponseEntity.ok().build();
     }
 
@@ -30,7 +30,7 @@ public class SnakeController {
      */
     @PostMapping(path = "/action/play")
     public ResponseEntity<Void> play() {
-        gameOfLifeService.play();
+        snakeService.play();
         return ResponseEntity.ok().build();
     }
 
@@ -39,7 +39,7 @@ public class SnakeController {
      */
     @PostMapping(path = "/action/changeOrientation")
     public ResponseEntity<Void> onOrientationChange(@RequestBody @Valid OrientationData data) {
-        gameOfLifeService.onOrientationChange(data.orientation());
+        snakeService.onOrientationChange(data.orientation());
         return ResponseEntity.ok().build();
     }
 
@@ -51,7 +51,7 @@ public class SnakeController {
      */
     @PostMapping(path = "action/onConnect")
     public ResponseEntity<Void> onConnect() {
-        gameOfLifeService.onConnect();
+        snakeService.onConnect();
         return ResponseEntity.ok().build();
     }
 

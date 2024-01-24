@@ -71,7 +71,6 @@ public class SnakeRuntime extends SnakeCommandProxy {
                 return moveSnake(generateNewFood(), true);
             }
             case WALL, SNAKE_BODY, SNAKE_HEAD, SNAKE_TAIL -> {
-                isRunning = false;
                 resetGame();
                 return null;
             }
@@ -217,6 +216,7 @@ public class SnakeRuntime extends SnakeCommandProxy {
     public void resetGame() {
         isRunning = false;
         speed = 750;
+        pause();
         currentOrientation = SnakeOrientation.RIGHT;
 
         if (!isInitialized()) {
