@@ -214,8 +214,6 @@ public class SnakeRuntime extends SnakeCommandProxy {
     }
 
     public void resetGame() {
-        isRunning = false;
-        speed = 750;
         pause();
         currentOrientation = SnakeOrientation.RIGHT;
 
