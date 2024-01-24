@@ -20,7 +20,7 @@ public abstract class SnakeCommandProxy {
 
     private static final String WEBSOCKET_DISPLAY_DATA_TOPIC_PATH = "/display";
 
-    private final SimpMessagingTemplate simpMessagingTemplate;
+    protected final SimpMessagingTemplate simpMessagingTemplate;
 
     /**
      * Method will be executed if you click the "Play" button on the UI
