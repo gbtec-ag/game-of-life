@@ -182,8 +182,8 @@ public class SnakeRuntime extends SnakeCommandProxy {
     }
 
     private void increaseSpeed() {
-        if (speed > 99)
-            speed -= 25;
+        if (speed >= 60)
+            speed -= 10;
     }
 
     private DisplayCell[][] generateNewFood() {
@@ -215,6 +215,7 @@ public class SnakeRuntime extends SnakeCommandProxy {
 
     public void resetGame() {
         pause();
+        speed = 500;
         currentOrientation = SnakeOrientation.RIGHT;
 
         if (!isInitialized()) {
