@@ -35,6 +35,8 @@ public class SnakeRuntime extends SnakeCommandProxy {
             DisplayCell[][] newDisplay = generateDisplayUpdate();
             if (newDisplay != null) {
                 display.sendDisplayUpdate(newDisplay);
+            } else {
+                break;
             }
 
             try {
@@ -215,7 +217,7 @@ public class SnakeRuntime extends SnakeCommandProxy {
     }
 
     public void resetGame() {
-        pause();
+
         speed = 500;
         currentOrientation = SnakeOrientation.RIGHT;
 
@@ -232,6 +234,7 @@ public class SnakeRuntime extends SnakeCommandProxy {
         cells[7][11] = new DisplayCell(DisplayCell.Type.FOOD);
 
         display.sendDisplayUpdate(cells);
+        pause();
     }
 
     @NotNull
