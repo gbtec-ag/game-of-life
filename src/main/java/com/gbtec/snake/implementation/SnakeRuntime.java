@@ -51,6 +51,7 @@ public class SnakeRuntime extends SnakeCommandProxy {
 
     public void changeOrientation(@NotNull SnakeOrientation orientation) {
         currentOrientation = orientation;
+        start();
     }
 
     @Nullable
