@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 public abstract class SnakeCommandProxy {
 
     private static final String WEBSOCKET_DISPLAY_DATA_TOPIC_PATH = "/display";
+    private static final String WEBSOCKET_STATISTICS_DATA_TOPIC_PATH = "/statistics";
 
     protected final SimpMessagingTemplate simpMessagingTemplate;
 
@@ -74,4 +75,23 @@ public abstract class SnakeCommandProxy {
     private static class DisplayResponse {
         private DisplayCell[][] displayData;
     }
+
+    @SneakyThrows
+    protected void updateStatistics(int foodCount, int highScore) {
+        StatisticsResponse statisticsResponse = new StatisticsResponse();
+        statisticsResponse.setFoodCount(foodCount);
+        statisticsResponse.setHighScore(highScore);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String val = objectMapper.writeValueAsString(statisticsResponse);
+
+        simpMessagingTemplate.convertAndSend(WEBSOCKET_STATISTICS_DATA_TOPIC_PATH, val);
+    }
+
+    @Data
+    private static class StatisticsResponse {
+        private int foodCount;
+        private int highScore;
+    }
+
 }

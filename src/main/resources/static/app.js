@@ -47,6 +47,9 @@ function connect() {
             stompClient.subscribe('/display', function (displayData) {
                 drawCellsFromData(JSON.parse(displayData.body).displayData);
             });
+            stompClient.subscribe('/statistics', function (statisticsData) {
+                updateStatistics(JSON.parse(statisticsData.body));
+            });
         },
         function (frame) { // errorCallback
             setDisconnected();
@@ -205,4 +208,9 @@ document.onkeydown = function (e) {
         dataType: "json"
     });
 
+}
+
+function updateStatistics(statistics) {
+    document.getElementById("foodCount").innerHTML = statistics.foodCount;
+    document.getElementById("highScore").innerHTML = statistics.highScore;
 }

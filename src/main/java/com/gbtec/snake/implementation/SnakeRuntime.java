@@ -20,7 +20,10 @@ public class SnakeRuntime extends SnakeCommandProxy {
     private static int speed = 100;
     private static SnakeOrientation currentOrientation = SnakeOrientation.RIGHT;
 
-    private Display display;
+    private static int foodCount = 0;
+    private static int highScore = 0;
+
+    private static Display display;
 
     public SnakeRuntime(SimpMessagingTemplate simpMessagingTemplate) {
         super(simpMessagingTemplate);
@@ -70,6 +73,8 @@ public class SnakeRuntime extends SnakeCommandProxy {
                 return moveSnake(display.getCurrentDisplay(), false);
             }
             case FOOD -> {
+                foodCount++;
+                sendStatisticsUpdate();
                 increaseSpeed();
                 return moveSnake(generateNewFood(), true);
             }
@@ -220,6 +225,8 @@ public class SnakeRuntime extends SnakeCommandProxy {
 
         speed = 500;
         currentOrientation = SnakeOrientation.RIGHT;
+        foodCount = 0;
+        sendStatisticsUpdate();
 
         if (!isInitialized()) {
             display = new Display(simpMessagingTemplate);
@@ -250,6 +257,13 @@ public class SnakeRuntime extends SnakeCommandProxy {
             }
         }
         return cells;
+    }
+
+    private void sendStatisticsUpdate() {
+        if (foodCount > highScore)
+            highScore = foodCount;
+
+        updateStatistics(foodCount, highScore);
     }
 
 }
