@@ -222,7 +222,6 @@ public class SnakeRuntime extends SnakeCommandProxy {
     }
 
     public void resetGame() {
-
         speed = 500;
         currentOrientation = SnakeOrientation.RIGHT;
         foodCount = 0;
