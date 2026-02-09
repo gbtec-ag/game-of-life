@@ -44,7 +44,7 @@ function connect() {
             setConnected();
 
             stompClient.subscribe('/generation', function (generationData) {
-                drawCellsFromData(JSON.parse(generationData.body).generationData);
+                scheduleDraw(JSON.parse(generationData.body).generationData);
             });
         },
         function (frame) { // errorCallback
@@ -111,52 +111,103 @@ window.addEventListener('load', () => {
     setDisconnected();
 });
 
+const CANVAS_SIZE = 700;
+const MATRIX_MIN_SIZE = 5;
+const MATRIX_MAX_SIZE = 256;
+const CELL_SPACE_SIZE = 3;
+const CELL_MIN_SIZE = 8;
+const CELL_MAX_SIZE = 64;
+
+let generationCanvas = null;
+let generationContext = null;
+let cachedMatrixSize = 0;
+let cachedCellSize = 0;
+let cachedXPositions = [];
+let cachedYPositions = [];
+let pendingGenerationData = null;
+let drawScheduled = false;
+
+function scheduleDraw(generationData) {
+    pendingGenerationData = generationData;
+    if (drawScheduled) {
+        return;
+    }
+    drawScheduled = true;
+    window.requestAnimationFrame(() => {
+        drawScheduled = false;
+        if (pendingGenerationData) {
+            drawCellsFromData(pendingGenerationData);
+            pendingGenerationData = null;
+        }
+    });
+}
+
 function drawCellsFromData(generationData) {
-    const canvas = document.querySelector("#generationDataCanvas");
-    const context = canvas.getContext("2d");
-    const canvasSize = 700;
+    if (!generationCanvas) {
+        generationCanvas = document.querySelector("#generationDataCanvas");
+        generationContext = generationCanvas.getContext("2d");
+    }
 
     // Set the generation size considering the min and max matrix size
-    const matrixMinSize = 5;
-    const matrixMaxSize = 256;
     let matrixSize = generationData.length;
-    if (matrixSize < matrixMinSize) {
-        matrixSize = matrixMinSize;
+    if (matrixSize < MATRIX_MIN_SIZE) {
+        matrixSize = MATRIX_MIN_SIZE;
     }
-    else if (matrixSize > matrixMaxSize) {
-        matrixSize = matrixMaxSize
+    else if (matrixSize > MATRIX_MAX_SIZE) {
+        matrixSize = MATRIX_MAX_SIZE
     }
-
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
 
     // Set the cell size considering the min and max values
-    const cellSpaceSize = 3;
-    const cellMinSize = 8;
-    const cellMaxSize = 64;
-    let cellSize = Math.trunc(canvasSize / matrixSize) - cellSpaceSize;
-    if (cellSize < cellMinSize) {
-        cellSize = cellMinSize;
+    let cellSize = Math.trunc(CANVAS_SIZE / matrixSize) - CELL_SPACE_SIZE;
+    if (cellSize < CELL_MIN_SIZE) {
+        cellSize = CELL_MIN_SIZE;
     }
-    else if (cellSize > cellMaxSize) {
-        cellSize = cellMaxSize
+    else if (cellSize > CELL_MAX_SIZE) {
+        cellSize = CELL_MAX_SIZE
     }
 
-    // Fill the canvas with data
-    let nextXPos = 0;
-    let nextYPos = 0;
-    for (let y = 0; y < matrixSize; y++) {
-        for (let x = 0; x < matrixSize; x++) {
-            if (generationData[y][x]) {
-                context.fillStyle = 'blue';
-            } else {
-                context.fillStyle = 'lightgray';
-            }
-            context.fillRect(nextXPos, nextYPos, cellSize, cellSize);
-            nextXPos += cellSize + cellSpaceSize;
+    if (generationCanvas.width !== CANVAS_SIZE || generationCanvas.height !== CANVAS_SIZE) {
+        generationCanvas.width = CANVAS_SIZE;
+        generationCanvas.height = CANVAS_SIZE;
+    }
+
+    if (matrixSize !== cachedMatrixSize || cellSize !== cachedCellSize) {
+        cachedMatrixSize = matrixSize;
+        cachedCellSize = cellSize;
+        cachedXPositions = new Array(matrixSize);
+        cachedYPositions = new Array(matrixSize);
+        let pos = 0;
+        for (let i = 0; i < matrixSize; i++) {
+            cachedXPositions[i] = pos;
+            cachedYPositions[i] = pos;
+            pos += cellSize + CELL_SPACE_SIZE;
         }
-
-        nextXPos = 0;
-        nextYPos += cellSize + cellSpaceSize;
     }
+
+    // Clear to keep visible gaps, then batch dead and live cells into two fills
+    generationContext.clearRect(0, 0, generationCanvas.width, generationCanvas.height);
+    generationContext.beginPath();
+    for (let y = 0; y < matrixSize; y++) {
+        const row = generationData[y];
+        const yPos = cachedYPositions[y];
+        for (let x = 0; x < matrixSize; x++) {
+            if (!row[x]) {
+                generationContext.rect(cachedXPositions[x], yPos, cellSize, cellSize);
+            }
+        }
+    }
+    generationContext.fillStyle = 'lightgray';
+    generationContext.fill();
+    generationContext.beginPath();
+    for (let y = 0; y < matrixSize; y++) {
+        const row = generationData[y];
+        const yPos = cachedYPositions[y];
+        for (let x = 0; x < matrixSize; x++) {
+            if (row[x]) {
+                generationContext.rect(cachedXPositions[x], yPos, cellSize, cellSize);
+            }
+        }
+    }
+    generationContext.fillStyle = 'blue';
+    generationContext.fill();
 }
