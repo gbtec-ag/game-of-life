@@ -1,13 +1,12 @@
 package com.gbtec.gameoflife.framework;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * Provides methods which allows to interact with the UI
